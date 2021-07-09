@@ -5,17 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pruebas - Observatorio Laboral</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,800,900&amp;display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <h1>Índice de gráficos</h1>
-    <h2>Seleccione el gráfico que desee visualizar</h2>
-    <select>
-
+    <h1 style="margin-bottom: 12px;">Índice de gráficos</h1>
+    <h2 style="margin-bottom: 12px;">Seleccione el gráfico que desee visualizar</h2>
+    <select style="margin-bottom: 24px;">
+        <option>Gráfico 1 - Caída PIB y empleo perdido</option>
+        <option>Gráfico 2 - Absoluto (formal/informal)</option>
+        <option>Gráfico 2bis - Porcentaje (formal/informal)</option>
+        <option>Gráfico 3 - Del empleo por país</option>
+        <option>Gráfico 4 - Absoluto (Género)</option>
+        <option>Gráfico 4bis - Porcentaje (Género)</option>
+        <option>Gráfico 5 - Países (género)</option>
+        <option>Gráfico 5bis - Scatterplot</option>
+        <option>Gráfico 6 - Pérdida empleo - Sexo y edad (Media general)</option>
+        <option>Gráfico 7 - Pérdida empleo - Sexo y edad (Países)</option>
+        <option>Gráfico 8 - Pérdida empleo - Sexo y escolaridad (Media general)</option>
+        <option>Gráfico 9 - Pérdida empleo - Sexo y escolaridad (Países)</option>
+        <option>Gráfico 10 - Caída salarios - Sexo y escolaridad (Media general)</option>
+        <option>Gráfico 11 - Caída salarios - Sexo y escolaridad (Países)</option>
+        <option>Gráfico 12 - Caída en horas trabajadas - Sexo y escolaridad (Media general)</option>
+        <option>Gráfico 13 - Caída en horas trabajadas - Sexo y escolaridad (Países)</option>
+        <option>Gráfico 14 - Chile</option>
+        <option>Gráfico 14bis - Uruguay</option>
+        <option>Gráfixo 14tris - México</option>
+        <option>Gráfico 15 - Pérdidas de empleo por sector</option>
+        <option>Gráfico 16 - Cambio en el % de vacantes</option>
+        <option>Gráfico 17 - Tasa de contratación en Linkedin</option>
+        <option>Tabla/Gráfico 18 - Evolución contratación en Linkedin</option>
     </select>
-    <div class="b-chart">
-
-    </div>
+    <hr>
+    <h1 style="text-align: center; font-size: 20px; margin-top: 8px; margin-bottom: 12px;">COMPONENTES</h1>
+    <section class="outer-chart">
+        <div class="chart">
+            <h1 class="chart__title">Título del gráfico</h1>
+            <h2 class="chart__subtitle">Subtítulo del gráfico</h2>
+            <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
+                <select class="chart__select">
+                    <option class="chart__select--item">País 1</option>
+                    <option class="chart__select--item">País 2</option>
+                    <option class="chart__select--item">País 3</option>
+                </select>
+            </div>
+            <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
+                <select class="chart__select--double">
+                    <option class="chart__select--item">País 1</option>
+                    <option class="chart__select--item">País 2</option>
+                    <option class="chart__select--item">País 3</option>
+                </select>
+                <select class="chart__select--double">
+                    <option class="chart__select--item">País 1</option>
+                    <option class="chart__select--item">País 2</option>
+                    <option class="chart__select--item">País 3</option>
+                </select>
+            </div>          
+            <div class="chart__legend">
+                <span class="chart__legend--item">Leyenda 1</span>
+                <span class="chart__legend--item">Leyenda 2</span>
+                <span class="chart__legend--item">Leyenda 3</span>
+            </div>
+            <div class="chart__legend">
+                <span class="chart__legend--item color-one">Leyenda 1</span>
+                <span class="chart__legend--item color-two">Leyenda 2</span>
+                <span class="chart__legend--item color-three">Leyenda 3</span>
+            </div>
+            <div class="chart__viz"></div>
+            <p class="chart__note">* Nota a pie de gráfico</p>
+            <div class="chart__tooltip">
+                <p class="chart__tooltip--title">prueba</p>
+                <p class="chart__tooltip--text">prueba</p>
+            </div>
+        </div>
+    </section>
+    <h1 style="text-align: center; font-size: 20px; margin-bottom: 12px;">GRÁFICOS</h1>
     <script src="./js/main.js"></script>    
 </body>
 </html>
