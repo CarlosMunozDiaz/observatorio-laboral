@@ -131,8 +131,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-
-    margin-top: 12px;
 }
 
 .chart__legend--item {
@@ -149,6 +147,7 @@ body {
 
     padding-left: 20px;
     margin-right: 16px;
+    margin-top: 12px; /* Incorporamos aquí este atributo y no 'chart__legend' para que en dispositivos móviles funcione correctamente el flex-wrap */
 }
 
 .chart__legend--item:last-child {
@@ -205,6 +204,8 @@ body {
     opacity: 0;
     
     position: absolute;
+    top: 50px;
+    left: 0px;
 
     width: auto;
     max-width: 150px;
@@ -232,5 +233,19 @@ body {
 }
 
 @media only screen and (max-width: 525px) {
+    /* Adaptando el bloque exterior se adapta el bloque interior */
+    .outer-chart {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0px 16px;
+    }
 
+    .chart__b-select {text-align: start;}
+    .chart__select, .chart__select--double {width: 100%;}
+    .chart__select--double:first-child {margin-right: 0px;}
+
+    .chart__legend {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
 }
