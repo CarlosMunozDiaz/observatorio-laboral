@@ -44,14 +44,14 @@ body {
     line-height: 20px;
     letter-spacing: 0em;
     color: #000;
-
+    
     margin-top: 4px;
 }
 
+.chart__sb-title { width: 40%; }
+
 /* BLOQUE - SELECTOR */
-.chart__b-select {
-    text-align: end;
-}
+.chart__b-select {text-align: end; margin-top: 8px;}
 
 /* SELECTOR ÚNICO */
 .chart__select {
@@ -64,23 +64,21 @@ body {
     position: relative;
 
     width: 350px;
-    height: 42px;
+    height: 50px;
     border-radius: 32px;
     padding-left: 16px;
     /* Elemento flecha */
-    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #f4f4f4;
+    background: url(../img/triangle-bottom-solid.svg) no-repeat right #f4f4f4;
     -webkit-appearance: none;
     background-position-x: calc(100% - 16px);
+    border: 0px;
     cursor: pointer;
 
     /* Texto */
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
-    line-height: 16px;
-
-    /* Margen con elemento inferior */
-    margin-top: 12px;
+    line-height: 16px;    
 }
 
 .chart__select:focus-visible {
@@ -97,14 +95,15 @@ body {
     /* Nuevos estilos */
     position: relative;
 
-    width: 180px;
-    height: 30px;
+    width: 160px;
+    height: 32px;
     border-radius: 26px;
     padding-left: 12px;
     /* Elemento flecha */
-    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #f4f4f4;
+    background: url(../img/triangle-bottom-solid-12.svg) no-repeat right #f4f4f4;
     -webkit-appearance: none;
     background-position-x: calc(100% - 12px);
+    border: 0px;
     cursor: pointer;
 
     /* Texto */
@@ -124,6 +123,79 @@ body {
 .chart__select--double:focus-visible {
     outline: none;
 }
+
+/* SWITCH */
+.chart__b-switch {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 8px;
+}
+
+.chart__switch {
+    display: flex;
+    width: 180px;
+    justify-content: space-between;    
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+}
+  
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #F4F4F4;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 50px;
+    width: 50px;
+    left: 0px;
+    bottom: 0px;
+    background-color: #081C29;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider:before {
+    background-color: #99E6FC;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(72px);
+    -ms-transform: translateX(72px);
+    transform: translateX(72px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/**** BLOQUE TÍTULO + ELEMENTO SUPERIOR */
+.chart__b-title--together { display: flex; justify-content: space-between; align-items: flex-end;}
+.chart__b-title--together .chart__b-select, .chart__b-title--together .chart__b-switch {margin-top: 0px;}
 
 /* LEYENDA */
 .chart__legend {
@@ -200,7 +272,6 @@ body {
 /* TOOLTIP */
 .chart__tooltip {
     /* Estos dos elementos (junto a la posición del tooltip) se modifican de forma dinámica desde JS */
-    display: none;
     opacity: 0;
     
     position: absolute;
@@ -240,9 +311,14 @@ body {
         padding: 0px 16px;
     }
 
+    .chart__sb-title {width: 100%;}
     .chart__b-select {text-align: start;}
     .chart__select, .chart__select--double {width: 100%;}
+    .chart__b-switch {justify-content: center;}
     .chart__select--double:first-child {margin-right: 0px;}
+
+    .chart__b-title--together {flex-direction: column; align-items: initial;}
+    .chart__b-title--together .chart__b-select, .chart__b-title--together .chart__b-switch {margin-top: 8px;}
 
     .chart__legend {
         justify-content: flex-start;

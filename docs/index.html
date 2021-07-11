@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <h1 style="margin-bottom: 12px;">Índice de gráficos</h1>
+    <!-- <h1 style="margin-bottom: 12px;">Índice de gráficos</h1>
     <h2 style="margin-bottom: 12px;">Seleccione el gráfico que desee visualizar</h2>
     <select style="width: 90%; margin-bottom: 24px;">
         <option>Gráfico 1 - Caída PIB y empleo perdido</option>
@@ -37,7 +37,7 @@
         <option>Gráfico 17 - Tasa de contratación en Linkedin</option>
         <option>Tabla/Gráfico 18 - Evolución contratación en Linkedin</option>
     </select>
-    <hr>
+    <hr> -->
     <h1 style="text-align: center; font-size: 20px; margin-top: 8px; margin-bottom: 12px;">COMPONENTES</h1>
     <section class="outer-chart">
         <div class="chart">
@@ -61,7 +61,17 @@
                     <option class="chart__select--item">País 2</option>
                     <option class="chart__select--item">País 3</option>
                 </select>
-            </div>          
+            </div>
+            <div class="chart__b-switch">
+                <div class="chart__switch">
+                    <img src="./img/icono_hombre.svg" width="20px" height="50px" alt="Icono hombre">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <img src="./img/icono_mujer.svg" width="25px" height="50px" alt="Icono mujer">
+                </div>
+            </div>                      
             <div class="chart__legend">
                 <span class="chart__legend--item">Leyenda 1</span>
                 <span class="chart__legend--item">Leyenda 2</span>
@@ -74,13 +84,84 @@
             </div>
             <div class="chart__viz"></div>
             <p class="chart__note">* Nota a pie de gráfico</p>
-            <div class="chart__tooltip">
+            <div class="chart__tooltip" id="chartTooltip">
                 <p class="chart__tooltip--title">prueba título</p>
                 <p class="chart__tooltip--text">prueba de texto inferior que tendrá datos</p>
             </div>
         </div>
     </section>
-    <h1 style="text-align: center; font-size: 20px; margin-bottom: 12px;">GRÁFICOS</h1>
+    <hr>
+    <h1 style="text-align: center; font-size: 20px; margin-top: 8px; margin-bottom: 12px;">CASO DE USO: TÍTULO ENCIMA DE SELECTOR O SWITCH</h1>
+    <section class="outer-chart">
+        <div class="chart">
+            <div class="chart__b-title--upper" style="margin: 24px 0px;">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Título del gráfico más largo para probar cómo queda con elemento lateral e inferior</h1>
+                    <h2 class="chart__subtitle">Subtítulo del gráfico</h2>
+                </div>
+                <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
+                    <select class="chart__select">
+                        <option class="chart__select--item">País 1</option>
+                        <option class="chart__select--item">País 2</option>
+                        <option class="chart__select--item">País 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart__b-title--upper" style="margin: 24px 0px;">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Título del gráfico</h1>
+                    <h2 class="chart__subtitle">Subtítulo del gráfico</h2>
+                </div>
+                <div class="chart__b-switch">
+                    <div class="chart__switch">
+                        <img src="./img/icono_hombre.svg" width="20px" height="50px" alt="Icono hombre">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <img src="./img/icono_mujer.svg" width="25px" height="50px" alt="Icono mujer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h1 style="text-align: center; font-size: 20px; margin-top: 8px; margin-bottom: 12px;">CASO DE USO: TÍTULO CON MISMA ALTURA QUE SELECTOR O SWITCH</h1>
+    <section class="outer-chart">
+        <div class="chart">
+            <div class="chart__b-title--together" style="margin: 24px 0px;">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Título del gráfico más largo para probar cómo queda con elemento lateral y misma altura</h1>
+                    <h2 class="chart__subtitle">Subtítulo del gráfico</h2>
+                </div>
+                <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
+                    <select class="chart__select">
+                        <option class="chart__select--item">País 1</option>
+                        <option class="chart__select--item">País 2</option>
+                        <option class="chart__select--item">País 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart__b-title--together" style="margin: 24px 0px;">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Título del gráfico</h1>
+                    <h2 class="chart__subtitle">Subtítulo del gráfico más largo para probar cómo queda con elemento lateral y misma altura</h2>
+                </div>                
+                <div class="chart__b-switch">
+                    <div class="chart__switch">
+                        <img src="./img/icono_hombre.svg" width="20px" height="50px" alt="Icono hombre">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <img src="./img/icono_mujer.svg" width="25px" height="50px" alt="Icono mujer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <h1 style="text-align: center; font-size: 20px; margin-top: 8px; margin-bottom: 12px;">GRÁFICOS</h1>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="./js/main.js"></script>    
 </body>
 </html>
