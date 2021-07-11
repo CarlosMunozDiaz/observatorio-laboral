@@ -251,6 +251,7 @@ input:checked + .slider:before {
 
 /* VISUALIZACIÓN */
 .chart__viz {
+    position: relative; /* Tooltip */
     width: 100%;
     max-width: 648px;
     height: 390px;
@@ -271,12 +272,9 @@ input:checked + .slider:before {
 
 /* TOOLTIP */
 .chart__tooltip {
-    /* Estos dos elementos (junto a la posición del tooltip) se modifican de forma dinámica desde JS */
-    opacity: 0;
-    
     position: absolute;
-    top: 50px;
-    left: 0px;
+    /* Este elemento se modifica de forma dinámica desde JS */
+    opacity: 0;   
 
     width: auto;
     max-width: 150px;

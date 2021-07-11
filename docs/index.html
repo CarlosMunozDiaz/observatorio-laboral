@@ -82,12 +82,12 @@
                 <span class="chart__legend--item color-two">Leyenda larga 2</span>
                 <span class="chart__legend--item color-three">Leyenda larga 3</span>
             </div>
-            <div class="chart__viz"></div>
+            <!-- <div class="chart__viz"></div> -->
             <p class="chart__note">* Nota a pie de gráfico</p>
-            <div class="chart__tooltip" id="chartTooltip">
+            <!-- <div class="chart__tooltip">
                 <p class="chart__tooltip--title">prueba título</p>
                 <p class="chart__tooltip--text">prueba de texto inferior que tendrá datos</p>
-            </div>
+            </div> -->
         </div>
     </section>
     <hr>
@@ -161,6 +161,71 @@
     </section>
     <hr>
     <h1 style="text-align: center; font-size: 20px; margin-top: 8px; margin-bottom: 12px;">GRÁFICOS</h1>
+    <h2 style="font-size: 16px; font-weight: bold; margin-top: 8px; margin-bottom: 12px;">Gráfico 1 - Caída PIB y empleo perdido - Múltiples líneas</h2>
+    <div class="outer-chart">
+        <div class="chart">
+            <div class="chart__b-title--upper">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Caída del PIB y empleo perdido comparado con otras recesiones</h1>
+                    <h2 class="chart__subtitle">Datos en puntos porcentuales</h2>
+                </div>
+            </div>
+            <div class="chart__legend">
+                <span class="chart__legend--item color-one">Economías avanzadas</span>
+                <span class="chart__legend--item color-two">LAC</span>
+                <span class="chart__legend--item color-three">Economías emergentes</span>
+            </div>
+            <div class="chart__viz">
+                <div class="chart__tooltip">
+                    <p class="chart__tooltip--title"></p>
+                    <p class="chart__tooltip--text"></p>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <h2 style="font-size: 16px; font-weight: bold; margin-top: 8px; margin-bottom: 12px;">Gráfico 2 - Pérdida de empleo total, formal e informal - Múltiples líneas</h2>
+    <div class="outer-chart">
+        <div class="chart">
+            <div class="chart__b-title--upper">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Pérdida de empleo total, formal e informal</h1>
+                    <h2 class="chart__subtitle">Datos en puntos porcentuales</h2>
+                </div>
+            </div>
+            <div class="chart__legend">
+                <span class="chart__legend--item color-one">Total</span>
+                <span class="chart__legend--item color-two">Formal</span>
+                <span class="chart__legend--item color-three">Informal</span>
+            </div>
+            <div class="chart__viz">
+                <div class="chart__tooltip">
+                    <p class="chart__tooltip--title"></p>
+                    <p class="chart__tooltip--text"></p>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <h2 style="font-size: 16px; font-weight: bold; margin-top: 8px; margin-bottom: 12px;">Gráfico 2bis - Pérdida de empleo total, formal e informal - Múltiples líneas</h2>
+    <div class="outer-chart">
+        <div class="chart">
+            <div class="chart__b-title--upper">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Pérdida de empleo formal e informal</h1>
+                    <h2 class="chart__subtitle">Datos absolutos</h2>
+                </div>
+            </div>
+            <div class="chart__legend">
+                <span class="chart__legend--item color-one">Formal</span>
+                <span class="chart__legend--item color-two">Informal</span>
+            </div>
+            <div class="chart__viz">
+                <div class="chart__tooltip">
+                    <p class="chart__tooltip--title"></p>
+                    <p class="chart__tooltip--text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="./js/main.js"></script>    
 </body>
