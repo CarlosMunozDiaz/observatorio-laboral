@@ -255,12 +255,11 @@ input:checked + .slider:before {
     width: 100%;
     max-width: 648px;
     height: 390px;
-    background-color: #dedede;
     margin: 12px auto 0px auto;
 }
 
 /* VISUALIZACIÓN - Texto ejes (tanto X como Y) */
-.axis text {
+.tick text {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -271,13 +270,13 @@ input:checked + .slider:before {
 }
 
 /* VISUALIZACIÓN - Líneas (tanto X como Y) */
-.domain {
+.tick line {
     stroke: #F0F0F0;
     stroke-width: 1px;
 }
 
-.domain-line-special {
-    stroke: #000;
+.line-special {
+    stroke: #000 !important;
 }
 
 /* NOTA DESTACADA */
