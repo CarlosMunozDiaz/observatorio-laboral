@@ -259,6 +259,27 @@ input:checked + .slider:before {
     margin: 12px auto 0px auto;
 }
 
+/* VISUALIZACIÓN - Texto ejes (tanto X como Y) */
+.axis text {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 10px;
+
+    color: #A3A3A3;
+}
+
+/* VISUALIZACIÓN - Líneas (tanto X como Y) */
+.domain {
+    stroke: #F0F0F0;
+    stroke-width: 1px;
+}
+
+.domain-line-special {
+    stroke: #000;
+}
+
 /* NOTA DESTACADA */
 .chart__note {
     font-family: Helvetica;

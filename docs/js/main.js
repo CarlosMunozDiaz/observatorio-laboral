@@ -1,47 +1,48 @@
-let tooltip = d3.select('.chart__tooltip');
-let chart = d3.select('.chart__viz');
+/* Función asociada al primer gráfico */
+function getFirstChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-one');
+    let tooltip = chartBlock.select('.chart__tooltip');
 
-chart.on('mouseenter', function() {
-    setTooltipText();
-});
+    //Lectura de datos
+    let file = './data/chart-one.csv';
+    d3.csv(file, function(data) {
+        return {
+            Fecha: data.Year,
+            AE: +data['Advanced Economies'].replace(/,/g, '.'),
+            LAC: +data['LAC'].replace(/,/g, '.'),
+            EE: +data['Emerging Economies'].replace(/,/g, '.')
+        }
+    }, function(error, d) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let {margin, width, height, chart} = setChart(chartBlock);
 
-chart.on('mousemove', function() {    
-    positionTooltip(this);
-    getInTooltip();
-});
+        //Disposición del eje X
 
-chart.on('mouseout', function() {
-    getOutTooltip();
-});
+        //Disposición del eje Y
 
-/*
-* FUNCIONES TOOLTIP
-*/
-
-function setTooltipText() { //Mouseenter
-    tooltip.html('Pruebaaaaa doble prueba y hasta triple prueba');
+    });
 }
 
-function getInTooltip() { //Mouseover
-    tooltip.style('opacity', 1);
-}
+getFirstChart();
 
-function getOutTooltip() { //Mouseout
-    tooltip.transition().duration(500).style('opacity', 0);
-}
+/* Visualization helpers */
 
-function positionTooltip(div) {
-    let coordinates = d3.mouse(div);
+/* Iniciaulización del gráfico */
+function setChart(chartBlock) {
+    let margin = {top: 5, right: 5, bottom: 205, left: 30},
+    width = parseInt(chartBlock.style('width')) - margin.left - margin.right,
+    height = parseInt(chartBlock.style('height')) - margin.top - margin.bottom;
 
-    let x = coordinates[0];
-    let y = coordinates[1];
-    let tooltipWidth = parseInt(tooltip.style('width'));
-    let tooltipHeight = parseInt(tooltip.style('height'));
-    
-    //Posición
-    let left = div.getBoundingClientRect().width / 2 > x ? 'right' : 'left';
-    let horizontalPos = left == 'left' ? -tooltipWidth - 30 : 30;
+    let chart = chartBlock
+        .append('svg')
+        .lower()
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    tooltip.style('top', y - (tooltipHeight + 15) + 'px');
-    tooltip.style('left', x + horizontalPos + 'px');
+    return {margin, width, height, chart};
 }
