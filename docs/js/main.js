@@ -86,9 +86,9 @@ function getSecondChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha,
-            Empleo_total: d.Empleo_Total.replace(/,/g, '.') * 100,
-            Empleo_formal: d.Empleo_Formal.replace(/,/g, '.') * 100,
-            Empleo_informal: d.Empleo_Informal.replace(/,/g, '.') * 100
+            Empleo_total: +d.Empleo_Total.replace(/,/g, '.') * 100,
+            Empleo_formal: +d.Empleo_Formal.replace(/,/g, '.') * 100,
+            Empleo_informal: +d.Empleo_Informal.replace(/,/g, '.') * 100
         }
     }, function(error, data) {
         if (error) throw error;
@@ -154,6 +154,194 @@ function getSecondChart() {
     });
 }
 
+function getSecondBisChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-two_bis');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-two_bis.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha,
+            Empleo_formal: +d.Empleo_Formal.replace(/,/g, '.'),
+            Empleo_informal: +d.Empleo_Informal.replace(/,/g, '.')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 25, left: 75};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(1);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '-12px')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+        
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([-25000000,0])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).ticks(8))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'lineEmpleo_formal', xAxis: 'Fecha', yAxis: 'Empleo_formal', cssLine: 'line-Empleo_formal', cssCircle: 'circle-Empleo_formal', cssColor: '#2347E3'},
+            {lineName: 'lineEmpleo_informal', xAxis: 'Fecha', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
+        ]
+
+        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+    });
+}
+
+function getThirdChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-three');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-three.csv';
+    d3.csv(file, function(d) {
+        return {
+            pais: d.Pais,
+            Empleo_total: +d.Empleo_Total.replace(/,/g, '.').replace('%',''),
+            Empleo_formal: +d.Empleo_Formal.replace(/,/g, '.').replace('%',''),
+            Empleo_informal: +d.Empleo_Informal.replace(/,/g, '.').replace('%','')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 115, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.pais; }))
+            .range([0, width]);
+
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x))
+            g.call(function(g){g.selectAll('.tick line').remove()})
+            g.call(function(g){g.select('.domain').remove()})
+            g.call(function(g){
+                g.selectAll('.tick text')
+                    .style("text-anchor", "end")
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em")
+                    .attr("transform", function(d) {
+                        return "rotate(-65)" 
+                    });
+            });            
+        }        
+        
+        chart.append("g")
+            .attr('transform', `translate(0,${height})`)
+            .call(xAxis)
+
+        //Eje Y
+        let y = d3.scaleLinear()
+            .domain([-20,10])
+            .range([height, 0])
+            .nice();
+        
+        let yAxis = svg => svg
+            .call(d3.axisLeft(y).ticks(4).tickFormat(function(d) { return d + '%'; }))
+            .call(g => g.select('.domain').remove())
+            .call(g => g.selectAll('.tick line')
+                .attr("class", function(d) { if (d == 0) { return 'line-special'; }})
+                .attr("x1", `0`)
+                .attr("x2", `${width}`)
+            );
+
+        chart.append('g')
+            .call(yAxis);
+
+        //Primera visualización de datos
+        chart.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr('class', function(d, i) { return `bar bar-${i}`; })
+            .style('fill', '#081C29')
+            .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
+            .attr('width', x.bandwidth() / 2)
+            .attr("y", function(d) { return y(0); })
+            .on('mouseenter', function(d, i, e) {
+                let html = `<p class="chart__tooltip--title">${d.pais}</p>
+                            <p class="chart__tooltip--text">Porc.: ${d.Empleo_total.toFixed(2)}%</p>`; //Solucionar recogida de información
+            
+                tooltip.html(html);
+            })
+            .on('mouseover mousemove', function(d, i, e) {
+                //Posibilidad visualización línea diferente
+                let bars = chartBlock.selectAll('.bar');
+                let css = e[i].getAttribute('class').split('-')[1];
+            
+                bars.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`bar-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+            
+                //Tooltip
+                positionTooltip(tooltip, e[i], chartBlock);
+                getInTooltip(tooltip);
+            })
+            .on('mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let bars = chartBlock.selectAll('.bar');
+                bars.each(function() {
+                    this.style.opacity = '1';
+                });
+            
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
+            .transition()
+            .duration(3000)
+            .attr("y", function(d) { return y(Math.max(0, d.Empleo_total)); })     
+            .attr('height', d => Math.abs(y(d.Empleo_total) - y(0)));
+    })
+}
+
 function getFifthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-five');
@@ -203,11 +391,11 @@ function getFifthChart() {
             g.call(d3.axisBottom(x0))
             g.call(function(g){
                 g.selectAll('.tick text')
-                .style("text-anchor", "end")
-                .attr("dx", "-.8em")
-                .attr("dy", ".15em")
-                .attr("transform", function(d) {
-                    return "rotate(-65)" 
+                    .style("text-anchor", "end")
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em")
+                    .attr("transform", function(d) {
+                        return "rotate(-65)" 
                     });
             })
             g.call(function(g){g.selectAll('.tick line').remove()});
@@ -253,17 +441,16 @@ function getFifthChart() {
             .enter()
             .append("rect")
             .attr("x", d => x1(d.descriptor))
-            .attr("y", function(d) { return y(Math.max(0, d.valor)); })
-            .attr("width", x1.bandwidth())
-            .attr('height', d => Math.abs(y(d.valor) - y(0)))
-            .attr('data-country', function(d,i) { return d.pais; })
+            .attr("y", function(d) { return y(0); })
             .attr('class', function(d,i) { 
                 if(d.descriptor == 'Hombres') {
                     return 'rect rect-hombres';
                 } else {
                     return 'rect rect-mujeres';
                 }
-             })
+            })
+            .attr("width", x1.bandwidth())            
+            .attr('data-country', function(d,i) { return d.pais; })
             .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
             .on('mouseenter', function(d, i, e) {
                 let pais = e[i].getAttribute('data-country').replace(/\*/g, '');
@@ -300,7 +487,11 @@ function getFifthChart() {
 
                 //Quitamos el tooltip
                 getOutTooltip(tooltip); 
-            });
+            })
+            .transition()
+            .duration(3000)            
+            .attr("y", function(d) { return y(Math.max(0, d.valor)); })     
+            .attr('height', d => Math.abs(y(d.valor) - y(0)));           
     });
 }
 
@@ -501,16 +692,12 @@ function getFifteenChart() {
             .attr('class', function(d, i) { return `bar bar-${i}`; })
             .style('fill', '#081C29')
             .attr("x", function (d) {
-                return x(Math.min(0, d.porcentaje));
+                return x(0);
             })
             .attr("y", function (d) {
                 return y(d.tipo_eje) + y.bandwidth() / 4;
-            })
-            .attr("width", function (d) {
-                return Math.abs(x(d.porcentaje) - x(0));
-            })
+            })            
             .attr("height", y.bandwidth() / 2)
-            
             .on('mouseenter', function(d, i, e) {
                 let html = `<p class="chart__tooltip--title">${d.tipo}</p>
                             <p class="chart__tooltip--text">Porc.: ${d.porcentaje.toFixed(2)}%</p>`; //Solucionar recogida de información
@@ -542,12 +729,22 @@ function getFifteenChart() {
 
                 //Quitamos el tooltip
                 getOutTooltip(tooltip); 
-            });
+            })
+            .transition()
+            .duration(3000)
+            .attr("x", function (d) {
+                return x(Math.min(0, d.porcentaje));
+            })
+            .attr("width", function (d) {
+                return Math.abs(x(d.porcentaje) - x(0));
+            });           
     });
 }
 
 getFirstChart();
 getSecondChart();
+getSecondBisChart();
+getThirdChart();
 getFifthChart();
 getFifthBisChart();
 getFifteenChart();
@@ -600,13 +797,22 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
             .x(function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
             .y(function(d) { return y(d[lines[i].yAxis]); });
 
-        chart.append("path")
+        let path = chart.append("path")
             .data([data])
             .attr("class", `line ${lines[i].cssLine}`)
             .attr("fill", "none")
             .attr("stroke", `${lines[i].cssColor}`)
             .attr("stroke-width", '1.5px')
             .attr("d", line);
+
+        let length = path.node().getTotalLength();
+
+        path.attr("stroke-dasharray", length + " " + length)
+            .attr("stroke-dashoffset", length)
+            .transition()
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0)
+            .duration(6000)
 
         chart.selectAll('.circles')
             .data(data)
@@ -653,7 +859,7 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
 
                 //Quitamos el tooltip
                 getOutTooltip(tooltip);                
-            });
+            })
     }
 }
 
