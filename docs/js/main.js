@@ -294,52 +294,75 @@ function getThirdChart() {
             .call(yAxis);
 
         //Primera visualización de datos
-        chart.selectAll(".bar")
-            .data(data)
-            .enter()
-            .append("rect")
-            .attr('class', function(d, i) { return `bar bar-${i}`; })
-            .style('fill', '#081C29')
-            .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
-            .attr('width', x.bandwidth() / 2)
-            .attr("y", function(d) { return y(0); })
-            .on('mouseenter', function(d, i, e) {
-                let html = `<p class="chart__tooltip--title">${d.pais}</p>
-                            <p class="chart__tooltip--text">Porc.: ${d.Empleo_total.toFixed(2)}%</p>`; //Solucionar recogida de información
-            
-                tooltip.html(html);
-            })
-            .on('mouseover mousemove', function(d, i, e) {
-                //Posibilidad visualización línea diferente
-                let bars = chartBlock.selectAll('.bar');
-                let css = e[i].getAttribute('class').split('-')[1];
-            
-                bars.each(function() {
-                    this.style.opacity = '0.4';
-                    if(this.getAttribute('class').indexOf(`bar-${css}`) != -1) {
+        let tipoGenerico = 'Empleo_total';
+        initChart(tipoGenerico);
+
+        //Actualización
+        document.getElementById('empleoThree').addEventListener('change', function(e) {
+            tipoGenerico = e.target.value;
+            updateChart(tipoGenerico);
+        });
+
+        //Funciones internas
+        function initChart(tipo) {
+            chart.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr('class', function(d, i) { return `bar bar-${i}`; })
+                .style('fill', '#081C29')
+                .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
+                .attr('width', x.bandwidth() / 2)
+                .attr("y", function(d) { return y(0); })
+                .on('mouseenter', function(d, i, e) {
+                    let html = `<p class="chart__tooltip--title">${d.pais}</p>
+                                <p class="chart__tooltip--text">Porc.: ${d[tipoGenerico].toFixed(2)}%</p>`; //Solucionar recogida de información
+                
+                    tooltip.html(html);
+                })
+                .on('mouseover mousemove', function(d, i, e) {
+                    //Posibilidad visualización línea diferente
+                    let bars = chartBlock.selectAll('.bar');
+                    let css = e[i].getAttribute('class').split('-')[1];
+                
+                    bars.each(function() {
+                        this.style.opacity = '0.4';
+                        let split = this.getAttribute('class').split(" ")[1];
+                        if(split == `bar-${css}`) {
+                            this.style.opacity = '1';
+                        }
+                    });
+                
+                    //Tooltip
+                    positionTooltip(tooltip, e[i], chartBlock);
+                    getInTooltip(tooltip);
+                })
+                .on('mouseout', function(d, i, e) {
+                    //Quitamos los estilos de la línea
+                    let bars = chartBlock.selectAll('.bar');
+                    bars.each(function() {
                         this.style.opacity = '1';
-                    }
-                });
-            
-                //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
-                getInTooltip(tooltip);
-            })
-            .on('mouseout', function(d, i, e) {
-                //Quitamos los estilos de la línea
-                let bars = chartBlock.selectAll('.bar');
-                bars.each(function() {
-                    this.style.opacity = '1';
-                });
-            
-                //Quitamos el tooltip
-                getOutTooltip(tooltip); 
-            })
-            .transition()
-            .duration(3000)
-            .attr("y", function(d) { return y(Math.max(0, d.Empleo_total)); })     
-            .attr('height', d => Math.abs(y(d.Empleo_total) - y(0)));
-    })
+                    });
+                
+                    //Quitamos el tooltip
+                    getOutTooltip(tooltip); 
+                })
+                .transition()
+                .duration(3000)
+                .attr("y", function(d) { return y(Math.max(0, d[tipo])); })     
+                .attr('height', d => Math.abs(y(d[tipo]) - y(0)));
+        }
+
+        function updateChart(tipo) {
+            chart
+                .selectAll(".bar")
+                .data(data)
+                .transition()
+                .duration(1500)
+                .attr("y", function(d) { return y(Math.max(0, d[tipo])); })     
+                .attr('height', d => Math.abs(y(d[tipo]) - y(0)));
+        }
+    });
 }
 
 function getFifthChart() {
