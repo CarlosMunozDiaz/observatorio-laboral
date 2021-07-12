@@ -1011,16 +1011,16 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
             })
             .on('mousemove', function(d, i, e) {
                 //Posibilidad visualización línea diferente
-                let lines = document.getElementsByClassName('line');
+                let lines = chartBlock.selectAll('.line');
                 let css = e[i].getAttribute('class').split('-')[1];
 
-                for(let i = 0; i < lines.length; i++) {
-                    lines[i].style.opacity = '0.4';
-                    if(lines[i].getAttribute('class').indexOf(`line-${css}`) != -1) {
-                        lines[i].style.opacity = '1';
-                        lines[i].style.strokeWidth = '2.5px';
+                lines.each(function(item) {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`line-${css}`) != -1) {
+                        this.style.opacity = '1';
+                        this.style.strokeWidth = '2.5px';
                     }
-                }
+                });
 
                 //Tooltip
                 positionTooltip(tooltip, e[i], chartBlock);
@@ -1028,11 +1028,12 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
             })
             .on('mouseout', function(d, i, e) {
                 //Quitamos los estilos de la línea
-                let lines = document.getElementsByClassName('line');
-                for(let i = 0; i < lines.length; i++) {
-                    lines[i].style.opacity = '1';
-                    lines[i].style.strokeWidth = '1.5px';
-                }
+                let lines = chartBlock.selectAll('.line');
+
+                lines.each(function(item) {
+                    this.style.opacity = '1';
+                    this.style.strokeWidth = '1.5px';                    
+                });
 
                 //Quitamos el tooltip
                 getOutTooltip(tooltip);                
