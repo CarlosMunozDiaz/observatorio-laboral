@@ -16,14 +16,14 @@ function getFirstChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 25};
+        let margin = {top: 5, right: 5, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(0.15);
+            .paddingInner(0.25);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -48,7 +48,7 @@ function getFirstChart() {
             .nice();
     
         let yAxis = function(svg){
-            svg.call(d3.axisLeft(y))
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
             svg.call(function(g){
                 g.selectAll('.tick line')
                     .attr('class', function(d,i) {
@@ -94,14 +94,14 @@ function getSecondChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 25};
+        let margin = {top: 5, right: 5, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(0.15);
+            .paddingInner(0.9);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -126,7 +126,7 @@ function getSecondChart() {
             .nice();
     
         let yAxis = function(svg){
-            svg.call(d3.axisLeft(y))
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
             svg.call(function(g){
                 g.selectAll('.tick line')
                     .attr('class', function(d,i) {
