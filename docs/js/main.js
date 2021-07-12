@@ -365,6 +365,158 @@ function getThirdChart() {
     });
 }
 
+function getFourthChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-four');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-four.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha,
+            Hombres: +d.Hombres.replace(/,/g, '.') * 100,
+            Mujeres: +d.Mujeres.replace(/,/g, '.') * 100
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(0.9);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([-20,0])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'lineHombres', xAxis: 'Fecha', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
+            {lineName: 'lineMujeres', xAxis: 'Fecha', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+        ]
+
+        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+    });
+}
+
+function getFourthBisChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-four_bis');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-four_bis.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha,
+            Hombres: +d.Hombres.replace(/,/g, '.'),
+            Mujeres: +d.Mujeres.replace(/,/g, '.')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 25, left: 75};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(1);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '-12px')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+        
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([-18000000,0])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).ticks(6))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'lineHombres', xAxis: 'Fecha', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
+            {lineName: 'lineMujeres', xAxis: 'Fecha', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+        ]
+
+        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+    });
+}
+
 function getFifthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-five');
@@ -768,6 +920,8 @@ getFirstChart();
 getSecondChart();
 getSecondBisChart();
 getThirdChart();
+getFourthChart();
+getFourthBisChart();
 getFifthChart();
 getFifthBisChart();
 getFifteenChart();
