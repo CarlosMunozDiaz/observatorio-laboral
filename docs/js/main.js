@@ -67,71 +67,90 @@ function getFirstChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineAE', xAxis: 'Fecha', yAxis: 'AE', cssLine: 'line-ae', cssCircle: 'circle-ae', cssColor: '#99E6FC', },
-            {lineName: 'lineLAC', xAxis: 'Fecha', yAxis: 'LAC', cssLine: 'line-lac', cssCircle: 'circle-lac', cssColor: '#2347E3'},
-            {lineName: 'lineEE', xAxis: 'Fecha', yAxis: 'EE', cssLine: 'line-ee', cssCircle: 'circle-ee', cssColor: '#081C29'}
+            {lineName: 'lineAE', xAxis: 'Fecha', yAxis: 'AE', cssLine: 'line-AE', cssCircle: 'circle-AE', cssColor: '#99E6FC', },
+            {lineName: 'lineLAC', xAxis: 'Fecha', yAxis: 'LAC', cssLine: 'line-LAC', cssCircle: 'circle-LAC', cssColor: '#2347E3'},
+            {lineName: 'lineEE', xAxis: 'Fecha', yAxis: 'EE', cssLine: 'line-EE', cssCircle: 'circle-EE', cssColor: '#081C29'}
         ]
 
-        for(let i = 0; i < lines.length; i++) {
-            let line = d3.line()
-                .x(function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
-                .y(function(d) { return y(d[lines[i].yAxis]); });
+        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+    });
+}
 
-            chart.append("path")
-                .data([data])
-                .attr("class", `line ${lines[i].cssLine}`)
-                .attr("fill", "none")
-                .attr("stroke", `${lines[i].cssColor}`)
-                .attr("stroke-width", '1.5px')
-                .attr("d", line);
+function getSecondChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-two');
+    let tooltip = chartBlock.select('.chart__tooltip');
 
-            chart.selectAll('.circles')
-                .data(data)
-                .enter()
-                .append('circle')
-                .attr('class', `${lines[i].cssCircle}`)
-                .attr("r", 5)
-                .attr("cx", function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
-                .attr("cy", function(d) { return y(d[lines[i].yAxis]); })
-                .style("fill", '#000')
-                .style('opacity', '0')
-                .on('mouseenter', function(d, i, e) {
-                    let css = e[i].getAttribute('class').split('-')[1];
-
-                    let html = `<p class="chart__tooltip--title">Año: ${d.Fecha}</p>
-                                <p class="chart__tooltip--text">Dato: ${d[css.toUpperCase()]}%</p>`; //Solucionar recogida de información
-    
-                    tooltip.html(html);
-                })
-                .on('mousemove', function(d, i, e) {
-                    //Posibilidad visualización línea diferente
-                    let lines = document.getElementsByClassName('line');
-                    let css = e[i].getAttribute('class').split('-')[1];
-    
-                    for(let i = 0; i < lines.length; i++) {
-                        lines[i].style.opacity = '0.4';
-                        if(lines[i].getAttribute('class').indexOf(`line-${css}`) != -1) {
-                            lines[i].style.opacity = '1';
-                            lines[i].style.strokeWidth = '2.5px';
-                        }
-                    }
-    
-                    //Tooltip
-                    positionTooltip(tooltip, e[i], chartBlock);
-                    getInTooltip(tooltip);               
-                })
-                .on('mouseout', function(d, i, e) {
-                    //Quitamos los estilos de la línea
-                    let lines = document.getElementsByClassName('line');
-                    for(let i = 0; i < lines.length; i++) {
-                        lines[i].style.opacity = '1';
-                        lines[i].style.strokeWidth = '1.5px';
-                    }
-    
-                    //Quitamos el tooltip
-                    getOutTooltip(tooltip);                
-                });
+    //Lectura de datos
+    let file = './data/chart-two.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha,
+            Empleo_total: d.Empleo_Total.replace(/,/g, '.') * 100,
+            Empleo_formal: d.Empleo_Formal.replace(/,/g, '.') * 100,
+            Empleo_informal: d.Empleo_Informal.replace(/,/g, '.') * 100
         }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 25, left: 25};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(0.15);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([-20,0])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'lineEmpleo_total', xAxis: 'Fecha', yAxis: 'Empleo_total', cssLine: 'line-Empleo_total', cssCircle: 'circle-Empleo_total', cssColor: '#99E6FC', },
+            {lineName: 'lineEmpleo_formal', xAxis: 'Fecha', yAxis: 'Empleo_formal', cssLine: 'line-Empleo_formal', cssCircle: 'circle-Empleo_formal', cssColor: '#2347E3'},
+            {lineName: 'lineEmpleo_informal', xAxis: 'Fecha', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
+        ]
+
+        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
     });
 }
 
@@ -528,12 +547,10 @@ function getFifteenChart() {
 }
 
 getFirstChart();
+getSecondChart();
 getFifthChart();
 getFifthBisChart();
 getFifteenChart();
-
-
-
 
 /* Visualization helpers */
 function wrap(text, width) {
@@ -575,6 +592,69 @@ function setChart(chartBlock, margin) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     return {margin, width, height, chart};
+}
+
+function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
+    for(let i = 0; i < lines.length; i++) {
+        let line = d3.line()
+            .x(function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
+            .y(function(d) { return y(d[lines[i].yAxis]); });
+
+        chart.append("path")
+            .data([data])
+            .attr("class", `line ${lines[i].cssLine}`)
+            .attr("fill", "none")
+            .attr("stroke", `${lines[i].cssColor}`)
+            .attr("stroke-width", '1.5px')
+            .attr("d", line);
+
+        chart.selectAll('.circles')
+            .data(data)
+            .enter()
+            .append('circle')
+            .attr('class', `${lines[i].cssCircle}`)
+            .attr("r", 5)
+            .attr("cx", function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
+            .attr("cy", function(d) { return y(d[lines[i].yAxis]); })
+            .style("fill", '#000')
+            .style('opacity', '0')
+            .on('mouseenter', function(d, i, e) {
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                let html = `<p class="chart__tooltip--title">Fecha: ${d.Fecha}</p>
+                            <p class="chart__tooltip--text">Dato: ${d[css].toFixed(1)}%</p>`; //Solucionar recogida de información
+
+                tooltip.html(html);
+            })
+            .on('mousemove', function(d, i, e) {
+                //Posibilidad visualización línea diferente
+                let lines = document.getElementsByClassName('line');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                for(let i = 0; i < lines.length; i++) {
+                    lines[i].style.opacity = '0.4';
+                    if(lines[i].getAttribute('class').indexOf(`line-${css}`) != -1) {
+                        lines[i].style.opacity = '1';
+                        lines[i].style.strokeWidth = '2.5px';
+                    }
+                }
+
+                //Tooltip
+                positionTooltip(tooltip, e[i], chartBlock);
+                getInTooltip(tooltip);               
+            })
+            .on('mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let lines = document.getElementsByClassName('line');
+                for(let i = 0; i < lines.length; i++) {
+                    lines[i].style.opacity = '1';
+                    lines[i].style.strokeWidth = '1.5px';
+                }
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip);                
+            });
+    }
 }
 
 function setLinearScale() {
