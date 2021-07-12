@@ -796,6 +796,33 @@ function getFifthBisChart() {
     });
 }
 
+function getFourteenChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-fourteen');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-fourteen.csv';
+}
+
+function getFourteenBisChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-fourteen_bis');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-fourteen_bis.csv';
+}
+
+function getFourteenTrisChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-fourteen_tris');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-fourteen_tris.csv';
+}
+
 function getFifteenChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-fifteen');
