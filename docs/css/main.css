@@ -315,18 +315,18 @@ input:checked + .slider:before {
     font-style: normal;
     font-weight: bold;
     font-size: 12px;
-    line-height: 10px;
+    line-height: 1.1;
     color: #000;
-
-    margin-bottom: 4px;
 }
 
 .chart__tooltip--text {
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
-    line-height: 10px;
+    line-height: 1.1;
     color: #000;
+
+    margin-top: 4px;
 }
 
 @media only screen and (max-width: 525px) {

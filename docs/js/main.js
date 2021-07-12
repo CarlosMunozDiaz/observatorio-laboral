@@ -285,6 +285,132 @@ function getFifthChart() {
     });
 }
 
+function getFifthBisChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-five_bis');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-five_bis.csv';
+    d3.csv(file, function(d) {
+        return {
+            pais: d.Pais,
+            dato_diferencia: +d.Diferencia.replace(/,/g, '.') * 100,
+            dato_perdidaEmpleo: +d.Empleo_total.replace(/,/g, '.') * 100
+        }
+    }, function(error,data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 60, left: 45};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Eje X
+        let x = d3.scaleLinear()
+            .domain([-8, 4])
+            .range([0,width])
+            .nice();
+
+        let xAxis = svg => svg
+            .call(d3.axisBottom(x).ticks(8))
+            .call(g => g.select('.domain').remove())
+            .call(g => g.selectAll('.tick line')
+                .attr("class", (d) => { if (d == 0) { return 'line-special'; } })
+                .attr("y1", '0%')
+                .attr("y2", `-${height}`)
+            );
+
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        chart.append("text")
+            .style('font-size', '14px')
+            .attr("text-anchor", "end")
+            .attr("y", '95%')
+            .attr("x", ((width / 2) + 23))
+            .text("Diferencia")
+
+        //Eje Y
+        let y = d3.scaleLinear()
+            .domain([-20,10])
+            .range([height, 0])
+            .nice();
+        
+        let yAxis = svg => svg
+            .call(d3.axisLeft(y).ticks(4))
+            .call(g => g.select('.domain').remove())
+            .call(g => g.selectAll('.tick line')
+                .attr("class", function(d) { if (d == 0) { return 'line-special'; }})
+                .attr("x1", `0`)
+                .attr("x2", `${width}`)
+            );
+
+        chart.append('g')
+            .call(yAxis);
+
+        chart.append("text")
+            .style('font-size', '14px')
+            .attr("text-anchor", "end")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -margin.left + 15)
+            .attr("x", -((height / 2) - 34))
+            .text("Empleo total")
+
+        //Dibujo del gráfico
+        chart.append('g')
+            .selectAll("dot")
+            .data(data)
+            .enter()
+            .append('circle')
+            .attr('class', 'circle-scatterplot')
+            .style('opacity', '1')
+            .style('fill', function(d) { if (d.pais == 'Total') { return '#99E6FC'; } else { return '#081C29'; }} )
+            .attr('r', 6)            
+            .attr('cx', (d) => {return x(d.dato_diferencia)})
+            .on('mouseenter', function(d, i, e) {
+                let html = `<p class="chart__tooltip--title">${d.pais}</p>
+                            <p class="chart__tooltip--text">Pérdida de empleo: ${d.dato_perdidaEmpleo.toFixed(2)}%</p>
+                            <p class="chart__tooltip--text">Diferencia entre hombres y mujeres: ${d.dato_diferencia.toFixed(2)}%</p>`; //Solucionar recogida de información
+
+                tooltip.html(html);
+
+                //Tooltip
+                positionTooltip(tooltip, e[i], chartBlock);
+                getInTooltip(tooltip);
+            })
+            .on('mouseover mousemove', function(d, i, e) {
+                //Posibilidad visualización línea diferente
+                let bars = chartBlock.selectAll('.circle-scatterplot');
+
+                bars.each(function() {
+                    this.style.opacity = '0.4';
+                });
+                this.style.opacity = '1';
+
+                //Tooltip
+                positionTooltip(tooltip, e[i], chartBlock);
+                getInTooltip(tooltip);
+            })
+            .on('mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let bars = chartBlock.selectAll('.circle-scatterplot');
+                bars.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
+            .transition()
+            .ease(d3.easeBounce)
+            .duration(1750)
+            .attr('cy', (d) => {return y(d.dato_perdidaEmpleo)})
+            .delay((d,i) => {return i * 150});         
+
+    });
+}
+
 function getFifteenChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-fifteen');
@@ -403,6 +529,7 @@ function getFifteenChart() {
 
 getFirstChart();
 getFifthChart();
+getFifthBisChart();
 getFifteenChart();
 
 
