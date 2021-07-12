@@ -2,11 +2,11 @@
 * FUNCIONES TOOLTIP
 */
 function getInTooltip(tooltip) { //Mouseover
-    tooltip.style('opacity', 1);
+    tooltip.style('display','block').style('opacity', 1);
 }
 
 function getOutTooltip(tooltip) { //Mouseout
-    tooltip.transition().duration(500).style('opacity', 0);
+    tooltip.transition().duration(500).style('display','none').style('opacity', 0);
 }
 
 function positionTooltip(tooltip, el, div) {
@@ -20,8 +20,8 @@ function positionTooltip(tooltip, el, div) {
     
     //Posición
     let left = parseInt(div.style('width')) / 2 > x ? 'right' : 'left';
-    let horizontalPos = left == 'left' ? -tooltipWidth : 45;
+    let horizontalPos = left == 'left' ? -25 : 25;
 
     tooltip.style('top', y - (tooltipHeight + 20) + 'px');
-    tooltip.style('left', x + horizontalPos + 'px');
+    tooltip.style('left', (x + horizontalPos) + 'px');
 }
