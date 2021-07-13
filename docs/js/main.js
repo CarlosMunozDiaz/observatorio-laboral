@@ -538,7 +538,6 @@ function getFifthChart() {
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Agrupación de datos para barras agrupadas
-        //Agrupaciones de datos
         let paises = data.map(function(d){return d.pais});
         let columnas = ['Mujeres','Hombres'];
         let newData = [];
@@ -793,6 +792,622 @@ function getFifthBisChart() {
             .attr('cy', (d) => {return y(d.dato_perdidaEmpleo)})
             .delay((d,i) => {return i * 150});         
 
+    });
+}
+
+function getSixthChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-six');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-six.csv';
+    d3.csv(file, function(d) {
+        return {
+            Edad: d['Edad'],
+            Edad_eje: d['Edad_eje'],
+            Hombres_total: +d['Hombres_total'].replace(/,/g, '.') * 100,
+            Mujeres_total: +d['Mujeres_total'].replace(/,/g, '.') * 100
+        }
+    }, function (error, data) {
+        if (error) throw data;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Agrupación de datos para barras agrupadas
+        let edades = data.map(function(d){return d.Edad_eje});
+        let columnas = ['Mujeres','Hombres'];
+        let newData = [];
+        for(let i = 0; i < data.length; i++){
+            newData.push({categoria: data[i].Edad_eje, valores: [
+                {descriptor: 'Mujeres', edad: data[i].Edad_eje, valor: data[i].Mujeres_total},
+                {descriptor: 'Hombres', edad: data[i].Edad_eje, valor: data[i].Hombres_total}                                  
+            ]});
+        }
+
+        //Eje X > Edades y columnas
+        let x0 = d3.scaleBand()
+            .rangeRound([0,width])
+            .domain(edades)
+            .paddingInner(.5)
+            .align(1);
+        
+        let x1 = d3.scaleBand()
+            .range([x0.bandwidth(),0])
+            .paddingInner(.25)
+            .paddingOuter(.35)
+            .domain(columnas);
+
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x0))
+            // g.call(function(g){
+            //     g.selectAll('.tick text')
+            //         .style("text-anchor", "end")
+            //         .attr("dx", "-.8em")
+            //         .attr("dy", ".15em")
+            //         .attr("transform", function(d) {
+            //             return "rotate(-65)" 
+            //         });
+            // })
+            g.call(function(g){g.selectAll('.tick line').remove()});
+            g.call(function(g){g.select('.domain').remove()});
+        }
+
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        let y = d3.scaleLinear()
+            .range([height, 0])
+            .domain([-25,0])
+            .nice();
+    
+        let yAxis = function(g){
+            g.call(d3.axisLeft(y).ticks(5).tickFormat(function(d) { return d + '%'; }))
+            g.call(function(g){g.select('.domain').remove()})
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr('x1', '0%')
+                    .attr('x2', `${width}`)
+            });
+        }
+
+        chart.append("g")
+            .call(yAxis);
+
+        //Visualización de datos
+        let slice = chart.selectAll(".slice")
+            .data(newData)
+            .enter()
+            .append("g")
+            .attr("class", "g")
+            .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
+
+        slice.selectAll("rect")
+            .data(function(d) { return d.valores; })
+            .enter()
+            .append("rect")
+            .attr("x", d => x1(d.descriptor))
+            .attr("y", function(d) { return y(0); })
+            .attr('class', function(d,i) { 
+                if(d.descriptor == 'Hombres') {
+                    return 'rect rect-hombres';
+                } else {
+                    return 'rect rect-mujeres';
+                }
+            })
+            .attr("width", x1.bandwidth())            
+            .attr('data-edad', function(d,i) { return d.edad; })
+            .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+            .on('mouseenter', function(d, i, e) {
+                let pais = e[i].getAttribute('data-edad');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                let html = `<p class="chart__tooltip--title">${pais}</p>
+                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
+
+                tooltip.html(html);
+
+            })
+            .on('mouseover mousemove', function(d, i, e) {
+                //Posibilidad visualización línea diferente
+                let rects = chartBlock.selectAll('.rect');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                rects.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`rect-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+
+                //Tooltip
+                positionTooltip(tooltip, e[i], chartBlock);
+                getInTooltip(tooltip);
+            })
+            .on('mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let rects = chartBlock.selectAll('.rect');
+                rects.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
+            .transition()
+            .duration(3000)            
+            .attr("y", function(d) { return y(Math.max(0, d.valor)); })     
+            .attr('height', d => Math.abs(y(d.valor) - y(0)));
+    });
+}
+
+function getEigthChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-eight');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-eight.csv';
+    d3.csv(file, function(d) {
+        return {
+            Escolaridad: d['Escolaridad'],
+            Escolaridad_eje: d['Escolaridad_eje'],
+            Hombres_total: +d['Hombres_total'].replace(/,/g, '.') * 100,
+            Mujeres_total: +d['Mujeres_total'].replace(/,/g, '.') * 100
+        }
+    }, function (error, data) {
+        if (error) throw data;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Agrupación de datos para barras agrupadas
+        let edades = data.map(function(d){return d.Escolaridad_eje});
+        let columnas = ['Mujeres','Hombres'];
+        let newData = [];
+        for(let i = 0; i < data.length; i++){
+            newData.push({categoria: data[i].Escolaridad_eje, valores: [
+                {descriptor: 'Mujeres', escolaridad: data[i].Escolaridad_eje, valor: data[i].Mujeres_total},
+                {descriptor: 'Hombres', escolaridad: data[i].Escolaridad_eje, valor: data[i].Hombres_total}                                  
+            ]});
+        }
+
+        //Eje X > Edades y columnas
+        let x0 = d3.scaleBand()
+            .rangeRound([0,width])
+            .domain(edades)
+            .paddingInner(.5)
+            .align(1);
+        
+        let x1 = d3.scaleBand()
+            .range([x0.bandwidth(),0])
+            .paddingInner(.25)
+            .paddingOuter(.35)
+            .domain(columnas);
+
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x0))
+            // g.call(function(g){
+            //     g.selectAll('.tick text')
+            //         .style("text-anchor", "end")
+            //         .attr("dx", "-.8em")
+            //         .attr("dy", ".15em")
+            //         .attr("transform", function(d) {
+            //             return "rotate(-65)" 
+            //         });
+            // })
+            g.call(function(g){g.selectAll('.tick line').remove()});
+            g.call(function(g){g.select('.domain').remove()});
+        }
+
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        let y = d3.scaleLinear()
+            .range([height, 0])
+            .domain([-25,0])
+            .nice();
+    
+        let yAxis = function(g){
+            g.call(d3.axisLeft(y).ticks(5).tickFormat(function(d) { return d + '%'; }))
+            g.call(function(g){g.select('.domain').remove()})
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr('x1', '0%')
+                    .attr('x2', `${width}`)
+            });
+        }
+
+        chart.append("g")
+            .call(yAxis);
+
+        //Visualización de datos
+        let slice = chart.selectAll(".slice")
+            .data(newData)
+            .enter()
+            .append("g")
+            .attr("class", "g")
+            .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
+
+        slice.selectAll("rect")
+            .data(function(d) { return d.valores; })
+            .enter()
+            .append("rect")
+            .attr("x", d => x1(d.descriptor))
+            .attr("y", function(d) { return y(0); })
+            .attr('class', function(d,i) { 
+                if(d.descriptor == 'Hombres') {
+                    return 'rect rect-hombres';
+                } else {
+                    return 'rect rect-mujeres';
+                }
+            })
+            .attr("width", x1.bandwidth())            
+            .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
+            .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+            .on('mouseenter', function(d, i, e) {
+                let escolaridad = e[i].getAttribute('data-escolaridad');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                let html = `<p class="chart__tooltip--title">${escolaridad}</p>
+                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
+
+                tooltip.html(html);
+
+            })
+            .on('mouseover mousemove', function(d, i, e) {
+                //Posibilidad visualización línea diferente
+                let rects = chartBlock.selectAll('.rect');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                rects.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`rect-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+
+                //Tooltip
+                positionTooltip(tooltip, e[i], chartBlock);
+                getInTooltip(tooltip);
+            })
+            .on('mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let rects = chartBlock.selectAll('.rect');
+                rects.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
+            .transition()
+            .duration(3000)            
+            .attr("y", function(d) { return y(Math.max(0, d.valor)); })     
+            .attr('height', d => Math.abs(y(d.valor) - y(0)));
+    });
+}
+
+function getTenthChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-ten');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-ten.csv';
+    d3.csv(file, function(d) {
+        return {
+            Escolaridad: d['Escolaridad'],
+            Escolaridad_eje: d['Escolaridad_eje'],
+            Hombres_total: +d['Hombres'].replace(/,/g, '.') * 100,
+            Mujeres_total: +d['Mujeres'].replace(/,/g, '.') * 100
+        }
+    }, function (error, data) {
+        if (error) throw data;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Agrupación de datos para barras agrupadas
+        let edades = data.map(function(d){return d.Escolaridad_eje});
+        let columnas = ['Mujeres','Hombres'];
+        let newData = [];
+        for(let i = 0; i < data.length; i++){
+            newData.push({categoria: data[i].Escolaridad_eje, valores: [
+                {descriptor: 'Mujeres', escolaridad: data[i].Escolaridad_eje, valor: data[i].Mujeres_total},
+                {descriptor: 'Hombres', escolaridad: data[i].Escolaridad_eje, valor: data[i].Hombres_total}                                  
+            ]});
+        }
+
+        //Eje X > Edades y columnas
+        let x0 = d3.scaleBand()
+            .rangeRound([0,width])
+            .domain(edades)
+            .paddingInner(.5)
+            .align(1);
+        
+        let x1 = d3.scaleBand()
+            .range([x0.bandwidth(),0])
+            .paddingInner(.25)
+            .paddingOuter(.35)
+            .domain(columnas);
+
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x0))
+            // g.call(function(g){
+            //     g.selectAll('.tick text')
+            //         .style("text-anchor", "end")
+            //         .attr("dx", "-.8em")
+            //         .attr("dy", ".15em")
+            //         .attr("transform", function(d) {
+            //             return "rotate(-65)" 
+            //         });
+            // })
+            g.call(function(g){g.selectAll('.tick line').remove()});
+            g.call(function(g){g.select('.domain').remove()});
+        }
+
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        let y = d3.scaleLinear()
+            .range([height, 0])
+            .domain([-15,0])
+            .nice();
+    
+        let yAxis = function(g){
+            g.call(d3.axisLeft(y).ticks(5).tickFormat(function(d) { return d + '%'; }))
+            g.call(function(g){g.select('.domain').remove()})
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr('x1', '0%')
+                    .attr('x2', `${width}`)
+            });
+        }
+
+        chart.append("g")
+            .call(yAxis);
+
+        //Visualización de datos
+        let slice = chart.selectAll(".slice")
+            .data(newData)
+            .enter()
+            .append("g")
+            .attr("class", "g")
+            .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
+
+        slice.selectAll("rect")
+            .data(function(d) { return d.valores; })
+            .enter()
+            .append("rect")
+            .attr("x", d => x1(d.descriptor))
+            .attr("y", function(d) { return y(0); })
+            .attr('class', function(d,i) { 
+                if(d.descriptor == 'Hombres') {
+                    return 'rect rect-hombres';
+                } else {
+                    return 'rect rect-mujeres';
+                }
+            })
+            .attr("width", x1.bandwidth())            
+            .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
+            .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+            .on('mouseenter', function(d, i, e) {
+                let escolaridad = e[i].getAttribute('data-escolaridad');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                let html = `<p class="chart__tooltip--title">${escolaridad}</p>
+                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
+
+                tooltip.html(html);
+
+            })
+            .on('mouseover mousemove', function(d, i, e) {
+                //Posibilidad visualización línea diferente
+                let rects = chartBlock.selectAll('.rect');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                rects.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`rect-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+
+                //Tooltip
+                positionTooltip(tooltip, e[i], chartBlock);
+                getInTooltip(tooltip);
+            })
+            .on('mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let rects = chartBlock.selectAll('.rect');
+                rects.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
+            .transition()
+            .duration(3000)            
+            .attr("y", function(d) { return y(Math.max(0, d.valor)); })     
+            .attr('height', d => Math.abs(y(d.valor) - y(0)));
+    });
+}
+
+function getTwelvethChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-twelve');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-twelve.csv';
+    d3.csv(file, function(d) {
+        return {
+            Escolaridad: d['Escolaridad'],
+            Escolaridad_eje: d['Escolaridad_eje'],
+            Hombres_total: +d['Hombres'].replace(/,/g, '.') * 100,
+            Mujeres_total: +d['Mujeres'].replace(/,/g, '.') * 100
+        }
+    }, function (error, data) {
+        if (error) throw data;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Agrupación de datos para barras agrupadas
+        let edades = data.map(function(d){return d.Escolaridad_eje});
+        let columnas = ['Mujeres','Hombres'];
+        let newData = [];
+        for(let i = 0; i < data.length; i++){
+            newData.push({categoria: data[i].Escolaridad_eje, valores: [
+                {descriptor: 'Mujeres', escolaridad: data[i].Escolaridad_eje, valor: data[i].Mujeres_total},
+                {descriptor: 'Hombres', escolaridad: data[i].Escolaridad_eje, valor: data[i].Hombres_total}                                  
+            ]});
+        }
+
+        //Eje X > Edades y columnas
+        let x0 = d3.scaleBand()
+            .rangeRound([0,width])
+            .domain(edades)
+            .paddingInner(.5)
+            .align(1);
+        
+        let x1 = d3.scaleBand()
+            .range([x0.bandwidth(),0])
+            .paddingInner(.25)
+            .paddingOuter(.35)
+            .domain(columnas);
+
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x0))
+            // g.call(function(g){
+            //     g.selectAll('.tick text')
+            //         .style("text-anchor", "end")
+            //         .attr("dx", "-.8em")
+            //         .attr("dy", ".15em")
+            //         .attr("transform", function(d) {
+            //             return "rotate(-65)" 
+            //         });
+            // })
+            g.call(function(g){g.selectAll('.tick line').remove()});
+            g.call(function(g){g.select('.domain').remove()});
+        }
+
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        let y = d3.scaleLinear()
+            .range([height, 0])
+            .domain([-6,0])
+            .nice();
+    
+        let yAxis = function(g){
+            g.call(d3.axisLeft(y).ticks(5).tickFormat(function(d) { return d + '%'; }))
+            g.call(function(g){g.select('.domain').remove()})
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr('x1', '0%')
+                    .attr('x2', `${width}`)
+            });
+        }
+
+        chart.append("g")
+            .call(yAxis);
+
+        //Visualización de datos
+        let slice = chart.selectAll(".slice")
+            .data(newData)
+            .enter()
+            .append("g")
+            .attr("class", "g")
+            .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
+
+        slice.selectAll("rect")
+            .data(function(d) { return d.valores; })
+            .enter()
+            .append("rect")
+            .attr("x", d => x1(d.descriptor))
+            .attr("y", function(d) { return y(0); })
+            .attr('class', function(d,i) { 
+                if(d.descriptor == 'Hombres') {
+                    return 'rect rect-hombres';
+                } else {
+                    return 'rect rect-mujeres';
+                }
+            })
+            .attr("width", x1.bandwidth())            
+            .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
+            .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+            .on('mouseenter', function(d, i, e) {
+                let escolaridad = e[i].getAttribute('data-escolaridad');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                let html = `<p class="chart__tooltip--title">${escolaridad}</p>
+                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
+
+                tooltip.html(html);
+
+            })
+            .on('mouseover mousemove', function(d, i, e) {
+                //Posibilidad visualización línea diferente
+                let rects = chartBlock.selectAll('.rect');
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                rects.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`rect-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+
+                //Tooltip
+                positionTooltip(tooltip, e[i], chartBlock);
+                getInTooltip(tooltip);
+            })
+            .on('mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let rects = chartBlock.selectAll('.rect');
+                rects.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
+            .transition()
+            .duration(3000)            
+            .attr("y", function(d) { return y(Math.max(0, d.valor)); })     
+            .attr('height', d => Math.abs(y(d.valor) - y(0)));
     });
 }
 
@@ -1164,6 +1779,10 @@ getFourthChart();
 getFourthBisChart();
 getFifthChart();
 getFifthBisChart();
+getSixthChart();
+getEigthChart();
+getTenthChart();
+getTwelvethChart();
 getFourteenChart();
 getFourteenBisChart();
 getFourteenTrisChart();
