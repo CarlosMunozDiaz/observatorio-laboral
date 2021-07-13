@@ -472,7 +472,7 @@ function getFourthBisChart() {
             g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
             g.call(function(g){
                 g.selectAll('.tick line')
-                    .attr('y1', '-12px')
+                    .attr('y1', '-0px')
                     .attr('y2', `-${height}`)
             })
             g.call(function(g){g.select('.domain').remove()});
@@ -803,6 +803,75 @@ function getFourteenChart() {
 
     //Lectura de datos
     let file = './data/chart-fourteen.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha_eje,
+            PrimerNivel: +d['8anios'].replace(/,/g, '.') * 100,
+            SegundoNivel: +d['9-12'].replace(/,/g, '.') * 100,
+            TercerNivel: +d['12+'].replace(/,/g, '.') * 100
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(1);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([0,40])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'linePrimerNivel', xAxis: 'Fecha', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
+            {lineName: 'lineSegundoNivel', xAxis: 'Fecha', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
+            {lineName: 'lineTercerNivel', xAxis: 'Fecha', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'}
+        ]
+
+        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+    });
 }
 
 function getFourteenBisChart() {
@@ -812,6 +881,77 @@ function getFourteenBisChart() {
 
     //Lectura de datos
     let file = './data/chart-fourteen_bis.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha_eje,
+            PrimerNivel: +d['ciclo_basico'].replace(/,/g, '.'),
+            SegundoNivel: +d['segundo'].replace(/,/g, '.'),
+            TercerNivel: +d['tercero'].replace(/,/g, '.'),
+            CuartoNivel: +d['tercero_completo'].replace(/,/g, '.')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(1);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%3)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([0,60])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'linePrimerNivel', xAxis: 'Fecha', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
+            {lineName: 'lineSegundoNivel', xAxis: 'Fecha', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
+            {lineName: 'lineTercerNivel', xAxis: 'Fecha', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'},
+            {lineName: 'lineCuartoNivel', xAxis: 'Fecha', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'}
+        ]
+
+        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+    });
 }
 
 function getFourteenTrisChart() {
@@ -821,6 +961,79 @@ function getFourteenTrisChart() {
 
     //Lectura de datos
     let file = './data/chart-fourteen_tris.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha_eje,
+            PrimerNivel: +d['Primaria'].replace(/,/g, '.'),
+            SegundoNivel: +d['Secundaria'].replace(/,/g, '.'),
+            TercerNivel: +d['Medio superior'].replace(/,/g, '.'),
+            CuartoNivel: +d['Superior'].replace(/,/g, '.'),
+            QuintoNivel: +d['no_especificado'].replace(/,/g, '.')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(1);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([0,50])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'linePrimerNivel', xAxis: 'Fecha', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
+            {lineName: 'lineSegundoNivel', xAxis: 'Fecha', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
+            {lineName: 'lineTercerNivel', xAxis: 'Fecha', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'},
+            {lineName: 'lineCuartoNivel', xAxis: 'Fecha', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'},
+            {lineName: 'lineQuintoNivel', xAxis: 'Fecha', yAxis: 'QuintoNivel', cssLine: 'line-QuintoNivel', cssCircle: 'circle-QuintoNivel', cssColor: '#9b9b9b'}
+        ]
+
+        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+    });
 }
 
 function getFifteenChart() {
@@ -951,6 +1164,9 @@ getFourthChart();
 getFourthBisChart();
 getFifthChart();
 getFifthBisChart();
+getFourteenChart();
+getFourteenBisChart();
+getFourteenTrisChart();
 getFifteenChart();
 
 /* Visualization helpers */

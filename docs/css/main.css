@@ -249,6 +249,14 @@ input:checked + .slider:before {
     background-color: #081C29;
 }
 
+.chart__legend--item.color-four:before {
+    background-color: #474b4e;
+}
+
+.chart__legend--item.color-five:before {
+    background-color: #9b9b9b;
+}
+
 .chart__legend--item.color-men:before {
     background-color: #081C29;
 }
