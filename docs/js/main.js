@@ -552,13 +552,13 @@ function getFifthChart() {
         let x0 = d3.scaleBand()
             .rangeRound([0,width])
             .domain(paises)
-            .paddingInner(.5)
+            .paddingInner(0.5)
             .align(1);
         
         let x1 = d3.scaleBand()
             .range([x0.bandwidth(),0])
-            .paddingInner(.25)
-            .paddingOuter(.35)
+            .paddingInner(0)
+            .paddingOuter(0)
             .domain(columnas);
 
         let xAxis = function(g){
@@ -614,7 +614,7 @@ function getFifthChart() {
             .data(function(d) { return d.valores; })
             .enter()
             .append("rect")
-            .attr("x", d => x1(d.descriptor))
+            .attr("x", d => x1(d.descriptor) - x0.bandwidth() / 4)
             .attr("y", function(d) { return y(0); })
             .attr('class', function(d,i) { 
                 if(d.descriptor == 'Hombres') {
@@ -946,6 +946,144 @@ function getSixthChart() {
             .duration(3000)            
             .attr("y", function(d) { return y(Math.max(0, d.valor)); })     
             .attr('height', d => Math.abs(y(d.valor) - y(0)));
+    });
+}
+
+function getSeventhChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-seven');
+    let tooltip = chartBlock.select('.chart__tooltip');
+    let switchState = false;
+
+    //Lectura de datos
+    let file = './data/chart-seven.csv';
+    d3.csv(file, function(d) {
+        return {
+            Pais: d.Pais,
+            Edad: d.Edad,
+            Hombres: +d.Hombres_total.replace(/,/g, '.') * 100,
+            Mujeres: +d.Mujeres_total.replace(/,/g, '.') * 100
+        }
+    }, function(error, data) {
+        if (error) throw error;
+
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Agrupación de datos para barras agrupadas
+        let paises = d3.nest()
+            .key(function(d) { return d.Pais; })
+            .entries(data);
+
+        let ejePaises = paises.map(function(d) { return d.key; });
+        let columnas = ['[14,24]', '[25,34]', '[35,55]', '[56,70]'];
+        
+        //Eje X > Países y columnas
+        let x0 = d3.scaleBand()
+            .rangeRound([0,width])
+            .domain(ejePaises)
+            .paddingInner(.25)
+            .align(1);
+        
+        let x1 = d3.scaleBand()
+            .range([0, x0.bandwidth()])
+            .paddingInner(0.15)
+            .paddingOuter(0.25)
+            .domain(columnas);
+
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x0))
+            g.call(function(g){
+                g.selectAll('.tick text')
+                    .style("text-anchor", "end")
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em")
+                    .attr("transform", function(d) {
+                        return "rotate(-65)" 
+                    });
+            })
+            g.call(function(g){g.selectAll('.tick line').remove()});
+            g.call(function(g){g.select('.domain').remove()});
+        }
+
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        let y = d3.scaleLinear()
+            .range([height, 0])
+            .domain([-40,10]);
+    
+        let yAxis = function(g){
+            g.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
+            g.call(function(g){g.select('.domain').remove()})
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr('x1', '0%')
+                    .attr('x2', `${width}`)
+            });
+        }
+
+        chart.append("g")
+            .call(yAxis);
+
+        let slice = chart.selectAll(".slice")
+            .data(paises)
+            .enter()
+            .append("g")
+            .attr("class", "g")
+            .attr("transform",function(d) { return "translate(" + x0(d.key) + ",0)"; });
+
+        slice.selectAll("rect")
+            .data(function(d) { return d.values; })
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x1(d.Edad) })
+            .attr("y", function(d) { return y(0); })
+            .attr('class', function(d,i) {
+                if(d.Edad == '[14-24]') {
+                    return 'rect rect-primero';
+                } else if (d.Edad == '[25,34]') {
+                    return 'rect rect-segundo';
+                } else if (d.Edad == '[35,55]') {
+                    return 'rect rect-tercero';
+                } else {
+                    return 'rect rect-cuarto';
+                }
+            })
+            .attr("width", x1.bandwidth())            
+            .attr('data-edad', function(d,i) { return d.Edad; })
+            .style('fill',function(d) { return d.Edad == '[14,24]' ? '#99E6FC' : d.Edad == '[25,34]' ? '#2347E3' : d.Edad == '[35,55]' ? '#081C29' : '#474b4e'})
+            .transition()
+            .duration(3000)            
+            .attr("y", function(d) { return y(Math.max(0, d.Hombres)); })     
+            .attr('height', d => Math.abs(y(d.Hombres) - y(0)));
+        
+        function updateChart(tipo) {
+            slice
+                .selectAll(".rect")
+                .data(function(d) { return d.values; })
+                .transition()
+                .duration(1500) 
+                .attr("y", function(d) { return y(Math.max(0, d[tipo])); })     
+                .attr('height', d => Math.abs(y(d[tipo]) - y(0)));
+        }
+
+        document.getElementById('chart-seven-switch').addEventListener('change', function(e) {
+            if(e.target.checked) {
+                switchState = true;
+                updateChart('Mujeres');
+            } else {
+                switchState = false;
+                updateChart('Hombres');
+            }
+        });        
     });
 }
 
@@ -1780,6 +1918,7 @@ getFourthBisChart();
 getFifthChart();
 getFifthBisChart();
 getSixthChart();
+getSeventhChart();
 getEigthChart();
 getTenthChart();
 getTwelvethChart();
