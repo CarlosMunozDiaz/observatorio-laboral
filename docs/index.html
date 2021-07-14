@@ -10,128 +10,6 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <h1 style="text-align: center; font-size: 20px; margin-top: 48px; margin-bottom: 48px;">COMPONENTES</h1>
-    <section class="outer-chart">
-        <div class="chart">
-            <h1 class="chart__title">Título del gráfico</h1>
-            <h2 class="chart__subtitle">Subtítulo del gráfico</h2>
-            <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
-                <select class="chart__select">
-                    <option class="chart__select--item">País 1</option>
-                    <option class="chart__select--item">País 2</option>
-                    <option class="chart__select--item">País 3</option>
-                </select>
-            </div>
-            <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
-                <select class="chart__select--double">
-                    <option class="chart__select--item">País 1</option>
-                    <option class="chart__select--item">País 2</option>
-                    <option class="chart__select--item">País 3</option>
-                </select>
-                <select class="chart__select--double">
-                    <option class="chart__select--item">País 1</option>
-                    <option class="chart__select--item">País 2</option>
-                    <option class="chart__select--item">País 3</option>
-                </select>
-            </div>
-            <div class="chart__b-switch">
-                <div class="chart__switch">
-                    <img src="./img/hombre_30.svg" width="13px" height="30px" alt="Icono hombre">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                    <img src="./img/mujer_30.svg" width="14px" height="30px" alt="Icono mujer">
-                </div>
-            </div>                      
-            <div class="chart__legend">
-                <span class="chart__legend--item">Leyenda 1</span>
-                <span class="chart__legend--item">Leyenda 2</span>
-                <span class="chart__legend--item">Leyenda 3</span>
-            </div>
-            <div class="chart__legend">
-                <span class="chart__legend--item color-one">Leyenda larga 1</span>
-                <span class="chart__legend--item color-two">Leyenda larga 2</span>
-                <span class="chart__legend--item color-three">Leyenda larga 3</span>
-            </div>
-            <!-- <div class="chart__viz"></div> -->
-            <p class="chart__note">* Nota a pie de gráfico</p>
-            <!-- <div class="chart__tooltip">
-                <p class="chart__tooltip--title">prueba título</p>
-                <p class="chart__tooltip--text">prueba de texto inferior que tendrá datos</p>
-            </div> -->
-        </div>
-    </section>
-    <hr>
-    <h1 style="text-align: center; font-size: 20px; margin-top: 48px; margin-bottom: 48px;">CASO DE USO: TÍTULO ENCIMA DE SELECTOR O SWITCH</h1>
-    <section class="outer-chart">
-        <div class="chart">
-            <div class="chart__b-title--upper" style="margin: 48px 0px;">
-                <div class="chart__sb-title">
-                    <h1 class="chart__title">Título del gráfico más largo para probar cómo queda con elemento lateral e inferior</h1>
-                    <h2 class="chart__subtitle">Subtítulo del gráfico</h2>
-                </div>
-                <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
-                    <select class="chart__select">
-                        <option class="chart__select--item">País 1</option>
-                        <option class="chart__select--item">País 2</option>
-                        <option class="chart__select--item">País 3</option>
-                    </select>
-                </div>
-            </div>
-            <div class="chart__b-title--upper" style="margin: 48px 0px;">
-                <div class="chart__sb-title">
-                    <h1 class="chart__title">Título del gráfico</h1>
-                    <h2 class="chart__subtitle">Subtítulo del gráfico</h2>
-                </div>
-                <div class="chart__b-switch">
-                    <div class="chart__switch">
-                        <img src="./img/hombre_30.svg" width="13px" height="30px" alt="Icono hombre">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                        <img src="./img/mujer_30.svg" width="14px" height="30px" alt="Icono mujer">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <h1 style="text-align: center; font-size: 20px; margin-top: 48px; margin-bottom: 48px;">CASO DE USO: TÍTULO CON MISMA ALTURA QUE SELECTOR O SWITCH</h1>
-    <section class="outer-chart">
-        <div class="chart">
-            <div class="chart__b-title--together" style="margin: 48px 0px;">
-                <div class="chart__sb-title">
-                    <h1 class="chart__title">Título del gráfico más largo para probar cómo queda con elemento lateral y misma altura</h1>
-                    <h2 class="chart__subtitle">Subtítulo del gráfico</h2>
-                </div>
-                <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
-                    <select class="chart__select">
-                        <option class="chart__select--item">País 1</option>
-                        <option class="chart__select--item">País 2</option>
-                        <option class="chart__select--item">País 3</option>
-                    </select>
-                </div>
-            </div>
-            <div class="chart__b-title--together" style="margin: 48px 0px;">
-                <div class="chart__sb-title">
-                    <h1 class="chart__title">Título del gráfico</h1>
-                    <h2 class="chart__subtitle">Subtítulo del gráfico más largo para probar cómo queda con elemento lateral y misma altura</h2>
-                </div>                
-                <div class="chart__b-switch">
-                    <div class="chart__switch">
-                        <img src="./img/hombre_30.svg" width="13px" height="30px" alt="Icono hombre">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                        <img src="./img/mujer_30.svg" width="14px" height="30px" alt="Icono mujer">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <hr>
     <h1 style="text-align: center; font-size: 20px; margin-top: 48px; margin-bottom: 48px;">GRÁFICOS</h1>
     <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 1 - Caída PIB y empleo perdido - Múltiples líneas</h2>
     <div class="outer-chart">
@@ -223,6 +101,29 @@
             <p class="chart__note">* Nota para Bolivia</p>
             <p class="chart__note">** Nota para México</p>
             <p class="chart__note">*** Nota para Perú</p>
+        </div>
+    </div>
+    <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 4-6 - Ajustes en horas y salarios entre 2019 y 2020</h2>
+    <div class="outer-chart">
+        <div class="chart">
+            <div class="chart__b-title--upper">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Cambios en horas trabajadas y salarios</h1>
+                    <h2 class="chart__subtitle">Datos porcentuales. Comparativa entre 2019 y 2020</h2>
+                </div>
+                <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
+                    <select class="chart__select" id="empleo3_4">
+                        <option class="chart__select--item" value="Horas_trabajadas">En horas trabajadas</option>
+                        <option class="chart__select--item" value="Salarios">En salarios</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart__viz" id="chart-3_4">
+                <div class="chart__tooltip">
+                    <p class="chart__tooltip--title"></p>
+                    <p class="chart__tooltip--text"></p>
+                </div>
+            </div>
         </div>
     </div>
     <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 4 - Pérdida de empleo por género (Datos porcentuales) - Múltiples líneas</h2>
@@ -609,6 +510,18 @@
                 </div>
             </div>
         </div>
+    </div>
+    <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 16 - Cambio de vacantas - Barras horizontales > Filtro por sector</h2>
+    <div class="outer-chart">
+
+    </div>
+    <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 17 - Tasa de contratación en LinkedIn - Múltiples líneas</h2>
+    <div class="outer-chart">
+
+    </div>
+    <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 18 - Tabla evolución contratación - Mapa de calor</h2>
+    <div class="outer-chart">
+
     </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="./js/tooltip.js"></script>   
