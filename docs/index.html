@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <h1 style="text-align: center; font-size: 20px; margin-top: 48px; margin-bottom: 48px;">GRÁFICOS</h1>
-    <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 1 - Caída PIB y empleo perdido - Múltiples líneas</h2>
+    <h2 style="font-size: 16px; font-weight: bold; margin-top: 12px; margin-bottom: 48px;">Gráfico 1 - Caída PIB y empleo perdido - Múltiples líneas</h2>
     <div class="outer-chart">
         <div class="chart">
             <div class="chart__b-title--upper">
@@ -112,13 +111,13 @@
                     <h2 class="chart__subtitle">Datos porcentuales. Comparativa entre 2019 y 2020</h2>
                 </div>
                 <div class="chart__b-select"> <!-- Podremos tener un selector o dos -->
-                    <select class="chart__select" id="empleo3_4">
+                    <select class="chart__select" id="empleo4_6">
                         <option class="chart__select--item" value="Horas_trabajadas">En horas trabajadas</option>
                         <option class="chart__select--item" value="Salarios">En salarios</option>
                     </select>
                 </div>
             </div>
-            <div class="chart__viz" id="chart-3_4">
+            <div class="chart__viz" id="chart-4_6">
                 <div class="chart__tooltip">
                     <p class="chart__tooltip--title"></p>
                     <p class="chart__tooltip--text"></p>
@@ -153,7 +152,7 @@
             <div class="chart__b-title--upper">
                 <div class="chart__sb-title">
                     <h1 class="chart__title">Pérdida de empleo por género</h1>
-                    <h2 class="chart__subtitle">Datos en puntos porcentuales</h2>
+                    <h2 class="chart__subtitle">Datos absolutos</h2>
                 </div>
             </div>
             <div class="chart__legend">
@@ -217,8 +216,15 @@
         <div class="chart">
             <div class="chart__b-title--upper">
                 <div class="chart__sb-title">
-                    <h1 class="chart__title">Pérdida de empleo por edad y género</h1>
+                    <h1 class="chart__title">Pérdida de empleo por tipo de formalidad, edad y género</h1>
                     <h2 class="chart__subtitle">Datos en puntos porcentuales</h2>
+                </div>
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleoSix">
+                        <option class="chart__select--item" value="0">Empleo total</option>
+                        <option class="chart__select--item" value="1">Empleo formal</option>
+                        <option class="chart__select--item" value="2">Empleo informal</option>
+                    </select>
                 </div>
             </div>
             <div class="chart__legend">
@@ -273,6 +279,13 @@
                 <div class="chart__sb-title">
                     <h1 class="chart__title">Pérdida de empleo por edad y nivel educativo</h1>
                     <h2 class="chart__subtitle">Datos en puntos porcentuales</h2>
+                </div>
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleoEight">
+                        <option class="chart__select--item" value="0">Empleo total</option>
+                        <option class="chart__select--item" value="1">Empleo formal</option>
+                        <option class="chart__select--item" value="2">Empleo informal</option>
+                    </select>
                 </div>
             </div>
             <div class="chart__legend">
@@ -513,11 +526,59 @@
     </div>
     <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 16 - Cambio de vacantas - Barras horizontales > Filtro por sector</h2>
     <div class="outer-chart">
-
+        <div class="chart">
+            <div class="chart__b-title--upper">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Cambio en el porcentaje de vacantes, experiencia, educación y teletrabajo donde se demanda educación media y superior</h1>
+                    <h2 class="chart__subtitle">Datos en puntos porcentuales. Diferencias entre abril de 2021 y marzo de 2020</h2>
+                </div>
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleoSixteen">
+                        <option class="chart__select--item" value="Vacantes">Número de vacantes</option>
+                        <option class="chart__select--item" value="Experiencia">Experiencia</option>
+                        <option class="chart__select--item" value="Educacion">Educación</option>
+                        <option class="chart__select--item" value="Teletrabajo">Teletrabajo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart__viz" id="chart-sixteen">
+                <div class="chart__tooltip">
+                    <p class="chart__tooltip--title"></p>
+                    <p class="chart__tooltip--text"></p>
+                </div>
+            </div>
+        </div>
     </div>
     <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 17 - Tasa de contratación en LinkedIn - Múltiples líneas</h2>
     <div class="outer-chart">
-
+        <div class="chart">
+            <div class="chart__b-title--upper">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Evolución de la tasa de contratación en LinkedIn</h1>
+                    <h2 class="chart__subtitle">Datos en puntos porcentuales</h2>
+                </div>
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleoSeventeen">
+                        <option class="chart__select--item" value="Argentina">Argentina</option>
+                        <option class="chart__select--item" value="Brasil">Brasil</option>
+                        <option class="chart__select--item" value="Chile">Chile</option>
+                        <option class="chart__select--item" value="Colombia">Colombia</option>
+                        <option class="chart__select--item" value="México">México</option>
+                        <option class="chart__select--item" value="Perú">Perú</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart__legend">
+                <span class="chart__legend--item color-women">Promedio general</span>
+                <span class="chart__legend--item color-men">País seleccionado</span>
+            </div>
+            <div class="chart__viz" id="chart-seventeen">
+                <div class="chart__tooltip">
+                    <p class="chart__tooltip--title"></p>
+                    <p class="chart__tooltip--text"></p>
+                </div>
+            </div>
+        </div>
     </div>
     <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 18 - Tabla evolución contratación - Mapa de calor</h2>
     <div class="outer-chart">

@@ -807,7 +807,11 @@ function getSixthChart() {
             Edad: d['Edad'],
             Edad_eje: d['Edad_eje'],
             Hombres_total: +d['Hombres_total'].replace(/,/g, '.') * 100,
-            Mujeres_total: +d['Mujeres_total'].replace(/,/g, '.') * 100
+            Mujeres_total: +d['Mujeres_total'].replace(/,/g, '.') * 100,
+            Hombres_formal: +d['Hombres_formal'].replace(/,/g, '.') * 100,
+            Mujeres_formal: +d['Mujeres_formal'].replace(/,/g, '.') * 100,
+            Hombres_informal: +d['Hombres_informal'].replace(/,/g, '.') * 100,
+            Mujeres_informal: +d['Mujeres_informal'].replace(/,/g, '.') * 100
         }
     }, function (error, data) {
         if (error) throw data;
@@ -822,8 +826,8 @@ function getSixthChart() {
         let newData = [];
         for(let i = 0; i < data.length; i++){
             newData.push({categoria: data[i].Edad_eje, valores: [
-                {descriptor: 'Mujeres', edad: data[i].Edad_eje, valor: data[i].Mujeres_total},
-                {descriptor: 'Hombres', edad: data[i].Edad_eje, valor: data[i].Hombres_total}                                  
+                {descriptor: 'Mujeres', edad: data[i].Edad_eje, valor: [data[i].Mujeres_total, data[i].Mujeres_formal, data[i].Mujeres_informal] },
+                {descriptor: 'Hombres', edad: data[i].Edad_eje, valor: [data[i].Hombres_total, data[i].Hombres_formal, data[i].Hombres_informal]}                                  
             ]});
         }
 
@@ -839,15 +843,6 @@ function getSixthChart() {
 
         let xAxis = function(g){
             g.call(d3.axisBottom(x0))
-            // g.call(function(g){
-            //     g.selectAll('.tick text')
-            //         .style("text-anchor", "end")
-            //         .attr("dx", "-.8em")
-            //         .attr("dy", ".15em")
-            //         .attr("transform", function(d) {
-            //             return "rotate(-65)" 
-            //         });
-            // })
             g.call(function(g){g.selectAll('.tick line').remove()});
             g.call(function(g){g.select('.domain').remove()});
         }
@@ -858,7 +853,7 @@ function getSixthChart() {
 
         let y = d3.scaleLinear()
             .range([height, 0])
-            .domain([-25,0])
+            .domain([-30,0])
             .nice();
     
         let yAxis = function(g){
@@ -941,8 +936,26 @@ function getSixthChart() {
             })
             .transition()
             .duration(3000)            
-            .attr("y", function(d) { return y(Math.max(0, d.valor)); })     
-            .attr('height', d => Math.abs(y(d.valor) - y(0)));
+            .attr("y", function(d) { return y(Math.max(0, d.valor[0])); })     
+            .attr('height', d => Math.abs(y(d.valor[0]) - y(0)));
+        
+        let currentIndex = 0;
+
+        function updateChart(idx) {
+            slice
+            .selectAll(".rect")
+            .data(function(d) { return d.valores; })
+            .transition()
+            .duration(3000)            
+            .attr("y", function(d) { return y(Math.max(0, d.valor[idx])); })     
+            .attr('height', d => Math.abs(y(d.valor[idx]) - y(0)));
+        }
+
+        document.getElementById('empleoSix').addEventListener('click', function(e) {
+            let idx = e.target.value;
+            currentIndex = +idx;
+            updateChart(idx);
+        });
     });
 }
 
@@ -979,11 +992,11 @@ function getSeventhChart() {
         //Eje X > Países y columnas
         let x0 = d3.scaleBand()
             .rangeRound([0,width])
-            .domain(ejePaises)
-            .align(1);
+            .domain(ejePaises);
         
         let x1 = d3.scaleBand()
             .range([0, x0.bandwidth()])
+            .paddingInner(0.25)
             .paddingOuter(0.5)
             .domain(columnas);
 
@@ -1094,7 +1107,11 @@ function getEigthChart() {
             Escolaridad: d['Escolaridad'],
             Escolaridad_eje: d['Escolaridad_eje'],
             Hombres_total: +d['Hombres_total'].replace(/,/g, '.') * 100,
-            Mujeres_total: +d['Mujeres_total'].replace(/,/g, '.') * 100
+            Mujeres_total: +d['Mujeres_total'].replace(/,/g, '.') * 100,
+            Hombres_formal: +d['Hombres_formal'].replace(/,/g, '.') * 100,
+            Mujeres_formal: +d['Mujeres_formal'].replace(/,/g, '.') * 100,
+            Hombres_informal: +d['Hombres_informal'].replace(/,/g, '.') * 100,
+            Mujeres_informal: +d['Mujeres_informal'].replace(/,/g, '.') * 100
         }
     }, function (error, data) {
         if (error) throw data;
@@ -1109,8 +1126,8 @@ function getEigthChart() {
         let newData = [];
         for(let i = 0; i < data.length; i++){
             newData.push({categoria: data[i].Escolaridad_eje, valores: [
-                {descriptor: 'Mujeres', escolaridad: data[i].Escolaridad_eje, valor: data[i].Mujeres_total},
-                {descriptor: 'Hombres', escolaridad: data[i].Escolaridad_eje, valor: data[i].Hombres_total}                                  
+                {descriptor: 'Mujeres', escolaridad: data[i].Escolaridad_eje, valor: [data[i].Mujeres_total, data[i].Mujeres_formal, data[i].Mujeres_informal] },
+                {descriptor: 'Hombres', escolaridad: data[i].Escolaridad_eje, valor: [data[i].Hombres_total, data[i].Hombres_formal, data[i].Hombres_informal]}                                  
             ]});
         }
 
@@ -1127,15 +1144,6 @@ function getEigthChart() {
 
         let xAxis = function(g){
             g.call(d3.axisBottom(x0))
-            // g.call(function(g){
-            //     g.selectAll('.tick text')
-            //         .style("text-anchor", "end")
-            //         .attr("dx", "-.8em")
-            //         .attr("dy", ".15em")
-            //         .attr("transform", function(d) {
-            //             return "rotate(-65)" 
-            //         });
-            // })
             g.call(function(g){g.selectAll('.tick line').remove()});
             g.call(function(g){g.select('.domain').remove()});
         }
@@ -1229,8 +1237,26 @@ function getEigthChart() {
             })
             .transition()
             .duration(3000)            
-            .attr("y", function(d) { return y(Math.max(0, d.valor)); })     
-            .attr('height', d => Math.abs(y(d.valor) - y(0)));
+            .attr("y", function(d) { return y(Math.max(0, d.valor[0])); })     
+            .attr('height', d => Math.abs(y(d.valor[0]) - y(0)));
+
+        let currentIndex = 0;
+
+        function updateChart(idx) {
+            slice
+            .selectAll(".rect")
+            .data(function(d) { return d.valores; })
+            .transition()
+            .duration(3000)            
+            .attr("y", function(d) { return y(Math.max(0, d.valor[idx])); })     
+            .attr('height', d => Math.abs(y(d.valor[idx]) - y(0)));
+        }
+
+        document.getElementById('empleoEight').addEventListener('click', function(e) {
+            let idx = e.target.value;
+            currentIndex = +idx;
+            updateChart(idx);
+        });
     });
 }
 
@@ -1271,6 +1297,7 @@ function getNinethChart() {
         
         let x1 = d3.scaleBand()
             .range([0, x0.bandwidth()])
+            .paddingInner(0.25)
             .paddingOuter(0.5)
             .domain(columnas);
 
@@ -1555,6 +1582,7 @@ function getEleventhChart() {
         
         let x1 = d3.scaleBand()
             .range([0, x0.bandwidth()])
+            .paddingInner(0.25)
             .paddingOuter(0.5)
             .domain(columnas);
 
@@ -1839,6 +1867,7 @@ function getThirteenthChart() {
         
         let x1 = d3.scaleBand()
             .range([0, x0.bandwidth()])
+            .paddingInner(0.25)
             .paddingOuter(0.5)
             .domain(columnas);
 
@@ -2296,7 +2325,140 @@ function getFifteenChart() {
 }
 
 function getSixteenthChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-sixteen');
+    let tooltip = chartBlock.select('.chart__tooltip');
 
+    //Lectura de datos
+    let file = './data/chart-sixteen.csv';
+    d3.csv(file, function(d) {
+        return {
+            pais: d.Pais,
+            Vacantes: +d['Cambio en Vacantes'].replace(/,/g, '.').replace('%',''),
+            Experiencia: +d['Experiencia'].replace(/,/g, '.').replace('%',''),
+            Educacion: +d['Educacion'].replace(/,/g, '.').replace('%',''),
+            Teletrabajo: +d['Teletrabajo'].replace(/,/g, '.').replace('%','')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 115, left: 45};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.pais; }))
+            .range([0, width]);
+
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x))
+            g.call(function(g){g.selectAll('.tick line').remove()})
+            g.call(function(g){g.select('.domain').remove()})
+            g.call(function(g){
+                g.selectAll('.tick text')
+                    .style("text-anchor", "end")
+                    .style("font-weight", function(d) {if(d == 'LAC (Media Simple)') { return 'bold'; }})
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em")
+                    .attr("transform", function(d) {
+                        return "rotate(-65)" 
+                    });
+            });            
+        }        
+        
+        chart.append("g")
+            .attr('transform', `translate(0,${height})`)
+            .call(xAxis)
+
+        //Eje Y
+        let y = d3.scaleLinear()
+            .domain([-80,120])
+            .range([height, 0])
+            .nice();
+        
+        let yAxis = svg => svg
+            .call(d3.axisLeft(y).ticks(6).tickFormat(function(d) { return d + '%'; }))
+            .call(g => g.select('.domain').remove())
+            .call(g => g.selectAll('.tick line')
+                .attr("class", function(d) { if (d == 0) { return 'line-special'; }})
+                .attr("x1", `0`)
+                .attr("x2", `${width}`)
+            );
+
+        chart.append('g')
+            .call(yAxis);
+
+        //Primera visualización de datos
+        let tipoGenerico = 'Vacantes';
+        initChart(tipoGenerico);
+
+        //Actualización
+        document.getElementById('empleoSixteen').addEventListener('change', function(e) {
+            tipoGenerico = e.target.value;
+            updateChart(tipoGenerico);
+        });
+
+        //Funciones internas
+        function initChart(tipo) {
+            chart.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr('class', function(d, i) { return `bar bar-${i}`; })
+                .style('fill', function(d) {if (d.pais == 'LAC (Media Simple)') { return '#8ca0ad'; } else { return '#081C29'; }} )
+                .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
+                .attr('width', x.bandwidth() / 2)
+                .attr("y", function(d) { return y(0); })
+                .on('mouseenter', function(d, i, e) {
+                    let html = `<p class="chart__tooltip--title">${d.pais}</p>
+                                <p class="chart__tooltip--text">Porc.: ${d[tipoGenerico].toFixed(2)}%</p>`; //Solucionar recogida de información
+                
+                    tooltip.html(html);
+                })
+                .on('mouseover mousemove', function(d, i, e) {
+                    //Posibilidad visualización línea diferente
+                    let bars = chartBlock.selectAll('.bar');
+                    let css = e[i].getAttribute('class').split('-')[1];
+                
+                    bars.each(function() {
+                        this.style.opacity = '0.4';
+                        let split = this.getAttribute('class').split(" ")[1];
+                        if(split == `bar-${css}`) {
+                            this.style.opacity = '1';
+                        }
+                    });
+                
+                    //Tooltip
+                    positionTooltip(tooltip, e[i], chartBlock);
+                    getInTooltip(tooltip);
+                })
+                .on('mouseout', function(d, i, e) {
+                    //Quitamos los estilos de la línea
+                    let bars = chartBlock.selectAll('.bar');
+                    bars.each(function() {
+                        this.style.opacity = '1';
+                    });
+                
+                    //Quitamos el tooltip
+                    getOutTooltip(tooltip); 
+                })
+                .transition()
+                .duration(3000)
+                .attr("y", function(d) { return y(Math.max(0, d[tipo])); })     
+                .attr('height', d => Math.abs(y(d[tipo]) - y(0)));
+        }
+
+        function updateChart(tipo) {
+            chart
+                .selectAll(".bar")
+                .data(data)
+                .transition()
+                .duration(1500)
+                .attr("y", function(d) { return y(Math.max(0, d[tipo])); })     
+                .attr('height', d => Math.abs(y(d[tipo]) - y(0)));
+        }
+    });
 }
 
 function getSeventeenthChart() {
@@ -2309,7 +2471,138 @@ function getEighteenthChart() {
 
 //Nuevos gráficos
 function get4_6Chart() {
-    
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-4_6');
+    let tooltip = chartBlock.select('.chart__tooltip');
+
+    //Lectura de datos
+    let file = './data/chart-4_6.csv';
+    d3.csv(file, function(d) {
+        return {
+            pais: d.Pais,
+            Horas_trabajadas: +d['Cambio en horas trabajadas'].replace(/,/g, '.').replace('%',''),
+            Salarios: +d['Cambios en salarios'].replace(/,/g, '.').replace('%',''),
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 100, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.pais; }))
+            .range([0, width]);
+
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x))
+            g.call(function(g){g.selectAll('.tick line').remove()})
+            g.call(function(g){g.select('.domain').remove()})
+            g.call(function(g){
+                g.selectAll('.tick text')
+                    .style("text-anchor", "end")
+                    .style('font-weight', function(d) { if (d == 'Promedio') { return 'bold'; }})
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em")
+                    .attr("transform", function(d) {
+                        return "rotate(-65)" 
+                    });
+            });            
+        }        
+        
+        chart.append("g")
+            .attr('transform', `translate(0,${height})`)
+            .call(xAxis)
+
+        //Eje Y
+        let y = d3.scaleLinear()
+            .domain([-15,10])
+            .range([height, 0])
+            .nice();
+        
+        let yAxis = svg => svg
+            .call(d3.axisLeft(y).ticks(4).tickFormat(function(d) { return d + '%'; }))
+            .call(g => g.select('.domain').remove())
+            .call(g => g.selectAll('.tick line')
+                .attr("class", function(d) { if (d == 0) { return 'line-special'; }})
+                .attr("x1", `0`)
+                .attr("x2", `${width}`)
+            );
+
+        chart.append('g')
+            .call(yAxis);
+
+        //Primera visualización de datos
+        let tipoGenerico = 'Horas_trabajadas';
+        initChart(tipoGenerico);
+
+        //Actualización
+        document.getElementById('empleo4_6').addEventListener('change', function(e) {
+            tipoGenerico = e.target.value;
+            updateChart(tipoGenerico);
+        });
+
+        //Funciones internas
+        function initChart(tipo) {
+            chart.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr('class', function(d, i) { return `bar bar-${i}`; })
+                .style('fill', function(d) {if (d.pais == 'Promedio') { return '#8ca0ad'; } else { return '#081C29'; }} )
+                .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
+                .attr('width', x.bandwidth() / 2)
+                .attr("y", function(d) { return y(0); })
+                .on('mouseenter', function(d, i, e) {
+                    let html = `<p class="chart__tooltip--title">${d.pais}</p>
+                                <p class="chart__tooltip--text">Porc.: ${d[tipoGenerico].toFixed(2)}%</p>`; //Solucionar recogida de información
+                
+                    tooltip.html(html);
+                })
+                .on('mouseover mousemove', function(d, i, e) {
+                    //Posibilidad visualización línea diferente
+                    let bars = chartBlock.selectAll('.bar');
+                    let css = e[i].getAttribute('class').split('-')[1];
+                
+                    bars.each(function() {
+                        this.style.opacity = '0.4';
+                        let split = this.getAttribute('class').split(" ")[1];
+                        if(split == `bar-${css}`) {
+                            this.style.opacity = '1';
+                        }
+                    });
+                
+                    //Tooltip
+                    positionTooltip(tooltip, e[i], chartBlock);
+                    getInTooltip(tooltip);
+                })
+                .on('mouseout', function(d, i, e) {
+                    //Quitamos los estilos de la línea
+                    let bars = chartBlock.selectAll('.bar');
+                    bars.each(function() {
+                        this.style.opacity = '1';
+                    });
+                
+                    //Quitamos el tooltip
+                    getOutTooltip(tooltip); 
+                })
+                .transition()
+                .duration(3000)
+                .attr("y", function(d) { return y(Math.max(0, d[tipo])); })     
+                .attr('height', d => Math.abs(y(d[tipo]) - y(0)));
+        }
+
+        function updateChart(tipo) {
+            chart
+                .selectAll(".bar")
+                .data(data)
+                .transition()
+                .duration(1500)
+                .attr("y", function(d) { return y(Math.max(0, d[tipo])); })     
+                .attr('height', d => Math.abs(y(d[tipo]) - y(0)));
+        }
+    });
 }
 
 
@@ -2318,6 +2611,7 @@ getFirstChart();
 getSecondChart();
 getSecondBisChart();
 getThirdChart();
+get4_6Chart();
 getFourthChart();
 getFourthBisChart();
 getFifthChart();
@@ -2334,6 +2628,7 @@ getFourteenChart();
 getFourteenBisChart();
 getFourteenTrisChart();
 getFifteenChart();
+getSixteenthChart();
 
 /* Visualization helpers */
 function wrap(text, width) {
@@ -2398,7 +2693,7 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
             .transition()
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
-            .duration(6000)
+            .duration(8000)
 
         chart.selectAll('.circles')
             .data(data)
@@ -2448,20 +2743,4 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
                 getOutTooltip(tooltip);                
             })
     }
-}
-
-function setLinearScale() {
-
-}
-
-function setBandScale() {
-
-}
-
-function setXStyles() {
-
-}
-
-function setYStyles() {
-
 }
