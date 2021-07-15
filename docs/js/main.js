@@ -86,6 +86,7 @@ function getSecondChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha,
+            Fecha_eje: d.Fecha_eje,
             Empleo_total: +d.Empleo_Total.replace(/,/g, '.') * 100,
             Empleo_formal: +d.Empleo_Formal.replace(/,/g, '.') * 100,
             Empleo_informal: +d.Empleo_Informal.replace(/,/g, '.') * 100
@@ -99,7 +100,7 @@ function getSecondChart() {
 
         //Disposición del eje X
         let x = d3.scaleBand()
-            .domain(data.map(function(d) { return d.Fecha }))
+            .domain(data.map(function(d) { return d.Fecha_eje }))
             .range([0, width])
             .paddingInner(0.9);
 
@@ -145,9 +146,9 @@ function getSecondChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineEmpleo_total', xAxis: 'Fecha', yAxis: 'Empleo_total', cssLine: 'line-Empleo_total', cssCircle: 'circle-Empleo_total', cssColor: '#99E6FC', },
-            {lineName: 'lineEmpleo_formal', xAxis: 'Fecha', yAxis: 'Empleo_formal', cssLine: 'line-Empleo_formal', cssCircle: 'circle-Empleo_formal', cssColor: '#2347E3'},
-            {lineName: 'lineEmpleo_informal', xAxis: 'Fecha', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
+            {lineName: 'lineEmpleo_total', xAxis: 'Fecha_eje', yAxis: 'Empleo_total', cssLine: 'line-Empleo_total', cssCircle: 'circle-Empleo_total', cssColor: '#99E6FC', },
+            {lineName: 'lineEmpleo_formal', xAxis: 'Fecha_eje', yAxis: 'Empleo_formal', cssLine: 'line-Empleo_formal', cssCircle: 'circle-Empleo_formal', cssColor: '#2347E3'},
+            {lineName: 'lineEmpleo_informal', xAxis: 'Fecha_eje', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
         ]
 
         setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
@@ -164,6 +165,7 @@ function getSecondBisChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha,
+            Fecha_eje: d.Fecha_eje,
             Empleo_formal: +d.Empleo_Formal.replace(/,/g, '.'),
             Empleo_informal: +d.Empleo_Informal.replace(/,/g, '.')
         }
@@ -176,7 +178,7 @@ function getSecondBisChart() {
 
         //Disposición del eje X
         let x = d3.scaleBand()
-            .domain(data.map(function(d) { return d.Fecha }))
+            .domain(data.map(function(d) { return d.Fecha_eje }))
             .range([0, width])
             .paddingInner(1);
 
@@ -222,8 +224,8 @@ function getSecondBisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineEmpleo_formal', xAxis: 'Fecha', yAxis: 'Empleo_formal', cssLine: 'line-Empleo_formal', cssCircle: 'circle-Empleo_formal', cssColor: '#2347E3'},
-            {lineName: 'lineEmpleo_informal', xAxis: 'Fecha', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
+            {lineName: 'lineEmpleo_formal', xAxis: 'Fecha_eje', yAxis: 'Empleo_formal', cssLine: 'line-Empleo_formal', cssCircle: 'circle-Empleo_formal', cssColor: '#2347E3'},
+            {lineName: 'lineEmpleo_informal', xAxis: 'Fecha_eje', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
         ]
 
         setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
@@ -375,6 +377,7 @@ function getFourthChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha,
+            Fecha_eje: d.Fecha_eje,
             Hombres: +d.Hombres.replace(/,/g, '.') * 100,
             Mujeres: +d.Mujeres.replace(/,/g, '.') * 100
         }
@@ -387,7 +390,7 @@ function getFourthChart() {
 
         //Disposición del eje X
         let x = d3.scaleBand()
-            .domain(data.map(function(d) { return d.Fecha }))
+            .domain(data.map(function(d) { return d.Fecha_eje }))
             .range([0, width])
             .paddingInner(0.9);
 
@@ -433,8 +436,8 @@ function getFourthChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineHombres', xAxis: 'Fecha', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
-            {lineName: 'lineMujeres', xAxis: 'Fecha', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
         ]
 
         setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
@@ -451,6 +454,7 @@ function getFourthBisChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha,
+            Fecha_eje: d.Fecha_eje,
             Hombres: +d.Hombres.replace(/,/g, '.'),
             Mujeres: +d.Mujeres.replace(/,/g, '.')
         }
@@ -463,7 +467,7 @@ function getFourthBisChart() {
 
         //Disposición del eje X
         let x = d3.scaleBand()
-            .domain(data.map(function(d) { return d.Fecha }))
+            .domain(data.map(function(d) { return d.Fecha_eje }))
             .range([0, width])
             .paddingInner(1);
 
@@ -509,8 +513,8 @@ function getFourthBisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineHombres', xAxis: 'Fecha', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
-            {lineName: 'lineMujeres', xAxis: 'Fecha', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
         ]
 
         setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
@@ -1974,6 +1978,7 @@ function getFourteenChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha_eje,
+            Fecha_eje: d.Fecha_eje,
             PrimerNivel: +d['8anios'].replace(/,/g, '.') * 100,
             SegundoNivel: +d['9-12'].replace(/,/g, '.') * 100,
             TercerNivel: +d['12+'].replace(/,/g, '.') * 100
@@ -2033,9 +2038,9 @@ function getFourteenChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'linePrimerNivel', xAxis: 'Fecha', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
-            {lineName: 'lineSegundoNivel', xAxis: 'Fecha', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
-            {lineName: 'lineTercerNivel', xAxis: 'Fecha', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'}
+            {lineName: 'linePrimerNivel', xAxis: 'Fecha_eje', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
+            {lineName: 'lineSegundoNivel', xAxis: 'Fecha_eje', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
+            {lineName: 'lineTercerNivel', xAxis: 'Fecha_eje', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'}
         ]
 
         setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
@@ -2052,6 +2057,7 @@ function getFourteenBisChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha_eje,
+            Fecha_eje: d.Fecha_eje,
             PrimerNivel: +d['ciclo_basico'].replace(/,/g, '.'),
             SegundoNivel: +d['segundo'].replace(/,/g, '.'),
             TercerNivel: +d['tercero'].replace(/,/g, '.'),
@@ -2112,10 +2118,10 @@ function getFourteenBisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'linePrimerNivel', xAxis: 'Fecha', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
-            {lineName: 'lineSegundoNivel', xAxis: 'Fecha', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
-            {lineName: 'lineTercerNivel', xAxis: 'Fecha', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'},
-            {lineName: 'lineCuartoNivel', xAxis: 'Fecha', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'}
+            {lineName: 'linePrimerNivel', xAxis: 'Fecha_eje', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
+            {lineName: 'lineSegundoNivel', xAxis: 'Fecha_eje', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
+            {lineName: 'lineTercerNivel', xAxis: 'Fecha_eje', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'},
+            {lineName: 'lineCuartoNivel', xAxis: 'Fecha_eje', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'}
         ]
 
         setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
@@ -2132,6 +2138,7 @@ function getFourteenTrisChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha_eje,
+            Fecha_eje: d.Fecha_eje,
             PrimerNivel: +d['Primaria'].replace(/,/g, '.'),
             SegundoNivel: +d['Secundaria'].replace(/,/g, '.'),
             TercerNivel: +d['Medio superior'].replace(/,/g, '.'),
@@ -2193,11 +2200,11 @@ function getFourteenTrisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'linePrimerNivel', xAxis: 'Fecha', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
-            {lineName: 'lineSegundoNivel', xAxis: 'Fecha', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
-            {lineName: 'lineTercerNivel', xAxis: 'Fecha', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'},
-            {lineName: 'lineCuartoNivel', xAxis: 'Fecha', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'},
-            {lineName: 'lineQuintoNivel', xAxis: 'Fecha', yAxis: 'QuintoNivel', cssLine: 'line-QuintoNivel', cssCircle: 'circle-QuintoNivel', cssColor: '#9b9b9b'}
+            {lineName: 'linePrimerNivel', xAxis: 'Fecha_eje', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
+            {lineName: 'lineSegundoNivel', xAxis: 'Fecha_eje', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
+            {lineName: 'lineTercerNivel', xAxis: 'Fecha_eje', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'},
+            {lineName: 'lineCuartoNivel', xAxis: 'Fecha_eje', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'},
+            {lineName: 'lineQuintoNivel', xAxis: 'Fecha_eje', yAxis: 'QuintoNivel', cssLine: 'line-QuintoNivel', cssCircle: 'circle-QuintoNivel', cssColor: '#9b9b9b'}
         ]
 
         setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
@@ -2708,7 +2715,7 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
             .on('mouseenter', function(d, i, e) {
                 let css = e[i].getAttribute('class').split('-')[1];
 
-                let html = `<p class="chart__tooltip--title">Fecha: ${d.Fecha}</p>
+                let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
                             <p class="chart__tooltip--text">Dato: ${d[css].toFixed(1)}%</p>`; //Solucionar recogida de información
 
                 tooltip.html(html);
