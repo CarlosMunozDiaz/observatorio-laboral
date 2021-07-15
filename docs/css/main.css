@@ -19,8 +19,6 @@ body {
     width: 100%;
     max-width: 648px;
     height: auto;
-
-    position: relative; /* Para disposición del tooltip > Quitar si luego no es necesario */
     margin: 0 auto;
 }
 
@@ -267,7 +265,6 @@ input:checked + .slider:before {
 
 /* VISUALIZACIÓN */
 .chart__viz {
-    position: relative; /* Tooltip */
     width: 100%;
     max-width: 648px;
     height: 390px;

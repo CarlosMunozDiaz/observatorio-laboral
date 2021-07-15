@@ -1,7 +1,8 @@
+let tooltip = d3.select('#chartTooltip');
+
 function getFirstChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-one');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-one.csv';
@@ -79,7 +80,6 @@ function getFirstChart() {
 function getSecondChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-two');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-two.csv';
@@ -158,7 +158,6 @@ function getSecondChart() {
 function getSecondBisChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-two_bis');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-two_bis.csv';
@@ -235,7 +234,6 @@ function getSecondBisChart() {
 function getThirdChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-three');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-three.csv';
@@ -322,7 +320,7 @@ function getThirdChart() {
                 
                     tooltip.html(html);
                 })
-                .on('mouseover mousemove', function(d, i, e) {
+                .on('mouseover mousemove mouseover', function(d, i, e) {
                     //Posibilidad visualización línea diferente
                     let bars = chartBlock.selectAll('.bar');
                     let css = e[i].getAttribute('class').split('-')[1];
@@ -336,7 +334,7 @@ function getThirdChart() {
                     });
                 
                     //Tooltip
-                    positionTooltip(tooltip, e[i], chartBlock);
+                    positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
                 .on('mouseout', function(d, i, e) {
@@ -370,7 +368,6 @@ function getThirdChart() {
 function getFourthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-four');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-four.csv';
@@ -447,7 +444,6 @@ function getFourthChart() {
 function getFourthBisChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-four_bis');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-four_bis.csv';
@@ -524,7 +520,6 @@ function getFourthBisChart() {
 function getFifthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-five');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-five.csv';
@@ -640,7 +635,7 @@ function getFifthChart() {
                 tooltip.html(html);
 
             })
-            .on('mouseover mousemove', function(d, i, e) {
+            .on('mouseover mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
                 let css = e[i].getAttribute('class').split('-')[1];
@@ -653,7 +648,7 @@ function getFifthChart() {
                 });
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
             })
             .on('mouseout', function(d, i, e) {
@@ -676,7 +671,6 @@ function getFifthChart() {
 function getFifthBisChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-five_bis');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-five_bis.csv';
@@ -764,10 +758,10 @@ function getFifthBisChart() {
                 tooltip.html(html);
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
             })
-            .on('mouseover mousemove', function(d, i, e) {
+            .on('mouseover mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let bars = chartBlock.selectAll('.circle-scatterplot');
 
@@ -777,7 +771,7 @@ function getFifthBisChart() {
                 this.style.opacity = '1';
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
             })
             .on('mouseout', function(d, i, e) {
@@ -802,7 +796,6 @@ function getFifthBisChart() {
 function getSixthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-six');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-six.csv';
@@ -912,7 +905,7 @@ function getSixthChart() {
                 tooltip.html(html);
 
             })
-            .on('mouseover mousemove', function(d, i, e) {
+            .on('mouseover mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
                 let css = e[i].getAttribute('class').split('-')[1];
@@ -925,7 +918,7 @@ function getSixthChart() {
                 });
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
             })
             .on('mouseout', function(d, i, e) {
@@ -966,7 +959,6 @@ function getSixthChart() {
 function getSeventhChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-seven');
-    let tooltip = chartBlock.select('.chart__tooltip');
     let switchState = false;
 
     //Lectura de datos
@@ -1102,7 +1094,6 @@ function getSeventhChart() {
 function getEigthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-eight');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-eight.csv';
@@ -1213,7 +1204,7 @@ function getEigthChart() {
                 tooltip.html(html);
 
             })
-            .on('mouseover mousemove', function(d, i, e) {
+            .on('mouseover mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
                 let css = e[i].getAttribute('class').split('-')[1];
@@ -1226,7 +1217,7 @@ function getEigthChart() {
                 });
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
             })
             .on('mouseout', function(d, i, e) {
@@ -1267,7 +1258,6 @@ function getEigthChart() {
 function getNinethChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-nine');
-    let tooltip = chartBlock.select('.chart__tooltip');
     let switchState = false;
 
     //Lectura de datos
@@ -1401,7 +1391,6 @@ function getNinethChart() {
 function getTenthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-ten');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-ten.csv';
@@ -1516,7 +1505,7 @@ function getTenthChart() {
                 tooltip.html(html);
 
             })
-            .on('mouseover mousemove', function(d, i, e) {
+            .on('mouseover mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
                 let css = e[i].getAttribute('class').split('-')[1];
@@ -1529,7 +1518,7 @@ function getTenthChart() {
                 });
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
             })
             .on('mouseout', function(d, i, e) {
@@ -1552,7 +1541,6 @@ function getTenthChart() {
 function getEleventhChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-eleven');
-    let tooltip = chartBlock.select('.chart__tooltip');
     let switchState = false;
 
     //Lectura de datos
@@ -1686,7 +1674,6 @@ function getEleventhChart() {
 function getTwelvethChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-twelve');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-twelve.csv';
@@ -1801,7 +1788,7 @@ function getTwelvethChart() {
                 tooltip.html(html);
 
             })
-            .on('mouseover mousemove', function(d, i, e) {
+            .on('mouseover mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
                 let css = e[i].getAttribute('class').split('-')[1];
@@ -1814,7 +1801,7 @@ function getTwelvethChart() {
                 });
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
             })
             .on('mouseout', function(d, i, e) {
@@ -1837,7 +1824,6 @@ function getTwelvethChart() {
 function getThirteenthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-thirteen');
-    let tooltip = chartBlock.select('.chart__tooltip');
     let switchState = false;
 
     //Lectura de datos
@@ -1971,7 +1957,6 @@ function getThirteenthChart() {
 function getFourteenChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-fourteen');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-fourteen.csv';
@@ -2050,7 +2035,6 @@ function getFourteenChart() {
 function getFourteenBisChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-fourteen_bis');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-fourteen_bis.csv';
@@ -2131,7 +2115,6 @@ function getFourteenBisChart() {
 function getFourteenTrisChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-fourteen_tris');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-fourteen_tris.csv';
@@ -2214,7 +2197,6 @@ function getFourteenTrisChart() {
 function getFifteenChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-fifteen');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-fifteen.csv';
@@ -2228,7 +2210,7 @@ function getFifteenChart() {
         if (error) throw error;
 
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 135};
+        let margin = {top: 5, right: 5, bottom: 25, left: 125};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -2294,7 +2276,7 @@ function getFifteenChart() {
 
                 tooltip.html(html);
             })
-            .on('mouseover mousemove', function(d, i, e) {
+            .on('mouseover mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let bars = chartBlock.selectAll('.bar');
                 let css = e[i].getAttribute('class').split('-')[1];
@@ -2307,7 +2289,7 @@ function getFifteenChart() {
                 });
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
             })
             .on('mouseout', function(d, i, e) {
@@ -2334,7 +2316,6 @@ function getFifteenChart() {
 function getSixteenthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-sixteen');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-sixteen.csv';
@@ -2423,7 +2404,7 @@ function getSixteenthChart() {
                 
                     tooltip.html(html);
                 })
-                .on('mouseover mousemove', function(d, i, e) {
+                .on('mouseover mousemove mouseover', function(d, i, e) {
                     //Posibilidad visualización línea diferente
                     let bars = chartBlock.selectAll('.bar');
                     let css = e[i].getAttribute('class').split('-')[1];
@@ -2437,7 +2418,7 @@ function getSixteenthChart() {
                     });
                 
                     //Tooltip
-                    positionTooltip(tooltip, e[i], chartBlock);
+                    positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
                 .on('mouseout', function(d, i, e) {
@@ -2480,7 +2461,6 @@ function getEighteenthChart() {
 function get4_6Chart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-4_6');
-    let tooltip = chartBlock.select('.chart__tooltip');
 
     //Lectura de datos
     let file = './data/chart-4_6.csv';
@@ -2567,7 +2547,7 @@ function get4_6Chart() {
                 
                     tooltip.html(html);
                 })
-                .on('mouseover mousemove', function(d, i, e) {
+                .on('mouseover mousemove mouseover', function(d, i, e) {
                     //Posibilidad visualización línea diferente
                     let bars = chartBlock.selectAll('.bar');
                     let css = e[i].getAttribute('class').split('-')[1];
@@ -2581,7 +2561,7 @@ function get4_6Chart() {
                     });
                 
                     //Tooltip
-                    positionTooltip(tooltip, e[i], chartBlock);
+                    positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
                 .on('mouseout', function(d, i, e) {
@@ -2720,7 +2700,7 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
 
                 tooltip.html(html);
             })
-            .on('mousemove', function(d, i, e) {
+            .on('mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let lines = chartBlock.selectAll('.line');
                 let css = e[i].getAttribute('class').split('-')[1];
@@ -2734,7 +2714,7 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
                 });
 
                 //Tooltip
-                positionTooltip(tooltip, e[i], chartBlock);
+                positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);               
             })
             .on('mouseout', function(d, i, e) {

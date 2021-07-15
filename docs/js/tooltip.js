@@ -9,19 +9,19 @@ function getOutTooltip(tooltip) { //Mouseout
     tooltip.transition().duration(500).style('display','none').style('opacity', 0);
 }
 
-function positionTooltip(tooltip, el, div) {
-    let coordinates = d3.mouse(el);
+function positionTooltip(event, tooltip) {
+    let x = event.pageX;
+    let y = event.pageY;
 
-    let x = coordinates[0];
-    let y = coordinates[1];
+    //Tamaño
+    let ancho = parseInt(tooltip.style('width'));
     
-    let tooltipWidth = parseInt(tooltip.style('width'));
-    let tooltipHeight = parseInt(tooltip.style('height'));
-    
+    let distanciaAncho = isNaN(ancho) ? 100 : ancho;
+
     //Posición
-    let left = parseInt(div.style('width')) / 2 > x ? 'right' : 'left';
-    let horizontalPos = left == 'left' ? -25 : 25;
+    let left = window.innerWidth / 2 > x ? 'left' : 'right';
+    let horizontalPos = left == 'left' ? 20 : - distanciaAncho + 20;
 
-    tooltip.style('top', y - (tooltipHeight + 20) + 'px');
+    tooltip.style('top', y + 20 + 'px');
     tooltip.style('left', (x + horizontalPos) + 'px');
 }
