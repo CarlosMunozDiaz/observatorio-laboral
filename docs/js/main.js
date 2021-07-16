@@ -73,7 +73,7 @@ function getFirstChart() {
             {lineName: 'lineEE', xAxis: 'Fecha', yAxis: 'EE', cssLine: 'line-EE', cssCircle: 'circle-EE', cssColor: '#081C29'}
         ]
 
-        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+        setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
     });
 }
 
@@ -151,7 +151,7 @@ function getSecondChart() {
             {lineName: 'lineEmpleo_informal', xAxis: 'Fecha_eje', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
         ]
 
-        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+        setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
     });
 }
 
@@ -227,7 +227,7 @@ function getSecondBisChart() {
             {lineName: 'lineEmpleo_informal', xAxis: 'Fecha_eje', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
         ]
 
-        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+        setMultipleLines(chartBlock, chart, data, 'absolute', lines, x, y, tooltip);
     });
 }
 
@@ -314,18 +314,17 @@ function getThirdChart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('mouseenter', function(d, i, e) {
+                .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
+                    let css = e[i].getAttribute('class').split('-')[1];
+                    
+                    //Texto
                     let html = `<p class="chart__tooltip--title">${d.pais}</p>
-                                <p class="chart__tooltip--text">Porc.: ${d[tipoGenerico].toFixed(2)}%</p>`; //Solucionar recogida de información
+                                <p class="chart__tooltip--text">${tipoGenerico.replace('_', ' ')}: ${numberWithCommas(d[tipoGenerico].toFixed(2))}%</p>`; //Solucionar recogida de información
                 
                     tooltip.html(html);
-                    positionTooltip(window.event, tooltip);
-                    getInTooltip(tooltip);
-                })
-                .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
+
                     //Posibilidad visualización línea diferente
-                    let bars = chartBlock.selectAll('.bar');
-                    let css = e[i].getAttribute('class').split('-')[1];
+                    let bars = chartBlock.selectAll('.bar');                    
                 
                     bars.each(function() {
                         this.style.opacity = '0.4';
@@ -439,7 +438,7 @@ function getFourthChart() {
             {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
         ]
 
-        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+        setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
     });
 }
 
@@ -515,7 +514,7 @@ function getFourthBisChart() {
             {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
         ]
 
-        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+        setMultipleLines(chartBlock, chart, data, 'absolute', lines, x, y, tooltip);
     });
 }
 
@@ -619,29 +618,25 @@ function getFifthChart() {
             .attr("y", function(d) { return y(0); })
             .attr('class', function(d,i) { 
                 if(d.descriptor == 'Hombres') {
-                    return 'rect rect-hombres';
+                    return 'rect rect-Hombres';
                 } else {
-                    return 'rect rect-mujeres';
+                    return 'rect rect-Mujeres';
                 }
             })
             .attr("width", x1.bandwidth())            
             .attr('data-country', function(d,i) { return d.pais; })
             .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-            .on('mouseenter', function(d, i, e) {
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 let pais = e[i].getAttribute('data-country').replace(/\*/g, '');
                 let css = e[i].getAttribute('class').split('-')[1];
 
                 let html = `<p class="chart__tooltip--title">${pais}</p>
-                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
-
+                            <p class="chart__tooltip--text">${css}: ${numberWithCommas(d.valor.toFixed(2))}%</p>`; //Solucionar recogida de información
+            
                 tooltip.html(html);
-                positionTooltip(window.event, tooltip);
-                getInTooltip(tooltip);
-            })
-            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
-                let css = e[i].getAttribute('class').split('-')[1];
 
                 rects.each(function() {
                     this.style.opacity = '0.4';
@@ -753,20 +748,14 @@ function getFifthBisChart() {
             .style('fill', function(d) { if (d.pais == 'Total') { return '#99E6FC'; } else { return '#081C29'; }} )
             .attr('r', 6)            
             .attr('cx', (d) => {return x(d.dato_diferencia)})
-            .on('mouseenter', function(d, i, e) {
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                //Texto
                 let html = `<p class="chart__tooltip--title">${d.pais}</p>
-                            <p class="chart__tooltip--text">Pérdida de empleo: ${d.dato_perdidaEmpleo.toFixed(2)}%</p>
-                            <p class="chart__tooltip--text">Diferencia entre hombres y mujeres: ${d.dato_diferencia.toFixed(2)}%</p>`; //Solucionar recogida de información
+                            <p class="chart__tooltip--text">Pérdida de empleo: ${numberWithCommas(d.dato_perdidaEmpleo.toFixed(2))}%</p>
+                            <p class="chart__tooltip--text">Diferencia entre hombres y mujeres: ${numberWithCommas(d.dato_diferencia.toFixed(2))}%</p>`; //Solucionar recogida de información
 
                 tooltip.html(html);
-                positionTooltip(window.event, tooltip);
-                getInTooltip(tooltip);
 
-                //Tooltip
-                positionTooltip(window.event, tooltip);
-                getInTooltip(tooltip);
-            })
-            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let bars = chartBlock.selectAll('.circle-scatterplot');
 
@@ -892,30 +881,28 @@ function getSixthChart() {
             .attr("y", function(d) { return y(0); })
             .attr('class', function(d,i) { 
                 if(d.descriptor == 'Hombres') {
-                    return 'rect rect-hombres';
+                    return 'rect rect-Hombres';
                 } else {
-                    return 'rect rect-mujeres';
+                    return 'rect rect-Mujeres';
                 }
             })
             .attr("width", x1.bandwidth() / 2)            
             .attr('data-edad', function(d,i) { return d.edad; })
             .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-            .on('mouseenter', function(d, i, e) {
-                let pais = e[i].getAttribute('data-edad');
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 let css = e[i].getAttribute('class').split('-')[1];
 
-                let html = `<p class="chart__tooltip--title">${pais}</p>
-                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
+                //Texto
+                let edad = e[i].getAttribute('data-edad');               
+                let tipoEmpleo = currentIndex == 0 ? 'Empleo total' : currentIndex == 1 ? 'Empleo formal' : 'Empleo informal';
+
+                let html = `<p class="chart__tooltip--title">${css} (${edad})</p>
+                            <p class="chart__tooltip--text">${tipoEmpleo}: ${numberWithCommas(d.valor[currentIndex].toFixed(2))}%</p>`;
 
                 tooltip.html(html);
-                positionTooltip(window.event, tooltip);
-                getInTooltip(tooltip);
 
-            })
-            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
-                let css = e[i].getAttribute('class').split('-')[1];
 
                 rects.each(function() {
                     this.style.opacity = '0.4';
@@ -1069,8 +1056,44 @@ function getSeventhChart() {
                 }
             })
             .attr("width", x1.bandwidth())            
-            .attr('data-edad', function(d,i) { return d.Edad; })
+            .attr('data-edad', function(d,i) { return d.Edad.replace(/[\[\]]/g, '').replace(',', '-'); })
             .style('fill',function(d) { return d.Edad == '[14,24]' ? '#99E6FC' : d.Edad == '[25,34]' ? '#2347E3' : d.Edad == '[35,55]' ? '#081C29' : '#474b4e'})
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                //Texto
+                let genero = switchState == true ? 'Mujeres' : 'Hombres';
+                let edad = e[i].getAttribute('data-edad');
+
+                let html = `<p class="chart__tooltip--title">${d.Pais} (${genero} - Edad: ${edad})</p>
+                            <p class="chart__tooltip--text">${numberWithCommas(d[genero].toFixed(2))}%</p>`;
+
+                tooltip.html(html);
+
+                //Posibilidad visualización línea diferente
+                let rects = chartBlock.selectAll('.rect');
+
+                rects.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`rect-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+
+                //Tooltip
+                positionTooltip(window.event, tooltip);
+                getInTooltip(tooltip);
+            })
+            .on('touchend mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let rects = chartBlock.selectAll('.rect');
+                rects.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
             .transition()
             .duration(3000)            
             .attr("y", function(d) { return y(Math.max(0, d.Hombres)); })     
@@ -1193,30 +1216,28 @@ function getEigthChart() {
             .attr("y", function(d) { return y(0); })
             .attr('class', function(d,i) { 
                 if(d.descriptor == 'Hombres') {
-                    return 'rect rect-hombres';
+                    return 'rect rect-Hombres';
                 } else {
-                    return 'rect rect-mujeres';
+                    return 'rect rect-Mujeres';
                 }
             })
             .attr("width", x1.bandwidth() / 2)            
             .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
             .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-            .on('mouseenter', function(d, i, e) {
-                let escolaridad = e[i].getAttribute('data-escolaridad');
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 let css = e[i].getAttribute('class').split('-')[1];
 
-                let html = `<p class="chart__tooltip--title">${escolaridad}</p>
-                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
+                //Texto
+                let escolaridad = e[i].getAttribute('data-escolaridad');               
+                let tipoEmpleo = currentIndex == 0 ? 'Empleo total' : currentIndex == 1 ? 'Empleo formal' : 'Empleo informal';
+
+                let html = `<p class="chart__tooltip--title">${css} (${escolaridad})</p>
+                            <p class="chart__tooltip--text">${tipoEmpleo}: ${numberWithCommas(d.valor[currentIndex].toFixed(2))}%</p>`;
 
                 tooltip.html(html);
-                positionTooltip(window.event, tooltip);
-                getInTooltip(tooltip);
 
-            })
-            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
-                let css = e[i].getAttribute('class').split('-')[1];
 
                 rects.each(function() {
                     this.style.opacity = '0.4';
@@ -1368,8 +1389,44 @@ function getNinethChart() {
                 }
             })
             .attr("width", x1.bandwidth())            
-            .attr('data-escolaridad', function(d,i) { return d.Escolaridad; })
+            .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
             .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                //Texto
+                let genero = switchState == true ? 'Mujeres' : 'Hombres';
+                let escolaridad = e[i].getAttribute('data-escolaridad');
+
+                let html = `<p class="chart__tooltip--title">${d.Pais} (${genero} - Años de estudio: ${escolaridad})</p>
+                            <p class="chart__tooltip--text">${numberWithCommas(d[genero].toFixed(2))}%</p>`;
+
+                tooltip.html(html);
+
+                //Posibilidad visualización línea diferente
+                let rects = chartBlock.selectAll('.rect');
+
+                rects.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`rect-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+
+                //Tooltip
+                positionTooltip(window.event, tooltip);
+                getInTooltip(tooltip);
+            })
+            .on('touchend mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let rects = chartBlock.selectAll('.rect');
+                rects.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
             .transition()
             .duration(3000)            
             .attr("y", function(d) { return y(Math.max(0, d.Hombres)); })     
@@ -1440,15 +1497,6 @@ function getTenthChart() {
 
         let xAxis = function(g){
             g.call(d3.axisBottom(x0))
-            // g.call(function(g){
-            //     g.selectAll('.tick text')
-            //         .style("text-anchor", "end")
-            //         .attr("dx", "-.8em")
-            //         .attr("dy", ".15em")
-            //         .attr("transform", function(d) {
-            //             return "rotate(-65)" 
-            //         });
-            // })
             g.call(function(g){g.selectAll('.tick line').remove()});
             g.call(function(g){g.select('.domain').remove()});
         }
@@ -1496,30 +1544,33 @@ function getTenthChart() {
             .attr("y", function(d) { return y(0); })
             .attr('class', function(d,i) { 
                 if(d.descriptor == 'Hombres') {
-                    return 'rect rect-hombres';
+                    return 'rect rect-Hombres';
                 } else {
-                    return 'rect rect-mujeres';
+                    return 'rect rect-Mujeres';
                 }
             })
             .attr("width", x1.bandwidth() / 2)            
             .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
             .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
             .on('mouseenter', function(d, i, e) {
-                let escolaridad = e[i].getAttribute('data-escolaridad');
-                let css = e[i].getAttribute('class').split('-')[1];
-
-                let html = `<p class="chart__tooltip--title">${escolaridad}</p>
-                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
-
-                tooltip.html(html);
+                
                 positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);
 
             })
             .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                //Texto                
+                let escolaridad = e[i].getAttribute('data-escolaridad');                
+
+                let html = `<p class="chart__tooltip--title">${css} (${escolaridad})</p>
+                            <p class="chart__tooltip--text">${numberWithCommas(d.valor.toFixed(2))}%</p>`;
+
+                tooltip.html(html);
+
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
-                let css = e[i].getAttribute('class').split('-')[1];
 
                 rects.each(function() {
                     this.style.opacity = '0.4';
@@ -1653,8 +1704,44 @@ function getEleventhChart() {
                 }
             })
             .attr("width", x1.bandwidth())            
-            .attr('data-escolaridad', function(d,i) { return d.Escolaridad; })
+            .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
             .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                //Texto
+                let genero = switchState == true ? 'Mujeres' : 'Hombres';
+                let escolaridad = e[i].getAttribute('data-escolaridad');
+
+                let html = `<p class="chart__tooltip--title">${d.Pais} (${genero} - Años de estudio: ${escolaridad})</p>
+                            <p class="chart__tooltip--text">${numberWithCommas(d[genero].toFixed(2))}%</p>`;
+
+                tooltip.html(html);
+
+                //Posibilidad visualización línea diferente
+                let rects = chartBlock.selectAll('.rect');
+
+                rects.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`rect-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+
+                //Tooltip
+                positionTooltip(window.event, tooltip);
+                getInTooltip(tooltip);
+            })
+            .on('touchend mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let rects = chartBlock.selectAll('.rect');
+                rects.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
             .transition()
             .duration(3000)            
             .attr("y", function(d) { return y(Math.max(0, d.Hombres)); })     
@@ -1725,15 +1812,6 @@ function getTwelvethChart() {
 
         let xAxis = function(g){
             g.call(d3.axisBottom(x0))
-            // g.call(function(g){
-            //     g.selectAll('.tick text')
-            //         .style("text-anchor", "end")
-            //         .attr("dx", "-.8em")
-            //         .attr("dy", ".15em")
-            //         .attr("transform", function(d) {
-            //             return "rotate(-65)" 
-            //         });
-            // })
             g.call(function(g){g.selectAll('.tick line').remove()});
             g.call(function(g){g.select('.domain').remove()});
         }
@@ -1781,30 +1859,27 @@ function getTwelvethChart() {
             .attr("y", function(d) { return y(0); })
             .attr('class', function(d,i) { 
                 if(d.descriptor == 'Hombres') {
-                    return 'rect rect-hombres';
+                    return 'rect rect-Hombres';
                 } else {
-                    return 'rect rect-mujeres';
+                    return 'rect rect-Mujeres';
                 }
             })
             .attr("width", x1.bandwidth() / 2)            
             .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
             .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-            .on('mouseenter', function(d, i, e) {
-                let escolaridad = e[i].getAttribute('data-escolaridad');
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 let css = e[i].getAttribute('class').split('-')[1];
 
-                let html = `<p class="chart__tooltip--title">${escolaridad}</p>
-                            <p class="chart__tooltip--text">${css}: ${d.valor.toFixed(2)}%</p>`; //Solucionar recogida de información
+                //Texto
+                let escolaridad = e[i].getAttribute('data-escolaridad');                
+
+                let html = `<p class="chart__tooltip--title">${css} (${escolaridad})</p>
+                            <p class="chart__tooltip--text">${numberWithCommas(d.valor.toFixed(2))}%</p>`;
 
                 tooltip.html(html);
-                positionTooltip(window.event, tooltip);
-                getInTooltip(tooltip);
 
-            })
-            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 //Posibilidad visualización línea diferente
                 let rects = chartBlock.selectAll('.rect');
-                let css = e[i].getAttribute('class').split('-')[1];
 
                 rects.each(function() {
                     this.style.opacity = '0.4';
@@ -1938,8 +2013,44 @@ function getThirteenthChart() {
                 }
             })
             .attr("width", x1.bandwidth())            
-            .attr('data-escolaridad', function(d,i) { return d.Escolaridad; })
+            .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
             .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                let css = e[i].getAttribute('class').split('-')[1];
+
+                //Texto
+                let genero = switchState == true ? 'Mujeres' : 'Hombres';
+                let escolaridad = e[i].getAttribute('data-escolaridad');
+
+                let html = `<p class="chart__tooltip--title">${d.Pais} (${genero} - Años de estudio: ${escolaridad})</p>
+                            <p class="chart__tooltip--text">${numberWithCommas(d[genero].toFixed(2))}%</p>`;
+
+                tooltip.html(html);
+
+                //Posibilidad visualización línea diferente
+                let rects = chartBlock.selectAll('.rect');
+
+                rects.each(function() {
+                    this.style.opacity = '0.4';
+                    if(this.getAttribute('class').indexOf(`rect-${css}`) != -1) {
+                        this.style.opacity = '1';
+                    }
+                });
+
+                //Tooltip
+                positionTooltip(window.event, tooltip);
+                getInTooltip(tooltip);
+            })
+            .on('touchend mouseout', function(d, i, e) {
+                //Quitamos los estilos de la línea
+                let rects = chartBlock.selectAll('.rect');
+                rects.each(function() {
+                    this.style.opacity = '1';
+                });
+
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })
             .transition()
             .duration(3000)            
             .attr("y", function(d) { return y(Math.max(0, d.Hombres)); })     
@@ -2041,7 +2152,7 @@ function getFourteenChart() {
             {lineName: 'lineTercerNivel', xAxis: 'Fecha_eje', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'}
         ]
 
-        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+        setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
     });
 }
 
@@ -2121,7 +2232,7 @@ function getFourteenBisChart() {
             {lineName: 'lineCuartoNivel', xAxis: 'Fecha_eje', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'}
         ]
 
-        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+        setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
     });
 }
 
@@ -2203,7 +2314,7 @@ function getFourteenTrisChart() {
             {lineName: 'lineQuintoNivel', xAxis: 'Fecha_eje', yAxis: 'QuintoNivel', cssLine: 'line-QuintoNivel', cssCircle: 'circle-QuintoNivel', cssColor: '#9b9b9b'}
         ]
 
-        setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip);
+        setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
     });
 }
 
@@ -2283,21 +2394,17 @@ function getFifteenChart() {
                 return y(d.tipo_eje) + y.bandwidth() / 4;
             })            
             .attr("height", y.bandwidth() / 2)
-            .on('mouseenter', function(d, i, e) {
-                alert("Entra Enter");
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                let css = e[i].getAttribute('class').split('-')[1];
+                //Texto
                 let html = `<p class="chart__tooltip--title">${d.tipo}</p>
-                            <p class="chart__tooltip--text">Porc.: ${d.porcentaje.toFixed(2)}%</p>`; //Solucionar recogida de información
+                            <p class="chart__tooltip--text">${numberWithCommas(d.porcentaje.toFixed(2))}%</p>`; //Solucionar recogida de información
 
                 tooltip.html(html);
-                positionTooltip(window.event, tooltip);
-                getInTooltip(tooltip);
-            })
-            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
-                alert("Entra Start/Move");
+
                 //Posibilidad visualización línea diferente
                 let bars = chartBlock.selectAll('.bar');
-                let css = e[i].getAttribute('class').split('-')[1];
-
+                
                 bars.each(function() {
                     this.style.opacity = '0.4';
                     if(this.getAttribute('class').indexOf(`bar-${css}`) != -1) {
@@ -2415,18 +2522,16 @@ function getSixteenthChart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('mouseenter', function(d, i, e) {
+                .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
+                    let css = e[i].getAttribute('class').split('-')[1];
+                    //Texto
                     let html = `<p class="chart__tooltip--title">${d.pais}</p>
-                                <p class="chart__tooltip--text">Porc.: ${d[tipoGenerico].toFixed(2)}%</p>`; //Solucionar recogida de información
+                                <p class="chart__tooltip--text">${tipoGenerico}: ${numberWithCommas(d[tipoGenerico].toFixed(2))}%</p>`;
                 
                     tooltip.html(html);
-                    positionTooltip(window.event, tooltip);
-                    getInTooltip(tooltip);
-                })
-                .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
+
                     //Posibilidad visualización línea diferente
-                    let bars = chartBlock.selectAll('.bar');
-                    let css = e[i].getAttribute('class').split('-')[1];
+                    let bars = chartBlock.selectAll('.bar');                    
                 
                     bars.each(function() {
                         this.style.opacity = '0.4';
@@ -2561,17 +2666,21 @@ function get4_6Chart() {
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
                 .on('mouseenter', function(d, i, e) {
-                    let html = `<p class="chart__tooltip--title">${d.pais}</p>
-                                <p class="chart__tooltip--text">Porc.: ${d[tipoGenerico].toFixed(2)}%</p>`; //Solucionar recogida de información
-                
-                    tooltip.html(html);
+                    
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
                 .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
-                    //Posibilidad visualización línea diferente
-                    let bars = chartBlock.selectAll('.bar');
                     let css = e[i].getAttribute('class').split('-')[1];
+                    //Texto
+                    let tipoTexto = tipoGenerico == 'Horas_trabajadas' ? 'Cambio en horas trabajadas' : 'Cambio en salarios'
+                    let html = `<p class="chart__tooltip--title">${d.pais}</p>
+                                <p class="chart__tooltip--text">${tipoTexto}: ${numberWithCommas(d[tipoGenerico].toFixed(1))}%</p>`;
+                
+                    tooltip.html(html);
+
+                    //Posibilidad visualización línea diferente
+                    let bars = chartBlock.selectAll('.bar');                    
                 
                     bars.each(function() {
                         this.style.opacity = '0.4';
@@ -2680,7 +2789,7 @@ function setChart(chartBlock, margin) {
     return {margin, width, height, chart};
 }
 
-function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
+function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, tooltip) {
     for(let i = 0; i < lines.length; i++) {
         let line = d3.line()
             .x(function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
@@ -2713,27 +2822,23 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
             .attr("cy", function(d) { return y(d[lines[i].yAxis]); })
             .style("fill", '#000')
             .style('opacity', '0')
-            .on('mouseenter', function(d, i, e) {
+            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
                 let css = e[i].getAttribute('class').split('-')[1];
 
+                //Texto
                 let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                            <p class="chart__tooltip--text">Dato: ${d[css].toFixed(1)}%</p>`; //Solucionar recogida de información
+                            <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css].toFixed(1))}${dataType == 'percentage' ? '%' : 'M'}</p>`; //Solucionar recogida de información
 
                 tooltip.html(html);
-                
-                positionTooltip(window.event, tooltip);
-                getInTooltip(tooltip);
-            })
-            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
-                //Posibilidad visualización línea diferente
-                let lines = chartBlock.selectAll('.line');
-                let css = e[i].getAttribute('class').split('-')[1];
 
-                lines.each(function(item) {
+                //Posibilidad visualización línea diferente
+                let lines = chartBlock.selectAll('.line');                
+
+                lines.each(function() {
                     this.style.opacity = '0.4';
                     if(this.getAttribute('class').indexOf(`line-${css}`) != -1) {
                         this.style.opacity = '1';
-                        this.style.strokeWidth = '2.5px';
+                        this.style.strokeWidth = '3px';
                     }
                 });
 
@@ -2745,7 +2850,7 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
                 //Quitamos los estilos de la línea
                 let lines = chartBlock.selectAll('.line');
 
-                lines.each(function(item) {
+                lines.each(function() {
                     this.style.opacity = '1';
                     this.style.strokeWidth = '1.5px';                    
                 });
@@ -2754,4 +2859,8 @@ function setMultipleLines(chartBlock, chart, data, lines, x, y, tooltip) {
                 getOutTooltip(tooltip);                
             })
     }
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\./g, ',').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
 }
