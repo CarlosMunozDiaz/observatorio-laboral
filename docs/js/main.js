@@ -9,9 +9,9 @@ function getFirstChart() {
     d3.csv(file, function(d) {
         return {
             Fecha: d.Year,
-            AE: +d['Advanced Economies'].replace(/,/g, '.'),
-            LAC: +d['LAC'].replace(/,/g, '.'),
-            EE: +d['Emerging Economies'].replace(/,/g, '.')
+            'Economías Avanzadas': +d['Advanced Economies'].replace(/,/g, '.'),
+            'América Latina y Caribe': +d['LAC'].replace(/,/g, '.'),
+            'Economías Emergentes': +d['Emerging Economies'].replace(/,/g, '.')
         }
     }, function(error, data) {
         if (error) throw error;
@@ -68,9 +68,9 @@ function getFirstChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineAE', xAxis: 'Fecha', yAxis: 'AE', cssLine: 'line-AE', cssCircle: 'circle-AE', cssColor: '#99E6FC', },
-            {lineName: 'lineLAC', xAxis: 'Fecha', yAxis: 'LAC', cssLine: 'line-LAC', cssCircle: 'circle-LAC', cssColor: '#2347E3'},
-            {lineName: 'lineEE', xAxis: 'Fecha', yAxis: 'EE', cssLine: 'line-EE', cssCircle: 'circle-EE', cssColor: '#081C29'}
+            {lineName: 'lineEconomías Avanzadas', xAxis: 'Fecha', yAxis: 'Economías Avanzadas', cssLine: 'line-Economías Avanzadas', cssCircle: 'circle-Economías Avanzadas', cssColor: '#99E6FC', },
+            {lineName: 'lineAmérica Latina y Caribe', xAxis: 'Fecha', yAxis: 'América Latina y Caribe', cssLine: 'line-América Latina y Caribe', cssCircle: 'circle-América Latina y Caribe', cssColor: '#2347E3'},
+            {lineName: 'lineEconomías Emergentes', xAxis: 'Fecha', yAxis: 'Economías Emergentes', cssLine: 'line-Economías Emergentes', cssCircle: 'circle-Economías Emergentes', cssColor: '#081C29'}
         ];
 
         window.addEventListener('scroll', function() {
@@ -94,9 +94,9 @@ function getSecondChart() {
         return {
             Fecha: d.Fecha,
             Fecha_eje: d.Fecha_eje,
-            Empleo_total: +d.Empleo_Total.replace(/,/g, '.') * 100,
-            Empleo_formal: +d.Empleo_Formal.replace(/,/g, '.') * 100,
-            Empleo_informal: +d.Empleo_Informal.replace(/,/g, '.') * 100
+            'Empleo total': +d.Empleo_Total.replace(/,/g, '.') * 100,
+            'Empleo formal': +d.Empleo_Formal.replace(/,/g, '.') * 100,
+            'Empleo informal': +d.Empleo_Informal.replace(/,/g, '.') * 100
         }
     }, function(error, data) {
         if (error) throw error;
@@ -153,9 +153,9 @@ function getSecondChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineEmpleo_total', xAxis: 'Fecha_eje', yAxis: 'Empleo_total', cssLine: 'line-Empleo_total', cssCircle: 'circle-Empleo_total', cssColor: '#99E6FC', },
-            {lineName: 'lineEmpleo_formal', xAxis: 'Fecha_eje', yAxis: 'Empleo_formal', cssLine: 'line-Empleo_formal', cssCircle: 'circle-Empleo_formal', cssColor: '#2347E3'},
-            {lineName: 'lineEmpleo_informal', xAxis: 'Fecha_eje', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
+            {lineName: 'lineEmpleo total', xAxis: 'Fecha_eje', yAxis: 'Empleo total', cssLine: 'line-Empleo total', cssCircle: 'circle-Empleo total', cssColor: '#99E6FC', },
+            {lineName: 'lineEmpleo formal', xAxis: 'Fecha_eje', yAxis: 'Empleo formal', cssLine: 'line-Empleo formal', cssCircle: 'circle-Empleo formal', cssColor: '#2347E3'},
+            {lineName: 'lineEmpleo informal', xAxis: 'Fecha_eje', yAxis: 'Empleo informal', cssLine: 'line-Empleo informal', cssCircle: 'circle-Empleo informal', cssColor: '#081C29'}
         ];
 
         window.addEventListener('scroll', function() {
@@ -179,8 +179,8 @@ function getSecondBisChart() {
         return {
             Fecha: d.Fecha,
             Fecha_eje: d.Fecha_eje,
-            Empleo_formal: +d.Empleo_Formal.replace(/,/g, '.'),
-            Empleo_informal: +d.Empleo_Informal.replace(/,/g, '.')
+            'Empleo formal': +d.Empleo_Formal.replace(/,/g, '.'),
+            'Empleo informal': +d.Empleo_Informal.replace(/,/g, '.')
         }
     }, function(error, data) {
         if (error) throw error;
@@ -237,15 +237,15 @@ function getSecondBisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineEmpleo_formal', xAxis: 'Fecha_eje', yAxis: 'Empleo_formal', cssLine: 'line-Empleo_formal', cssCircle: 'circle-Empleo_formal', cssColor: '#2347E3'},
-            {lineName: 'lineEmpleo_informal', xAxis: 'Fecha_eje', yAxis: 'Empleo_informal', cssLine: 'line-Empleo_informal', cssCircle: 'circle-Empleo_informal', cssColor: '#081C29'}
+            {lineName: 'lineEmpleo formal', xAxis: 'Fecha_eje', yAxis: 'Empleo formal', cssLine: 'line-Empleo formal', cssCircle: 'circle-Empleo formal', cssColor: '#2347E3'},
+            {lineName: 'lineEmpleo informal', xAxis: 'Fecha_eje', yAxis: 'Empleo informal', cssLine: 'line-Empleo informal', cssCircle: 'circle-Empleo informal', cssColor: '#081C29'}
         ];
 
         window.addEventListener('scroll', function() {
             if (!chartBlock.node().classList.contains('visible')){
                 if(isElementInViewport(chartBlock.node())){
                     chartBlock.node().classList.add('visible');
-                    setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
+                    setMultipleLines(chartBlock, chart, data, 'absolute', lines, x, y, tooltip);
                 }                
             }
         }); 
@@ -554,7 +554,7 @@ function getFourthBisChart() {
             if (!chartBlock.node().classList.contains('visible')){
                 if(isElementInViewport(chartBlock.node())){
                     chartBlock.node().classList.add('visible');
-                    setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
+                    setMultipleLines(chartBlock, chart, data, 'absolute', lines, x, y, tooltip);
                 }                
             }
         });
@@ -876,7 +876,7 @@ function getSixthChart() {
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Agrupación de datos para barras agrupadas
-        let edades = data.map(function(d){return d.Edad_eje});
+        let edades = data.map(function(d){ return d.Edad_eje });
         let columnas = ['Mujeres','Hombres'];
         let newData = [];
         for(let i = 0; i < data.length; i++){
@@ -897,7 +897,7 @@ function getSixthChart() {
             .domain(columnas);
 
         let xAxis = function(g){
-            g.call(d3.axisBottom(x0))
+            g.call(d3.axisBottom(x0).tickFormat(function(d) { return d + ' años'; }));
             g.call(function(g){g.selectAll('.tick line').remove()});
             g.call(function(g){g.select('.domain').remove()});
         }
@@ -1254,7 +1254,7 @@ function getEigthChart() {
             .domain(columnas);
 
         let xAxis = function(g){
-            g.call(d3.axisBottom(x0))
+            g.call(d3.axisBottom(x0).tickFormat(function(d) { return d + ' años'; }))
             g.call(function(g){g.selectAll('.tick line').remove()});
             g.call(function(g){g.select('.domain').remove()});
         }
@@ -1604,7 +1604,7 @@ function getTenthChart() {
             .domain(columnas);
 
         let xAxis = function(g){
-            g.call(d3.axisBottom(x0))
+            g.call(d3.axisBottom(x0).tickFormat(function(d) { return d + ' años'; }))
             g.call(function(g){g.selectAll('.tick line').remove()});
             g.call(function(g){g.select('.domain').remove()});
         }
@@ -1941,7 +1941,7 @@ function getTwelvethChart() {
             .domain(columnas);
 
         let xAxis = function(g){
-            g.call(d3.axisBottom(x0))
+            g.call(d3.axisBottom(x0).tickFormat(function(d) { return d + ' años'; }))
             g.call(function(g){g.selectAll('.tick line').remove()});
             g.call(function(g){g.select('.domain').remove()});
         }
@@ -1952,7 +1952,7 @@ function getTwelvethChart() {
 
         let y = d3.scaleLinear()
             .range([height, 0])
-            .domain([-6,0])
+            .domain([-15,0])
             .nice();
     
         let yAxis = function(g){
@@ -2240,9 +2240,9 @@ function getFourteenChart() {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
-            PrimerNivel: +d['8anios'].replace(/,/g, '.') * 100,
-            SegundoNivel: +d['9-12'].replace(/,/g, '.') * 100,
-            TercerNivel: +d['12+'].replace(/,/g, '.') * 100
+            'Primer nivel': +d['8anios'].replace(/,/g, '.') * 100,
+            'Segundo nivel': +d['9-12'].replace(/,/g, '.') * 100,
+            'Tercer nivel': +d['12+'].replace(/,/g, '.') * 100
         }
     }, function(error, data) {
         if (error) throw error;
@@ -2299,9 +2299,9 @@ function getFourteenChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'linePrimerNivel', xAxis: 'Fecha_eje', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
-            {lineName: 'lineSegundoNivel', xAxis: 'Fecha_eje', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
-            {lineName: 'lineTercerNivel', xAxis: 'Fecha_eje', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'}
+            {lineName: 'linePrimer nivel', xAxis: 'Fecha_eje', yAxis: 'Primer nivel', cssLine: 'line-Primer nivel', cssCircle: 'circle-Primer nivel', cssColor: '#99E6FC'},
+            {lineName: 'lineSegundo nivel', xAxis: 'Fecha_eje', yAxis: 'Segundo nivel', cssLine: 'line-Segundo nivel', cssCircle: 'circle-Segundo nivel', cssColor: '#2347E3'},
+            {lineName: 'lineTercer nivel', xAxis: 'Fecha_eje', yAxis: 'Tercer nivel', cssLine: 'line-Tercer nivel', cssCircle: 'circle-Tercer nivel', cssColor: '#081C29'}
         ];
 
         window.addEventListener('scroll', function() {
@@ -2325,10 +2325,10 @@ function getFourteenBisChart() {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
-            PrimerNivel: +d['ciclo_basico'].replace(/,/g, '.'),
-            SegundoNivel: +d['segundo'].replace(/,/g, '.'),
-            TercerNivel: +d['tercero'].replace(/,/g, '.'),
-            CuartoNivel: +d['tercero_completo'].replace(/,/g, '.')
+            'Ciclo básico': +d['ciclo_basico'].replace(/,/g, '.'),
+            'Segundo sin completar': +d['segundo'].replace(/,/g, '.'),
+            'Tercero sin completar': +d['tercero'].replace(/,/g, '.'),
+            'Tercero completado': +d['tercero_completo'].replace(/,/g, '.')
         }
     }, function(error, data) {
         if (error) throw error;
@@ -2385,10 +2385,10 @@ function getFourteenBisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'linePrimerNivel', xAxis: 'Fecha_eje', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
-            {lineName: 'lineSegundoNivel', xAxis: 'Fecha_eje', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
-            {lineName: 'lineTercerNivel', xAxis: 'Fecha_eje', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'},
-            {lineName: 'lineCuartoNivel', xAxis: 'Fecha_eje', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'}
+            {lineName: 'lineCiclo básico', xAxis: 'Fecha_eje', yAxis: 'Ciclo básico', cssLine: 'line-Ciclo básico', cssCircle: 'circle-Ciclo básico', cssColor: '#99E6FC'},
+            {lineName: 'lineSegundo sin completar', xAxis: 'Fecha_eje', yAxis: 'Segundo sin completar', cssLine: 'line-Segundo sin completar', cssCircle: 'circle-Segundo sin completar', cssColor: '#2347E3'},
+            {lineName: 'lineTercero sin completar', xAxis: 'Fecha_eje', yAxis: 'Tercero sin completar', cssLine: 'line-Tercero sin completar', cssCircle: 'circle-Tercero sin completar', cssColor: '#081C29'},
+            {lineName: 'lineTercero completado', xAxis: 'Fecha_eje', yAxis: 'Tercero completado', cssLine: 'line-Tercero completado', cssCircle: 'circle-Tercero completado', cssColor: '#474b4e'}
         ];
 
         window.addEventListener('scroll', function() {
@@ -2412,11 +2412,11 @@ function getFourteenTrisChart() {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
-            PrimerNivel: +d['Primaria'].replace(/,/g, '.'),
-            SegundoNivel: +d['Secundaria'].replace(/,/g, '.'),
-            TercerNivel: +d['Medio superior'].replace(/,/g, '.'),
-            CuartoNivel: +d['Superior'].replace(/,/g, '.'),
-            QuintoNivel: +d['no_especificado'].replace(/,/g, '.')
+            'Primaria': +d['Primaria'].replace(/,/g, '.'),
+            'Secundaria': +d['Secundaria'].replace(/,/g, '.'),
+            'Medio superior': +d['Medio superior'].replace(/,/g, '.'),
+            'Superior': +d['Superior'].replace(/,/g, '.'),
+            'No especificado': +d['no_especificado'].replace(/,/g, '.')
         }
     }, function(error, data) {
         if (error) throw error;
@@ -2473,11 +2473,11 @@ function getFourteenTrisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'linePrimerNivel', xAxis: 'Fecha_eje', yAxis: 'PrimerNivel', cssLine: 'line-PrimerNivel', cssCircle: 'circle-PrimerNivel', cssColor: '#99E6FC'},
-            {lineName: 'lineSegundoNivel', xAxis: 'Fecha_eje', yAxis: 'SegundoNivel', cssLine: 'line-SegundoNivel', cssCircle: 'circle-SegundoNivel', cssColor: '#2347E3'},
-            {lineName: 'lineTercerNivel', xAxis: 'Fecha_eje', yAxis: 'TercerNivel', cssLine: 'line-TercerNivel', cssCircle: 'circle-TercerNivel', cssColor: '#081C29'},
-            {lineName: 'lineCuartoNivel', xAxis: 'Fecha_eje', yAxis: 'CuartoNivel', cssLine: 'line-CuartoNivel', cssCircle: 'circle-CuartoNivel', cssColor: '#474b4e'},
-            {lineName: 'lineQuintoNivel', xAxis: 'Fecha_eje', yAxis: 'QuintoNivel', cssLine: 'line-QuintoNivel', cssCircle: 'circle-QuintoNivel', cssColor: '#9b9b9b'}
+            {lineName: 'linePrimaria', xAxis: 'Fecha_eje', yAxis: 'Primaria', cssLine: 'line-Primaria', cssCircle: 'circle-Primaria', cssColor: '#99E6FC'},
+            {lineName: 'lineSecundaria', xAxis: 'Fecha_eje', yAxis: 'Secundaria', cssLine: 'line-Secundaria', cssCircle: 'circle-Secundaria', cssColor: '#2347E3'},
+            {lineName: 'lineMedio superior', xAxis: 'Fecha_eje', yAxis: 'Medio superior', cssLine: 'line-Medio superior', cssCircle: 'circle-Medio superior', cssColor: '#081C29'},
+            {lineName: 'lineSuperior', xAxis: 'Fecha_eje', yAxis: 'Superior', cssLine: 'line-Superior', cssCircle: 'circle-Superior', cssColor: '#474b4e'},
+            {lineName: 'lineNo especificado', xAxis: 'Fecha_eje', yAxis: 'No especificado', cssLine: 'line-No especificado', cssCircle: 'circle-No especificado', cssColor: '#9b9b9b'}
         ]
 
         window.addEventListener('scroll', function() {
@@ -2711,7 +2711,7 @@ function getSixteenthChart() {
                 .enter()
                 .append("rect")
                 .attr('class', function(d, i) { return `bar bar-${i}`; })
-                .style('fill', function(d) {if (d.pais == 'LAC (Media Simple)') { return '#8ca0ad'; } else { return '#081C29'; }} )
+                .style('fill', function(d) {if (d.pais == 'ALC (Media Simple)') { return '#2783c6'; } else { return '#081C29'; }} )
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
@@ -3013,7 +3013,28 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
             .attr("fill", "none")
             .attr("stroke", `${lines[i].cssColor}`)
             .attr("stroke-width", '1.5px')
-            .attr("d", line);
+            .attr("d", line)
+            .on('touchstart touchmove mousemove mouseover', function(d,i,e) {
+                //Posibilidad visualización línea diferente
+                let lines = chartBlock.selectAll('.line');                
+                let currentLine = e[i];
+
+                lines.each(function() {
+                    this.style.opacity = '0.4';
+                });
+
+                currentLine.style.opacity = '1';
+                currentLine.style.strokeWidth = '3.5px';
+            })
+            .on('touchend mouseout', function(d,i,e) {
+                //Quitamos los estilos de la línea
+                let lines = chartBlock.selectAll('.line');
+
+                lines.each(function() {
+                    this.style.opacity = '1';
+                    this.style.strokeWidth = '1.5px';                    
+                });
+            });
 
         let length = path.node().getTotalLength();
 
@@ -3038,8 +3059,15 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
                 let css = e[i].getAttribute('class').split('-')[1];
 
                 //Texto
+                let data = '';
+                if(dataType == 'percentage') {
+                    data = numberWithCommas(d[css].toFixed(1))
+                } else {
+                    let auxData = d[css] / 1000000;
+                    data = numberWithCommas(auxData.toFixed(1));
+                }
                 let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                            <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css].toFixed(1))}${dataType == 'percentage' ? '%' : 'M'}</p>`; //Solucionar recogida de información
+                            <p class="chart__tooltip--text">${css}: ${data}${dataType == 'percentage' ? '%' : 'M'}</p>`;
 
                 tooltip.html(html);
 
@@ -3050,7 +3078,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
                     this.style.opacity = '0.4';
                     if(this.getAttribute('class').indexOf(`line-${css}`) != -1) {
                         this.style.opacity = '1';
-                        this.style.strokeWidth = '3px';
+                        this.style.strokeWidth = '3.5px';
                     }
                 });
 
@@ -3069,7 +3097,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
 
                 //Quitamos el tooltip
                 getOutTooltip(tooltip);                
-            })
+            });
     }
 }
 

@@ -310,7 +310,7 @@ input:checked + .slider:before {
     opacity: 0;   
 
     width: auto;
-    max-width: 150px;
+    max-width: 135px;
     height: auto;
     padding: 8px;
     background-color: #F4F4F4;
