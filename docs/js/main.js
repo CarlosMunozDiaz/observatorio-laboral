@@ -888,11 +888,13 @@ function getSixthChart() {
 
         //Eje X > Edades y columnas
         let x0 = d3.scaleBand()
-            .rangeRound([0,width])
+            .rangeRound([0,width])            
+            .paddingOuter(0)
             .domain(edades);
         
         let x1 = d3.scaleBand()
             .range([x0.bandwidth(),0])
+            .paddingInner(0.5)
             .paddingOuter(0.5)
             .domain(columnas);
 
@@ -960,7 +962,7 @@ function getSixthChart() {
                         return 'rect rect-Mujeres';
                     }
                 })
-                .attr("width", x1.bandwidth() / 2)            
+                .attr("width", x1.bandwidth())            
                 .attr('data-edad', function(d,i) { return d.edad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
                 .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
@@ -1034,7 +1036,7 @@ function getSeventhChart() {
     let file = './data/chart-seven.csv';
     d3.csv(file, function(d) {
         return {
-            Pais: d.Pais,
+            Pais: d.Pais_eje,
             Edad: d.Edad,
             Hombres: +d.Hombres_total.replace(/,/g, '.') * 100,
             Mujeres: +d.Mujeres_total.replace(/,/g, '.') * 100
@@ -1043,7 +1045,7 @@ function getSeventhChart() {
         if (error) throw error;
 
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let margin = {top: 5, right: 5, bottom: 75, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Agrupación de datos para barras agrupadas
@@ -1245,12 +1247,13 @@ function getEigthChart() {
         //Eje X > Edades y columnas
         let x0 = d3.scaleBand()
             .rangeRound([0,width])
-            .domain(edades)
-            .align(1);
+            .paddingOuter(0)
+            .domain(edades);
         
         let x1 = d3.scaleBand()
             .range([x0.bandwidth(),0])
-            .paddingOuter(0.95)
+            .paddingInner(0.5)
+            .paddingOuter(0.5)
             .domain(columnas);
 
         let xAxis = function(g){
@@ -1317,7 +1320,7 @@ function getEigthChart() {
                         return 'rect rect-Mujeres';
                     }
                 })
-                .attr("width", x1.bandwidth() / 2)            
+                .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
                 .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
@@ -1391,7 +1394,7 @@ function getNinethChart() {
     let file = './data/chart-nine.csv';
     d3.csv(file, function(d) {
         return {
-            Pais: d.Pais,
+            Pais: d.Pais_eje,
             Escolaridad: d.Escolaridad,
             Hombres: +d.Hombres_total.replace(/,/g, '.') * 100,
             Mujeres: +d.Mujeres_total.replace(/,/g, '.') * 100
@@ -1400,7 +1403,7 @@ function getNinethChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let margin = {top: 5, right: 5, bottom: 75, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Agrupación de datos para barras agrupadas
@@ -1596,10 +1599,12 @@ function getTenthChart() {
         //Eje X > Edades y columnas
         let x0 = d3.scaleBand()
             .rangeRound([0,width])
+            .paddingOuter(0.5)
             .domain(edades);
         
         let x1 = d3.scaleBand()
             .range([x0.bandwidth(),0])
+            .paddingInner(0.5)
             .paddingOuter(0.5)
             .domain(columnas);
 
@@ -1667,7 +1672,7 @@ function getTenthChart() {
                         return 'rect rect-Mujeres';
                     }
                 })
-                .attr("width", x1.bandwidth() / 2)            
+                .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
                 .on('mouseenter', function(d, i, e) {
@@ -1728,7 +1733,7 @@ function getEleventhChart() {
     let file = './data/chart-eleven.csv';
     d3.csv(file, function(d) {
         return {
-            Pais: d.Pais,
+            Pais: d.Pais_eje,
             Escolaridad: d.Escolaridad,
             Hombres: +d.Hombres.replace(/,/g, '.') * 100,
             Mujeres: +d.Mujeres.replace(/,/g, '.') * 100
@@ -1737,7 +1742,7 @@ function getEleventhChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let margin = {top: 5, right: 5, bottom: 75, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Agrupación de datos para barras agrupadas
@@ -1933,10 +1938,12 @@ function getTwelvethChart() {
         //Eje X > Edades y columnas
         let x0 = d3.scaleBand()
             .rangeRound([0,width])
+            .paddingOuter(0)
             .domain(edades);
         
         let x1 = d3.scaleBand()
             .range([x0.bandwidth(),0])
+            .paddingInner(0.5)
             .paddingOuter(0.5)
             .domain(columnas);
 
@@ -2004,7 +2011,7 @@ function getTwelvethChart() {
                         return 'rect rect-Mujeres';
                     }
                 })
-                .attr("width", x1.bandwidth() / 2)            
+                .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
                 .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
@@ -2059,7 +2066,7 @@ function getThirteenthChart() {
     let file = './data/chart-thirteen.csv';
     d3.csv(file, function(d) {
         return {
-            Pais: d.Pais,
+            Pais: d.Pais_eje,
             Escolaridad: d.Escolaridad,
             Hombres: +d.Hombres.replace(/,/g, '.') * 100,
             Mujeres: +d.Mujeres.replace(/,/g, '.') * 100
@@ -2068,7 +2075,7 @@ function getThirteenthChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 95, left: 35};
+        let margin = {top: 5, right: 5, bottom: 75, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Agrupación de datos para barras agrupadas
@@ -2275,7 +2282,7 @@ function getFourteenChart() {
 
         //Disposición del eje Y
         let y = d3.scaleLinear()
-            .domain([0,40])
+            .domain([0,60])
             .range([height,0])
             .nice();
     
@@ -2449,7 +2456,7 @@ function getFourteenTrisChart() {
 
         //Disposición del eje Y
         let y = d3.scaleLinear()
-            .domain([0,50])
+            .domain([0,60])
             .range([height,0])
             .nice();
     
@@ -2668,7 +2675,7 @@ function getSixteenthChart() {
             g.call(function(g){
                 g.selectAll('.tick text')
                     .style("text-anchor", "end")
-                    .style("font-weight", function(d) {if(d == 'LAC (Media Simple)') { return 'bold'; }})
+                    .style("font-weight", function(d) {if(d == 'ALC (Media Simple)') { return 'bold'; }})
                     .attr("dx", "-.8em")
                     .attr("dy", ".15em")
                     .attr("transform", function(d) {
