@@ -62,11 +62,11 @@ body {
     position: relative;
 
     width: 350px;
-    height: 42px;
+    height: 36px;
     border-radius: 32px;
     padding-left: 16px;
     /* Elemento flecha */
-    background: url(../img/triangle-bottom-solid.svg) no-repeat right #f4f4f4;
+    background: url(../img/triangle-bottom-solid-18.svg) no-repeat right #f4f4f4;
     -webkit-appearance: none;
     background-position-x: calc(100% - 16px);
     border: 0px;
@@ -140,7 +140,7 @@ body {
     position: relative;
     display: inline-block;
     width: 100px;
-    height: 30px;
+    height: 36px;
 }
   
 .switch input { 
@@ -164,8 +164,8 @@ body {
 .slider:before {
     position: absolute;
     content: "";
-    height: 30px;
-    width: 30px;
+    height: 36px;
+    width: 36px;
     left: 0px;
     bottom: 0px;
     background-color: #081C29;
@@ -184,7 +184,7 @@ input:checked + .slider:before {
 }
 
 .slider.round {
-    border-radius: 34px;
+    border-radius: 36px;
 }
 
 .slider.round:before {
