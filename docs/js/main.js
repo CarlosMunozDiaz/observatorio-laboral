@@ -2507,7 +2507,7 @@ function getFifteenChart() {
         if (error) throw error;
 
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 125};
+        let margin = {top: 5, right: 5, bottom: 25, left: 115};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -2546,8 +2546,20 @@ function getFifteenChart() {
             svg.call(d3.axisLeft(y).tickFormat(function(d) { return d.split('-')[0]; }))
             svg.call(function(g){g.selectAll('.tick line').remove()})
             svg.call(function(g){g.select('.domain').remove()})
-            svg.call(function(g){g.selectAll('.tick text').on('mouseover', function(d) { console.log("Uso del tooltip"); })})
-            svg.call(function(g){g.selectAll('.tick text').on('mouseleave', function(d) { console.log("Uso del tooltip"); })})
+            svg.call(function(g){g.selectAll('.tick text').style('cursor','default')})
+            svg.call(function(g){g.selectAll('.tick text').on('touchstart touchmove mousemove mouseover', function(d) {
+                //Texto tooltip
+                let html = `<p class="chart__tooltip--title">${d.split('-')[1]}</p>`;                
+                tooltip.html(html);
+
+                //Tooltip
+                positionTooltip(window.event, tooltip);
+                getInTooltip(tooltip);
+            })})
+            svg.call(function(g){g.selectAll('.tick text').on('mouseleave', function(d) { 
+                //Quitamos el tooltip
+                getOutTooltip(tooltip); 
+            })});
         }        
         
         chart.append("g")
@@ -2866,11 +2878,6 @@ function get4_6Chart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('mouseenter', function(d, i, e) {
-                    
-                    positionTooltip(window.event, tooltip);
-                    getInTooltip(tooltip);
-                })
                 .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     //Texto
