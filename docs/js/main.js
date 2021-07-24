@@ -77,8 +77,6 @@ function getFirstChart() {
                 .attr("y", function(d) { return y(0); })
                 .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
-
-                    console.log(d);
                     
                     //Texto
                     let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
@@ -2365,12 +2363,12 @@ function getThirteenthChart() {
     });
 }
 
-function getFourteenChart() {
+function getFourteen_1aChart() {
     //Bloque de la visualización
-    let chartBlock = d3.select('#chart-fourteen');
+    let chartBlock = d3.select('#chart-fourteen_1a');
 
     //Lectura de datos
-    let file = './data/chart-fourteen.csv';
+    let file = './data/chart-fourteen_1a.csv';
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha_eje,
@@ -2450,12 +2448,95 @@ function getFourteenChart() {
     });
 }
 
-function getFourteenBisChart() {
+function getFourteen_1bChart() {
     //Bloque de la visualización
-    let chartBlock = d3.select('#chart-fourteen_bis');
+    let chartBlock = d3.select('#chart-fourteen_1b');
 
     //Lectura de datos
-    let file = './data/chart-fourteen_bis.csv';
+    let file = './data/chart-fourteen_1b.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha_eje,
+            Fecha_eje: d.Fecha_eje,
+            Hombres: +d['Hombre'].replace(/,/g, '.'),
+            Mujeres: +d['Mujer'].replace(/,/g, '.')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(1);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([0,35])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+        ];
+
+        window.addEventListener('scroll', function() {
+            if (!chartBlock.node().classList.contains('visible')){
+                if(isElementInViewport(chartBlock.node())){
+                    chartBlock.node().classList.add('visible');
+                    setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
+                }                
+            }
+        });
+    });
+}
+
+function getFourteen_2aChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-fourteen_2a');
+
+    //Lectura de datos
+    let file = './data/chart-fourteen_2a.csv';
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha_eje,
@@ -2537,12 +2618,95 @@ function getFourteenBisChart() {
     });
 }
 
-function getFourteenTrisChart() {
+function getFourteen_2bChart() {
     //Bloque de la visualización
-    let chartBlock = d3.select('#chart-fourteen_tris');
+    let chartBlock = d3.select('#chart-fourteen_2b');
 
     //Lectura de datos
-    let file = './data/chart-fourteen_tris.csv';
+    let file = './data/chart-fourteen_2b.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha_eje,
+            Fecha_eje: d.Fecha_eje,
+            Hombres: +d['Hombre'].replace(/,/g, '.'),
+            Mujeres: +d['Mujer'].replace(/,/g, '.')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(1);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%3)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([0,35])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+        ];
+
+        window.addEventListener('scroll', function() {
+            if (!chartBlock.node().classList.contains('visible')){
+                if(isElementInViewport(chartBlock.node())){
+                    chartBlock.node().classList.add('visible');
+                    setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
+                }                
+            }
+        });
+    });
+}
+
+function getFourteen_3aChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-fourteen_3a');
+
+    //Lectura de datos
+    let file = './data/chart-fourteen_3a.csv';
     d3.csv(file, function(d) {
         return {
             Fecha: d.Fecha_eje,
@@ -2614,6 +2778,89 @@ function getFourteenTrisChart() {
             {lineName: 'lineSuperior', xAxis: 'Fecha_eje', yAxis: 'Superior', cssLine: 'line-Superior', cssCircle: 'circle-Superior', cssColor: '#474b4e'},
             {lineName: 'lineNo especificado', xAxis: 'Fecha_eje', yAxis: 'No especificado', cssLine: 'line-No especificado', cssCircle: 'circle-No especificado', cssColor: '#9b9b9b'}
         ]
+
+        window.addEventListener('scroll', function() {
+            if (!chartBlock.node().classList.contains('visible')){
+                if(isElementInViewport(chartBlock.node())){
+                    chartBlock.node().classList.add('visible');
+                    setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
+                }                
+            }
+        });
+    });
+}
+
+function getFourteen_3bChart() {
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-fourteen_3b');
+
+    //Lectura de datos
+    let file = './data/chart-fourteen_3b.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha_eje,
+            Fecha_eje: d.Fecha_eje,
+            Hombres: +d['Hombre'].replace(/,/g, '.'),
+            Mujeres: +d['Mujer'].replace(/,/g, '.')
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(1);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%1)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([0,35])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d + '%'; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas
+        let lines = [
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+        ];
 
         window.addEventListener('scroll', function() {
             if (!chartBlock.node().classList.contains('visible')){
@@ -3357,9 +3604,12 @@ getTenthChart();
 getEleventhChart();
 getTwelvethChart();
 getThirteenthChart();
-getFourteenChart();
-getFourteenBisChart();
-getFourteenTrisChart();
+getFourteen_1aChart();
+getFourteen_1bChart();
+getFourteen_2aChart();
+getFourteen_2bChart();
+getFourteen_3aChart();
+getFourteen_3bChart();
 getFifteenChart();
 getSixteenthChart();
 getSeventeenthChart();
