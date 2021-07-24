@@ -2932,7 +2932,7 @@ function getSeventeenthChart() {
         }
     }, function(error, data) {
         if (error) throw error;
-        console.log(data);
+        
         //Creación del elemento SVG en el contenedor
         let margin = {top: 5, right: 5, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
@@ -2945,7 +2945,7 @@ function getSeventeenthChart() {
 
         //Estilos para eje X
         let xAxis = function(g){
-            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%3)})))
             g.call(function(g){
                 g.selectAll('.tick line')
                     .attr('y1', '0%')
@@ -2966,7 +2966,7 @@ function getSeventeenthChart() {
             .nice();
     
         let yAxis = function(svg){
-            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d; }))
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d.toString().replace(/\./g, ','); }))
             svg.call(function(g){
                 g.selectAll('.tick line')
                     .attr('class', function(d,i) {
@@ -2985,13 +2985,13 @@ function getSeventeenthChart() {
 
         //Inicialización de líneas > Sólo se muestra la línea 'Promedio'
         let lines = [
-            {lineName: 'Promedio', xAxis: 'Fecha', cssName: 'Promedio', cssColor: '#000'},
-            {lineName: 'Argentina', xAxis: 'Fecha', cssName: 'Argentina', cssColor: '#ccc'},
-            {lineName: 'Brasil', xAxis: 'Fecha', cssName: 'Brasil', cssColor: '#ccc'},
-            {lineName: 'Chile', xAxis: 'Fecha', cssName: 'Chile', cssColor: '#ccc'},
-            {lineName: 'Colombia', xAxis: 'Fecha', cssName: 'Colombia', cssColor: '#ccc'},
-            {lineName: 'México', xAxis: 'Fecha', cssName: 'México', cssColor: '#ccc'},
-            {lineName: 'Perú', xAxis: 'Fecha', cssName: 'Perú', cssColor: '#ccc'},
+            {lineName: 'Promedio', xAxis: 'Fecha', cssName: 'Promedio', cssColor: '#99E6FC'},
+            {lineName: 'Argentina', xAxis: 'Fecha', cssName: 'Argentina', cssColor: '#081C29'},
+            {lineName: 'Brasil', xAxis: 'Fecha', cssName: 'Brasil', cssColor: '#081C29'},
+            {lineName: 'Chile', xAxis: 'Fecha', cssName: 'Chile', cssColor: '#081C29'},
+            {lineName: 'Colombia', xAxis: 'Fecha', cssName: 'Colombia', cssColor: '#081C29'},
+            {lineName: 'México', xAxis: 'Fecha', cssName: 'México', cssColor: '#081C29'},
+            {lineName: 'Perú', xAxis: 'Fecha', cssName: 'Perú', cssColor: '#081C29'},
         ];
 
         let currentCountry = 'null';
@@ -2999,13 +2999,18 @@ function getSeventeenthChart() {
         function initChart() {
             for(let i = 0; i < lines.length; i++) {
                 let line = d3.line()
+                    .defined(function(d) { return !isNaN(y(d[lines[i].lineName])); })
                     .x(function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
                     .y(function(d) { return y(d[lines[i].lineName]); });
 
+                let filteredData = data.filter(line.defined());
+
                 if(lines[i].lineName == 'Promedio') {
+                    
+                    //Línea real
                     let path = chart.append("path")
-                        .data([data])
-                        .attr("class", `line ${lines[i].cssName}`)
+                        .data([filteredData])
+                        .attr("class", `line-${lines[i].cssName}`)
                         .attr("fill", "none")
                         .attr("stroke", `${lines[i].cssColor}`)
                         .attr("stroke-width", "1.5px")
@@ -3033,34 +3038,27 @@ function getSeventeenthChart() {
                         .duration(4500);
         
                     chart.selectAll('.circles')
-                        .data(data)
+                        .data(filteredData)
                         .enter()
                         .append('circle')
-                        .attr('class', `${lines[i].cssName}`)
+                        .attr('class', `circle-${lines[i].cssName}`)
                         .attr("r", 5)
                         .attr("cx", function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
                         .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                         .style("fill", '#000')
-                        .style('opacity', '0.5')
+                        .style('opacity', '0')
                         .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
-                            let css = e[i].getAttribute('class');
-                            console.log(css);
+                            let css = e[i].getAttribute('class').split('-')[1];
             
                             //Texto
-                            let html = `<p class="chart__tooltip--title">${d.Fecha}</p>`;
+                            let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
+                                <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css])}</p>`;
             
                             tooltip.html(html);
             
                             //Posibilidad visualización línea diferente
-                            // let lines = chartBlock.selectAll('.line');                
-            
-                            // lines.each(function() {
-                            //     this.style.opacity = '0.4';
-                            //     if(this.getAttribute('class').indexOf(`line-${css}`) != -1) {
-                            //         this.style.opacity = '1';
-                            //         this.style.strokeWidth = '3.5px';
-                            //     }
-                            // });
+                            let currentLine = chartBlock.select(`.line-${css}`);
+                            currentLine.style('stroke-width','3.5px');
             
                             //Tooltip
                             positionTooltip(window.event, tooltip);
@@ -3068,12 +3066,9 @@ function getSeventeenthChart() {
                         })
                         .on('touchend mouseout', function(d, i, e) {
                             //Quitamos los estilos de la línea
-                            // let lines = chartBlock.selectAll('.line');
-            
-                            // lines.each(function() {
-                            //     this.style.opacity = '1';
-                            //     this.style.strokeWidth = '1.5px';                    
-                            // });
+                            let css = e[i].getAttribute('class').split('-')[1];
+                            let currentLine = chartBlock.select(`.line-${css}`);
+                            currentLine.style('stroke-width','1.5px');
             
                             //Quitamos el tooltip
                             getOutTooltip(tooltip);                
@@ -3082,8 +3077,8 @@ function getSeventeenthChart() {
                 } else {
 
                     let path = chart.append("path")
-                    .data([data])
-                    .attr("class", `line ${lines[i].cssName}`)
+                    .data([filteredData])
+                    .attr("class", `line line-${lines[i].cssName}`)
                     .attr("fill", "none")
                     .attr("stroke", `${lines[i].cssColor}`)
                     .attr("stroke-width", '0px')
@@ -3111,10 +3106,10 @@ function getSeventeenthChart() {
                     .duration(4500)
         
                 chart.selectAll('.circles')
-                    .data(data)
+                    .data(filteredData)
                     .enter()
                     .append('circle')
-                    .attr('class', `${lines[i].cssName}`)
+                    .attr('class', `circle-${lines[i].cssName}`)
                     .attr("r", 5)
                     .attr("cx", function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
                     .attr("cy", function(d) { return y(d[lines[i].lineName]); })
@@ -3124,42 +3119,27 @@ function getSeventeenthChart() {
                         let css = e[i].getAttribute('class').split('-')[1];
         
                         //Texto
-                        let data = '';
-                        if(dataType == 'percentage') {
-                            data = numberWithCommas(d[css].toFixed(1))
-                        } else {
-                            let auxData = d[css] / 1000000;
-                            data = numberWithCommas(auxData.toFixed(1));
-                        }
                         let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                                    <p class="chart__tooltip--text">${css}: ${data}${dataType == 'percentage' ? '%' : 'M'}</p>`;
+                                    <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css])}</p>`;
         
                         tooltip.html(html);
         
                         //Posibilidad visualización línea diferente
-                        let lines = chartBlock.selectAll('.line');                
-        
-                        lines.each(function() {
-                            this.style.opacity = '0.4';
-                            if(this.getAttribute('class').indexOf(`line-${css}`) != -1) {
-                                this.style.opacity = '1';
-                                this.style.strokeWidth = '3.5px';
-                            }
-                        });
-        
+                        let currentLine = chartBlock.select(`.line-${css}`);
+                        currentLine.style('stroke-width','3.5px');
+
                         //Tooltip
                         positionTooltip(window.event, tooltip);
                         getInTooltip(tooltip);               
                     })
                     .on('touchend mouseout', function(d, i, e) {
                         //Quitamos los estilos de la línea
-                        let lines = chartBlock.selectAll('.line');
+                        let css = e[i].getAttribute('class').split('-')[1];
         
-                        lines.each(function() {
-                            this.style.opacity = '1';
-                            this.style.strokeWidth = '1.5px';                    
-                        });
-        
+                        //Posibilidad visualización línea diferente
+                        let currentLine = chartBlock.select(`.line-${css}`);
+                        currentLine.style('stroke-width','1.5px');
+
                         //Quitamos el tooltip
                         getOutTooltip(tooltip);                
                     });
@@ -3178,17 +3158,35 @@ function getSeventeenthChart() {
         }); 
 
         //Se actualiza con el país seleccionado
-        function updateChart(country) {
+        function updateChart(currentCountry, country) {
             //Primero quitamos la línea del país anterior >> Lógica para opacidad de línea y uso de círculos
 
+            if(currentCountry != 'null') {
+                let formerLine = chartBlock.select(`.line-${currentCountry}`);
+                let formerCircles = chartBlock.selectAll(`.circle-${currentCountry}`);
+
+                formerLine.style('stroke-width','0px');
+                formerCircles.each(function() {
+                    this.style.fill = 'none';
+                });
+            }            
 
             //Tras ello, damos nuevos estilos al país seleccionado >> Si es null, sólo mostramos 'Promedio'
+            if(country != 'null') {
+                let line = chartBlock.select(`.line-${country}`);
+                let circles = chartBlock.selectAll(`.circle-${country}`);
+
+                line.style('stroke-width','1.5px');
+                circles.each(function() {
+                    this.style.fill = '#000';
+                });
+            }
         }
 
-        document.getElementById('#empleoSeventeen').addEventListener('change', function(e) {
-            console.log(e.target);
-            currentCountry = e.target;
-            updateChart(currentCountry);
+        document.getElementById('empleoSeventeen').addEventListener('change', function(e) {
+            let auxCountry = currentCountry;
+            currentCountry = e.target.value;
+            updateChart(auxCountry, currentCountry);            
         });
     });
 }
