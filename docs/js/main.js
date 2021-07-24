@@ -2914,7 +2914,283 @@ function getSixteenthChart() {
 }
 
 function getSeventeenthChart() {
-    console.log("Nada todavía - 17");
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-seventeen');
+
+    //Lectura de datos
+    let file = './data/chart-seventeen.csv';
+    d3.csv(file, function(d) {
+        return {
+            Fecha: d.Fecha,
+            Promedio: +d['Promedio'].replace(/,/g, '.'),            
+            Argentina: +d['Argentina'].replace(/,/g, '.'),
+            Brasil: +d['Brasil'].replace(/,/g, '.'),
+            Chile: +d['Chile'].replace(/,/g, '.'),
+            Colombia: +d['Colombia'].replace(/,/g, '.'),            
+            México: +d['México'].replace(/,/g, '.'),
+            Perú: +d['Perú'].replace(/,/g, '.'),
+        }
+    }, function(error, data) {
+        if (error) throw error;
+        console.log(data);
+        //Creación del elemento SVG en el contenedor
+        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let {width, height, chart} = setChart(chartBlock, margin);
+
+        //Disposición del eje X
+        let x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Fecha }))
+            .range([0, width])
+            .paddingInner(0.25);
+
+        //Estilos para eje X
+        let xAxis = function(g){
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('y1', '0%')
+                    .attr('y2', `-${height}`)
+            })
+            g.call(function(g){g.select('.domain').remove()});
+        }
+        
+        //Inicialización eje X
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        //Disposición del eje Y
+        let y = d3.scaleLinear()
+            .domain([-1,1])
+            .range([height,0])
+            .nice();
+    
+        let yAxis = function(svg){
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", `${x.bandwidth() / 2}`)
+                    .attr("x2", `${width - x.bandwidth() / 2}`)
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }        
+        
+        chart.append("g")
+            .call(yAxis);
+
+        //Inicialización de líneas > Sólo se muestra la línea 'Promedio'
+        let lines = [
+            {lineName: 'Promedio', xAxis: 'Fecha', cssName: 'Promedio', cssColor: '#000'},
+            {lineName: 'Argentina', xAxis: 'Fecha', cssName: 'Argentina', cssColor: '#ccc'},
+            {lineName: 'Brasil', xAxis: 'Fecha', cssName: 'Brasil', cssColor: '#ccc'},
+            {lineName: 'Chile', xAxis: 'Fecha', cssName: 'Chile', cssColor: '#ccc'},
+            {lineName: 'Colombia', xAxis: 'Fecha', cssName: 'Colombia', cssColor: '#ccc'},
+            {lineName: 'México', xAxis: 'Fecha', cssName: 'México', cssColor: '#ccc'},
+            {lineName: 'Perú', xAxis: 'Fecha', cssName: 'Perú', cssColor: '#ccc'},
+        ];
+
+        let currentCountry = 'null';
+
+        function initChart() {
+            for(let i = 0; i < lines.length; i++) {
+                let line = d3.line()
+                    .x(function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
+                    .y(function(d) { return y(d[lines[i].lineName]); });
+
+                if(lines[i].lineName == 'Promedio') {
+                    let path = chart.append("path")
+                        .data([data])
+                        .attr("class", `line ${lines[i].cssName}`)
+                        .attr("fill", "none")
+                        .attr("stroke", `${lines[i].cssColor}`)
+                        .attr("stroke-width", "1.5px")
+                        .attr("d", line)
+                        .on('touchstart touchmove mousemove mouseover', function(d,i,e) {
+                            //Posibilidad visualización línea diferente            
+                            let currentLine = e[i];
+            
+                            currentLine.style.opacity = '1';
+                            currentLine.style.strokeWidth = '3.5px';
+                        })
+                        .on('touchend mouseout', function(d,i,e) {
+                            //Quitamos los estilos de la línea
+                            let currentLine = e[i];
+                            currentLine.style.strokeWidth = '1.5px';
+                        });
+        
+                    let length = path.node().getTotalLength();
+            
+                    path.attr("stroke-dasharray", length + " " + length)
+                        .attr("stroke-dashoffset", length)
+                        .transition()
+                        .ease(d3.easeLinear)
+                        .attr("stroke-dashoffset", 0)
+                        .duration(4500);
+        
+                    chart.selectAll('.circles')
+                        .data(data)
+                        .enter()
+                        .append('circle')
+                        .attr('class', `${lines[i].cssName}`)
+                        .attr("r", 5)
+                        .attr("cx", function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
+                        .attr("cy", function(d) { return y(d[lines[i].lineName]); })
+                        .style("fill", '#000')
+                        .style('opacity', '0.5')
+                        .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                            let css = e[i].getAttribute('class');
+                            console.log(css);
+            
+                            //Texto
+                            let html = `<p class="chart__tooltip--title">${d.Fecha}</p>`;
+            
+                            tooltip.html(html);
+            
+                            //Posibilidad visualización línea diferente
+                            // let lines = chartBlock.selectAll('.line');                
+            
+                            // lines.each(function() {
+                            //     this.style.opacity = '0.4';
+                            //     if(this.getAttribute('class').indexOf(`line-${css}`) != -1) {
+                            //         this.style.opacity = '1';
+                            //         this.style.strokeWidth = '3.5px';
+                            //     }
+                            // });
+            
+                            //Tooltip
+                            positionTooltip(window.event, tooltip);
+                            getInTooltip(tooltip);               
+                        })
+                        .on('touchend mouseout', function(d, i, e) {
+                            //Quitamos los estilos de la línea
+                            // let lines = chartBlock.selectAll('.line');
+            
+                            // lines.each(function() {
+                            //     this.style.opacity = '1';
+                            //     this.style.strokeWidth = '1.5px';                    
+                            // });
+            
+                            //Quitamos el tooltip
+                            getOutTooltip(tooltip);                
+                        });
+
+                } else {
+
+                    let path = chart.append("path")
+                    .data([data])
+                    .attr("class", `line ${lines[i].cssName}`)
+                    .attr("fill", "none")
+                    .attr("stroke", `${lines[i].cssColor}`)
+                    .attr("stroke-width", '0px')
+                    .attr("d", line)
+                    .on('touchstart touchmove mousemove mouseover', function(d,i,e) {
+                        //Posibilidad visualización línea diferente            
+                        let currentLine = e[i];
+        
+                        currentLine.style.opacity = '1';
+                        currentLine.style.strokeWidth = '3.5px';
+                    })
+                    .on('touchend mouseout', function(d,i,e) {
+                        //Quitamos los estilos de la línea
+                        let currentLine = e[i];
+                        currentLine.style.strokeWidth = '1.5px';
+                    });
+        
+                let length = path.node().getTotalLength();
+        
+                path.attr("stroke-dasharray", length + " " + length)
+                    .attr("stroke-dashoffset", length)
+                    .transition()
+                    .ease(d3.easeLinear)
+                    .attr("stroke-dashoffset", 0)
+                    .duration(4500)
+        
+                chart.selectAll('.circles')
+                    .data(data)
+                    .enter()
+                    .append('circle')
+                    .attr('class', `${lines[i].cssName}`)
+                    .attr("r", 5)
+                    .attr("cx", function(d) { return x(d[lines[i].xAxis]) + x.bandwidth() / 2; })
+                    .attr("cy", function(d) { return y(d[lines[i].lineName]); })
+                    .style("fill", 'none')
+                    .style('opacity', '0')
+                    .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                        let css = e[i].getAttribute('class').split('-')[1];
+        
+                        //Texto
+                        let data = '';
+                        if(dataType == 'percentage') {
+                            data = numberWithCommas(d[css].toFixed(1))
+                        } else {
+                            let auxData = d[css] / 1000000;
+                            data = numberWithCommas(auxData.toFixed(1));
+                        }
+                        let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
+                                    <p class="chart__tooltip--text">${css}: ${data}${dataType == 'percentage' ? '%' : 'M'}</p>`;
+        
+                        tooltip.html(html);
+        
+                        //Posibilidad visualización línea diferente
+                        let lines = chartBlock.selectAll('.line');                
+        
+                        lines.each(function() {
+                            this.style.opacity = '0.4';
+                            if(this.getAttribute('class').indexOf(`line-${css}`) != -1) {
+                                this.style.opacity = '1';
+                                this.style.strokeWidth = '3.5px';
+                            }
+                        });
+        
+                        //Tooltip
+                        positionTooltip(window.event, tooltip);
+                        getInTooltip(tooltip);               
+                    })
+                    .on('touchend mouseout', function(d, i, e) {
+                        //Quitamos los estilos de la línea
+                        let lines = chartBlock.selectAll('.line');
+        
+                        lines.each(function() {
+                            this.style.opacity = '1';
+                            this.style.strokeWidth = '1.5px';                    
+                        });
+        
+                        //Quitamos el tooltip
+                        getOutTooltip(tooltip);                
+                    });
+
+                }               
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!chartBlock.node().classList.contains('visible')){
+                if(isElementInViewport(chartBlock.node())){
+                    chartBlock.node().classList.add('visible');
+                    initChart();
+                }                
+            }
+        }); 
+
+        //Se actualiza con el país seleccionado
+        function updateChart(country) {
+            //Primero quitamos la línea del país anterior >> Lógica para opacidad de línea y uso de círculos
+
+
+            //Tras ello, damos nuevos estilos al país seleccionado >> Si es null, sólo mostramos 'Promedio'
+        }
+
+        document.getElementById('#empleoSeventeen').addEventListener('change', function(e) {
+            console.log(e.target);
+            currentCountry = e.target;
+            updateChart(currentCountry);
+        });
+    });
 }
 
 function getEighteenthChart() {
@@ -3088,7 +3364,7 @@ getFourteenBisChart();
 getFourteenTrisChart();
 getFifteenChart();
 getSixteenthChart();
-
+getSeventeenthChart();
 
 /* Visualization helpers */
 function wrap(text, width) {
@@ -3186,7 +3462,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
             .transition()
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
-            .duration(6000)
+            .duration(4500)
 
         chart.selectAll('.circles')
             .data(data)
