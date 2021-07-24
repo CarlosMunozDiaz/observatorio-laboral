@@ -555,17 +555,46 @@
     </div>
     <h2 style="font-size: 16px; font-weight: bold; margin-top: 48px; margin-bottom: 48px;">Gráfico 18 - Tabla evolución contratación - Mapa de calor</h2>
     <div class="outer-chart">
-        <div class="chart__b-title--upper">
-            <div class="chart__sb-title">
-                <h1 class="chart__title">18 - LinkedIn</h1>
-                <h2 class="chart__subtitle">Datos en puntos porcentuales</h2>
+        <div class="chart">
+            <div class="chart__b-title--upper">
+                <div class="chart__sb-title">
+                    <h1 class="chart__title">Evolución de la tasa de contratación en LinkedIn por industria</h1>
+                    <h2 class="chart__subtitle">Datos en puntos porcentuales</h2>
+                </div>
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleoEighteen">
+                        <option class="chart__select--item" value="null">Seleccione una industria</option>
+                        <option class="chart__select--item" value="Software & IT Services">Software & IT Services</option>
+                        <option class="chart__select--item" value="Sin fines de lucro">Sin fines de lucro</option>
+                        <option class="chart__select--item" value="Finanzas">Finanzas</option>
+                        <option class="chart__select--item" value="Comercio al menudeo">Comercio al menudeo</option>
+                        <option class="chart__select--item" value="Salud">Salud</option>
+                        <option class="chart__select--item" value="Transporte y Logística">Transporte y Logística</option>
+                        <option class="chart__select--item" value="Medios y comunicación">Medios y comunicación</option>
+                        <option class="chart__select--item" value="Bienestar y salud">Bienestar y salud</option>
+                        <option class="chart__select--item" value="Bienes raíces">Bienes raíces</option>
+                        <option class="chart__select--item" value="Servicios corporativos">Servicios corporativos</option>
+                        <option class="chart__select--item" value="Agricultura">Agricultura</option>
+                        <option class="chart__select--item" value="Construcción">Construcción</option>
+                        <option class="chart__select--item" value="Bienes de consumo">Bienes de consumo</option>
+                        <option class="chart__select--item" value="Hardware & redes">Hardware & redes</option>
+                        <option class="chart__select--item" value="Legal">Legal</option>
+                        <option class="chart__select--item" value="Manufactura">Manufactura</option>
+                        <option class="chart__select--item" value="Energía y minas">Energía y minas</option>
+                        <option class="chart__select--item" value="Entretenimiento">Entretenimiento</option>
+                        <option class="chart__select--item" value="Diseño">Diseño</option>
+                        <option class="chart__select--item" value="Administración pública">Administración pública</option>
+                        <option class="chart__select--item" value="Educación">Educación</option>
+                        <option class="chart__select--item" value="Recreación y viajes">Recreación y viajes</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="chart__legend">
-            <span class="chart__legend--item color-women">Promedio general</span>
-            <span class="chart__legend--item color-men">País seleccionado</span>
-        </div>
-        <div class="chart__viz" id="chart-eighteen">
+            <div class="chart__legend">
+                <span class="chart__legend--item color-women">Promedio general</span>
+                <span class="chart__legend--item color-men">Industria seleccionada</span>
+            </div>
+            <div class="chart__viz" id="chart-eighteen">
+            </div>
         </div>
     </div>
     <div class="chart__tooltip" id="chartTooltip">

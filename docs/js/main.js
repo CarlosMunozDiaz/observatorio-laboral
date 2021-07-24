@@ -3439,7 +3439,15 @@ function getSeventeenthChart() {
 }
 
 function getEighteenthChart() {
-    console.log("Nada todavía - 18");
+    //Bloque de la visualización
+    let chartBlock = d3.select('#chart-eighteen');
+
+    //Lectura de datos
+    let file = './data/chart-eighteen.csv';
+    d3.csv(file, function(error, data) {
+        if (error) throw error;
+        console.log(data);
+    });
 }
 
 //Nuevos gráficos
@@ -3613,6 +3621,7 @@ getFourteen_3bChart();
 getFifteenChart();
 getSixteenthChart();
 getSeventeenthChart();
+getEighteenthChart();
 
 /* Visualization helpers */
 function wrap(text, width) {
