@@ -1,11 +1,11 @@
 /*
 * FUNCIONES TOOLTIP
 */
-function getInTooltip(tooltip) { //Mouseover
+function getInTooltip(tooltip) {
     tooltip.style('display','block').style('opacity', 1);
 }
 
-function getOutTooltip(tooltip) { //Mouseout
+function getOutTooltip(tooltip) {
     tooltip.transition().style('display','none').style('opacity', 0);
 }
 
