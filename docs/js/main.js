@@ -3,7 +3,7 @@ let tooltip = d3.select('#chartTooltip');
 function getFirstChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-one');
-    alert("Entra");
+    
     //Lectura de datos
     let file = './data/chart-one.csv';
     d3.csv(file, function(d) {
@@ -13,8 +13,7 @@ function getFirstChart() {
         }
     }, function(error, data) {
         if (error) throw alert(error);
-        alert(data);
-        
+                
         //Creación del elemento SVG en el contenedor
         let margin = {top: 5, right: 5, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
