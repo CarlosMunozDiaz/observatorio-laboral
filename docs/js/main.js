@@ -3893,33 +3893,33 @@ function get4_6Chart() {
 }
 
 getFirstChart();
-getFirstBisChart();
-getSecondChart();
-getSecondBisChart();
-getThirdChart();
-get4_6Chart();
-getFourthChart();
-getFourthBisChart();
-getFifthChart();
-getFifthBisChart();
-getSixthChart();
-getSeventhChart();
-getEigthChart();
-getNinethChart();
-getTenthChart();
-getEleventhChart();
-getTwelvethChart();
-getThirteenthChart();
-getFourteen_1aChart();
-getFourteen_1bChart();
-getFourteen_2aChart();
-getFourteen_2bChart();
-getFourteen_3aChart();
-getFourteen_3bChart();
-getFifteenChart();
-getSixteenthChart();
-getSeventeenthChart();
-getEighteenthChart();
+// getFirstBisChart();
+// getSecondChart();
+// getSecondBisChart();
+// getThirdChart();
+// get4_6Chart();
+// getFourthChart();
+// getFourthBisChart();
+// getFifthChart();
+// getFifthBisChart();
+// getSixthChart();
+// getSeventhChart();
+// getEigthChart();
+// getNinethChart();
+// getTenthChart();
+// getEleventhChart();
+// getTwelvethChart();
+// getThirteenthChart();
+// getFourteen_1aChart();
+// getFourteen_1bChart();
+// getFourteen_2aChart();
+// getFourteen_2bChart();
+// getFourteen_3aChart();
+// getFourteen_3bChart();
+// getFifteenChart();
+// getSixteenthChart();
+// getSeventeenthChart();
+// getEighteenthChart();
 
 /* Visualization helpers */
 function wrap(text, width) {
