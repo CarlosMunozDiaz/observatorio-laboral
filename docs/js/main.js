@@ -4076,5 +4076,6 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
 }
 
 function numberWithCommas(x) {
-    return x.toString().replace(/\./g, ',').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+    //return x.toString().replace(/\./g, ',').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+    return x.toString().replace(/\./g, ',');
 }
