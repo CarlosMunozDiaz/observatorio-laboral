@@ -80,7 +80,7 @@ function getFirstChart() {
                 .attr('x', function(d) { return x(d.Fecha) + x.bandwidth() / 2; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('mouseover mousemove', function(d, i, e) {
+                .on('mouseover mouseenter mousedown mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     
                     //Texto
@@ -104,7 +104,7 @@ function getFirstChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let bars = chartBlock.selectAll('.bar');
                     bars.each(function() {
@@ -483,7 +483,7 @@ function getThirdChart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('mouseover mousemove', function(d, i, e) {
+                .on('mouseover mouseenter mousedown mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     
                     //Texto
@@ -507,7 +507,7 @@ function getThirdChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let bars = chartBlock.selectAll('.bar');
                     bars.each(function() {
@@ -819,7 +819,7 @@ function getFifthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-country', function(d,i) { return d.pais; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let pais = e[i].getAttribute('data-country').replace(/\*/g, '');
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -842,7 +842,7 @@ function getFifthChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -952,7 +952,7 @@ function getFifthBisChart() {
                 .style('fill', function(d) { if (d.pais == 'Total') { return '#99E6FC'; } else { return '#081C29'; }} )
                 .attr('r', 6)            
                 .attr('cx', (d) => {return x(d.dato_diferencia)})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     //Texto
                     let html = `<p class="chart__tooltip--title">${d.pais}</p>
                                 <p class="chart__tooltip--text">Pérdida de empleo: ${numberWithCommas(d.dato_perdidaEmpleo.toFixed(2))}%</p>
@@ -972,7 +972,7 @@ function getFifthBisChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let bars = chartBlock.selectAll('.circle-scatterplot');
                     bars.each(function() {
@@ -1105,7 +1105,7 @@ function getSixthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-edad', function(d,i) { return d.edad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -1131,7 +1131,7 @@ function getSixthChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -1285,7 +1285,7 @@ function getSeventhChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-edad', function(d,i) { return d.Edad.replace(/[\[\]]/g, '').replace(',', '-'); })
                 .style('fill',function(d) { return d.Edad == '[14,24]' ? '#99E6FC' : d.Edad == '[25,34]' ? '#2347E3' : d.Edad == '[35,55]' ? '#081C29' : '#474b4e'})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -1311,7 +1311,7 @@ function getSeventhChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -1463,7 +1463,7 @@ function getEigthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -1489,7 +1489,7 @@ function getEigthChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -1641,7 +1641,7 @@ function getNinethChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
                 .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -1667,7 +1667,7 @@ function getNinethChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -1815,13 +1815,13 @@ function getTenthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('mouseenter', function(d, i, e) {
+                .on('mouseenter mousedown', function(d, i, e) {
                     
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
 
                 })
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto                
@@ -1846,7 +1846,7 @@ function getTenthChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -1980,7 +1980,7 @@ function getEleventhChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
                 .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -2006,7 +2006,7 @@ function getEleventhChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -2154,7 +2154,7 @@ function getTwelvethChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -2179,7 +2179,7 @@ function getTwelvethChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -2313,7 +2313,7 @@ function getThirteenthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
                 .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -2339,7 +2339,7 @@ function getThirteenthChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
@@ -2943,7 +2943,7 @@ function getFifteenChart() {
             svg.call(function(g){g.selectAll('.tick line').remove()})
             svg.call(function(g){g.select('.domain').remove()})
             svg.call(function(g){g.selectAll('.tick text').style('cursor','default')})
-            svg.call(function(g){g.selectAll('.tick text').on('mousemove mouseover', function(d) {
+            svg.call(function(g){g.selectAll('.tick text').on('mouseenter mousedown mousemove mouseover', function(d) {
                 //Texto tooltip
                 let html = `<p class="chart__tooltip--title">${d.split('-')[1]}</p>`;                
                 tooltip.html(html);
@@ -2987,7 +2987,7 @@ function getFifteenChart() {
                     return y(d.tipo_eje + '-' + d.tipo) + y.bandwidth() / 4;
                 })            
                 .attr("height", y.bandwidth() / 2)
-                .on('mousemove mouseover', function(d, i, e) {
+                .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     //Texto
                     let html = `<p class="chart__tooltip--title">${d.tipo}</p>
@@ -3009,7 +3009,7 @@ function getFifteenChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let bars = chartBlock.selectAll('.bar');
                     bars.each(function() {
@@ -3123,7 +3123,7 @@ function getSixteenthChart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('mouseover mousemove', function(d, i, e) {
+                .on('mouseover mouseenter mousedown mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     //Texto
                     let html = `<p class="chart__tooltip--title">${d.pais}</p>
@@ -3146,7 +3146,7 @@ function getSixteenthChart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let bars = chartBlock.selectAll('.bar');
                     bars.each(function() {
@@ -3174,7 +3174,7 @@ function getSixteenthChart() {
     });
 }
 
-alert("Fuera touch")
+alert("Fuera touch 2")
 
 function getSeventeenthChart() {
     //Bloque de la visualización
@@ -3278,14 +3278,14 @@ function getSeventeenthChart() {
                         .attr("stroke", `${lines[i].cssColor}`)
                         .attr("stroke-width", "1.5px")
                         .attr("d", line)
-                        .on('mousemove mouseover', function(d,i,e) {
+                        .on('mouseenter mousedown mousemove mouseover', function(d,i,e) {
                             //Posibilidad visualización línea diferente            
                             let currentLine = e[i];
             
                             currentLine.style.opacity = '1';
                             currentLine.style.strokeWidth = '3.5px';
                         })
-                        .on('touchend mouseout', function(d,i,e) {
+                        .on('mouseout', function(d,i,e) {
                             //Quitamos los estilos de la línea
                             let currentLine = e[i];
                             currentLine.style.strokeWidth = '1.5px';
@@ -3310,7 +3310,7 @@ function getSeventeenthChart() {
                         .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                         .style("fill", '#000')
                         .style('opacity', '0')
-                        .on('mousemove mouseover', function(d, i, e) {
+                        .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                             let css = e[i].getAttribute('class').split('-')[1];
             
                             //Texto
@@ -3327,7 +3327,7 @@ function getSeventeenthChart() {
                             positionTooltip(window.event, tooltip);
                             getInTooltip(tooltip);               
                         })
-                        .on('touchend mouseout', function(d, i, e) {
+                        .on('mouseout', function(d, i, e) {
                             //Quitamos los estilos de la línea
                             let css = e[i].getAttribute('class').split('-')[1];
                             let currentLine = chartBlock.select(`.line-${css}`);
@@ -3346,14 +3346,14 @@ function getSeventeenthChart() {
                     .attr("stroke", `${lines[i].cssColor}`)
                     .attr("stroke-width", '0px')
                     .attr("d", line)
-                    .on('mousemove mouseover', function(d,i,e) {
+                    .on('mouseenter mousedown mousemove mouseover', function(d,i,e) {
                         //Posibilidad visualización línea diferente            
                         let currentLine = e[i];
         
                         currentLine.style.opacity = '1';
                         currentLine.style.strokeWidth = '3.5px';
                     })
-                    .on('touchend mouseout', function(d,i,e) {
+                    .on('mouseout', function(d,i,e) {
                         //Quitamos los estilos de la línea
                         let currentLine = e[i];
                         currentLine.style.strokeWidth = '1.5px';
@@ -3378,7 +3378,7 @@ function getSeventeenthChart() {
                     .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                     .style("fill", 'none')
                     .style('opacity', '0')
-                    .on('mousemove mouseover', function(d, i, e) {
+                    .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                         let css = e[i].getAttribute('class').split('-')[1];
         
                         //Texto
@@ -3395,7 +3395,7 @@ function getSeventeenthChart() {
                         positionTooltip(window.event, tooltip);
                         getInTooltip(tooltip);               
                     })
-                    .on('touchend mouseout', function(d, i, e) {
+                    .on('mouseout', function(d, i, e) {
                         //Quitamos los estilos de la línea
                         let css = e[i].getAttribute('class').split('-')[1];
         
@@ -3571,14 +3571,14 @@ function getEighteenthChart() {
                         .attr("stroke", `#99E6FC`)
                         .attr("stroke-width", "1.5px")
                         .attr("d", line)
-                        .on('mousemove mouseover', function(d,i,e) {
+                        .on('mouseenter mousedown mousemove mouseover', function(d,i,e) {
                             //Posibilidad visualización línea diferente            
                             let currentLine = e[i];
             
                             currentLine.style.opacity = '1';
                             currentLine.style.strokeWidth = '3.5px';
                         })
-                        .on('touchend mouseout', function(d,i,e) {
+                        .on('mouseout', function(d,i,e) {
                             //Quitamos los estilos de la línea
                             let currentLine = e[i];
                             currentLine.style.strokeWidth = '1.5px';
@@ -3603,7 +3603,7 @@ function getEighteenthChart() {
                         .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                         .style("fill", '#000')
                         .style('opacity', '0')
-                        .on('mousemove mouseover', function(d, i, e) {
+                        .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                             let css = e[i].getAttribute('class').split('-')[1];
             
                             //Texto
@@ -3620,7 +3620,7 @@ function getEighteenthChart() {
                             positionTooltip(window.event, tooltip);
                             getInTooltip(tooltip);               
                         })
-                        .on('touchend mouseout', function(d, i, e) {
+                        .on('mouseout', function(d, i, e) {
                             //Quitamos los estilos de la línea
                             let css = e[i].getAttribute('class').split('-')[1];
                             let currentLine = chartBlock.select(`.line-${css}`);
@@ -3639,14 +3639,14 @@ function getEighteenthChart() {
                     .attr("stroke", `#081C29`)
                     .attr("stroke-width", '0px')
                     .attr("d", line)
-                    .on('mousemove mouseover', function(d,i,e) {
+                    .on('mouseenter mousedown mousemove mouseover', function(d,i,e) {
                         //Posibilidad visualización línea diferente            
                         let currentLine = e[i];
         
                         currentLine.style.opacity = '1';
                         currentLine.style.strokeWidth = '3.5px';
                     })
-                    .on('touchend mouseout', function(d,i,e) {
+                    .on('mouseout', function(d,i,e) {
                         //Quitamos los estilos de la línea
                         let currentLine = e[i];
                         currentLine.style.strokeWidth = '1.5px';
@@ -3671,7 +3671,7 @@ function getEighteenthChart() {
                     .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                     .style("fill", 'none')
                     .style('opacity', '0')
-                    .on('mousemove mouseover', function(d, i, e) {
+                    .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                         let css = e[i].getAttribute('class').split('-')[1];
         
                         //Texto
@@ -3688,7 +3688,7 @@ function getEighteenthChart() {
                         positionTooltip(window.event, tooltip);
                         getInTooltip(tooltip);               
                     })
-                    .on('touchend mouseout', function(d, i, e) {
+                    .on('mouseout', function(d, i, e) {
                         //Quitamos los estilos de la línea
                         let css = e[i].getAttribute('class').split('-')[1];
         
@@ -3842,7 +3842,7 @@ function get4_6Chart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('mouseover mousemove', function(d, i, e) {
+                .on('mouseover mouseenter mousedown mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     //Texto
                     let tipoTexto = tipoGenerico == 'Horas_trabajadas' ? 'Cambio en horas trabajadas' : 'Cambio en salarios'
@@ -3866,7 +3866,7 @@ function get4_6Chart() {
                     positionTooltip(window.event, tooltip);
                     getInTooltip(tooltip);
                 })
-                .on('touchend mouseout', function(d, i, e) {
+                .on('mouseout', function(d, i, e) {
                     //Quitamos los estilos de la línea
                     let bars = chartBlock.selectAll('.bar');
                     bars.each(function() {
@@ -3990,7 +3990,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
             .attr("stroke", `${lines[i].cssColor}`)
             .attr("stroke-width", '1.5px')
             .attr("d", line)
-            .on('mousemove mouseover', function(d,i,e) {
+            .on('mouseenter mousedown mousemove mouseover', function(d,i,e) {
                 //Posibilidad visualización línea diferente
                 let lines = chartBlock.selectAll('.line');                
                 let currentLine = e[i];
@@ -4002,7 +4002,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
                 currentLine.style.opacity = '1';
                 currentLine.style.strokeWidth = '3.5px';
             })
-            .on('touchend mouseout', function(d,i,e) {
+            .on('mouseout', function(d,i,e) {
                 //Quitamos los estilos de la línea
                 let lines = chartBlock.selectAll('.line');
 
@@ -4031,7 +4031,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
             .attr("cy", function(d) { return y(d[lines[i].yAxis]); })
             .style("fill", '#000')
             .style('opacity', '0')
-            .on('mousemove mouseover', function(d, i, e) {
+            .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                 let css = e[i].getAttribute('class').split('-')[1];
 
                 //Texto
@@ -4062,7 +4062,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
                 positionTooltip(window.event, tooltip);
                 getInTooltip(tooltip);               
             })
-            .on('touchend mouseout', function(d, i, e) {
+            .on('mouseout', function(d, i, e) {
                 //Quitamos los estilos de la línea
                 let lines = chartBlock.selectAll('.line');
 
