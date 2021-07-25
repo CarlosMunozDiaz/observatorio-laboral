@@ -80,7 +80,7 @@ function getFirstChart() {
                 .attr('x', function(d) { return x(d.Fecha) + x.bandwidth() / 2; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
+                .on('touchenter touchmove mouseover mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     
                     //Texto
@@ -483,7 +483,7 @@ function getThirdChart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
+                .on('touchenter touchmove mouseover mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     
                     //Texto
@@ -819,7 +819,7 @@ function getFifthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-country', function(d,i) { return d.pais; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let pais = e[i].getAttribute('data-country').replace(/\*/g, '');
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -952,7 +952,7 @@ function getFifthBisChart() {
                 .style('fill', function(d) { if (d.pais == 'Total') { return '#99E6FC'; } else { return '#081C29'; }} )
                 .attr('r', 6)            
                 .attr('cx', (d) => {return x(d.dato_diferencia)})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     //Texto
                     let html = `<p class="chart__tooltip--title">${d.pais}</p>
                                 <p class="chart__tooltip--text">Pérdida de empleo: ${numberWithCommas(d.dato_perdidaEmpleo.toFixed(2))}%</p>
@@ -1105,7 +1105,7 @@ function getSixthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-edad', function(d,i) { return d.edad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -1285,7 +1285,7 @@ function getSeventhChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-edad', function(d,i) { return d.Edad.replace(/[\[\]]/g, '').replace(',', '-'); })
                 .style('fill',function(d) { return d.Edad == '[14,24]' ? '#99E6FC' : d.Edad == '[25,34]' ? '#2347E3' : d.Edad == '[35,55]' ? '#081C29' : '#474b4e'})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -1463,7 +1463,7 @@ function getEigthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -1641,7 +1641,7 @@ function getNinethChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
                 .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -1821,7 +1821,7 @@ function getTenthChart() {
                     getInTooltip(tooltip);
 
                 })
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto                
@@ -1980,7 +1980,7 @@ function getEleventhChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
                 .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -2154,7 +2154,7 @@ function getTwelvethChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
                 .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -2313,7 +2313,7 @@ function getThirteenthChart() {
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
                 .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
                     //Texto
@@ -2943,7 +2943,7 @@ function getFifteenChart() {
             svg.call(function(g){g.selectAll('.tick line').remove()})
             svg.call(function(g){g.select('.domain').remove()})
             svg.call(function(g){g.selectAll('.tick text').style('cursor','default')})
-            svg.call(function(g){g.selectAll('.tick text').on('touchstart touchmove mousemove mouseover', function(d) {
+            svg.call(function(g){g.selectAll('.tick text').on('touchenter touchmove mousemove mouseover', function(d) {
                 //Texto tooltip
                 let html = `<p class="chart__tooltip--title">${d.split('-')[1]}</p>`;                
                 tooltip.html(html);
@@ -2987,7 +2987,7 @@ function getFifteenChart() {
                     return y(d.tipo_eje + '-' + d.tipo) + y.bandwidth() / 4;
                 })            
                 .attr("height", y.bandwidth() / 2)
-                .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     //Texto
                     let html = `<p class="chart__tooltip--title">${d.tipo}</p>
@@ -3123,7 +3123,7 @@ function getSixteenthChart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
+                .on('touchenter touchmove mouseover mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     //Texto
                     let html = `<p class="chart__tooltip--title">${d.pais}</p>
@@ -3276,7 +3276,7 @@ function getSeventeenthChart() {
                         .attr("stroke", `${lines[i].cssColor}`)
                         .attr("stroke-width", "1.5px")
                         .attr("d", line)
-                        .on('touchstart touchmove mousemove mouseover', function(d,i,e) {
+                        .on('touchenter touchmove mousemove mouseover', function(d,i,e) {
                             //Posibilidad visualización línea diferente            
                             let currentLine = e[i];
             
@@ -3308,7 +3308,7 @@ function getSeventeenthChart() {
                         .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                         .style("fill", '#000')
                         .style('opacity', '0')
-                        .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                        .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                             let css = e[i].getAttribute('class').split('-')[1];
             
                             //Texto
@@ -3344,7 +3344,7 @@ function getSeventeenthChart() {
                     .attr("stroke", `${lines[i].cssColor}`)
                     .attr("stroke-width", '0px')
                     .attr("d", line)
-                    .on('touchstart touchmove mousemove mouseover', function(d,i,e) {
+                    .on('touchenter touchmove mousemove mouseover', function(d,i,e) {
                         //Posibilidad visualización línea diferente            
                         let currentLine = e[i];
         
@@ -3376,7 +3376,7 @@ function getSeventeenthChart() {
                     .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                     .style("fill", 'none')
                     .style('opacity', '0')
-                    .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                    .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                         let css = e[i].getAttribute('class').split('-')[1];
         
                         //Texto
@@ -3569,7 +3569,7 @@ function getEighteenthChart() {
                         .attr("stroke", `#99E6FC`)
                         .attr("stroke-width", "1.5px")
                         .attr("d", line)
-                        .on('touchstart touchmove mousemove mouseover', function(d,i,e) {
+                        .on('touchenter touchmove mousemove mouseover', function(d,i,e) {
                             //Posibilidad visualización línea diferente            
                             let currentLine = e[i];
             
@@ -3601,7 +3601,7 @@ function getEighteenthChart() {
                         .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                         .style("fill", '#000')
                         .style('opacity', '0')
-                        .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                        .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                             let css = e[i].getAttribute('class').split('-')[1];
             
                             //Texto
@@ -3637,7 +3637,7 @@ function getEighteenthChart() {
                     .attr("stroke", `#081C29`)
                     .attr("stroke-width", '0px')
                     .attr("d", line)
-                    .on('touchstart touchmove mousemove mouseover', function(d,i,e) {
+                    .on('touchenter touchmove mousemove mouseover', function(d,i,e) {
                         //Posibilidad visualización línea diferente            
                         let currentLine = e[i];
         
@@ -3669,7 +3669,7 @@ function getEighteenthChart() {
                     .attr("cy", function(d) { return y(d[lines[i].lineName]); })
                     .style("fill", 'none')
                     .style('opacity', '0')
-                    .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+                    .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                         let css = e[i].getAttribute('class').split('-')[1];
         
                         //Texto
@@ -3840,7 +3840,7 @@ function get4_6Chart() {
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
-                .on('touchstart touchmove mouseover mousemove', function(d, i, e) {
+                .on('touchenter touchmove mouseover mousemove', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
                     //Texto
                     let tipoTexto = tipoGenerico == 'Horas_trabajadas' ? 'Cambio en horas trabajadas' : 'Cambio en salarios'
@@ -3988,7 +3988,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
             .attr("stroke", `${lines[i].cssColor}`)
             .attr("stroke-width", '1.5px')
             .attr("d", line)
-            .on('touchstart touchmove mousemove mouseover', function(d,i,e) {
+            .on('touchenter touchmove mousemove mouseover', function(d,i,e) {
                 //Posibilidad visualización línea diferente
                 let lines = chartBlock.selectAll('.line');                
                 let currentLine = e[i];
@@ -4029,7 +4029,7 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
             .attr("cy", function(d) { return y(d[lines[i].yAxis]); })
             .style("fill", '#000')
             .style('opacity', '0')
-            .on('touchstart touchmove mousemove mouseover', function(d, i, e) {
+            .on('touchenter touchmove mousemove mouseover', function(d, i, e) {
                 let css = e[i].getAttribute('class').split('-')[1];
 
                 //Texto
