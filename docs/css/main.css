@@ -339,7 +339,7 @@ input:checked + .slider:before {
     .outer-chart {
         box-sizing: border-box;
         width: 100%;
-        padding: 0px 16px;
+        padding: 0px 8px;
     }
 
     .chart__sb-title {width: 100%;}
