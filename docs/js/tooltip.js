@@ -1,6 +1,8 @@
 /*
 * FUNCIONES TOOLTIP
 */
+let tooltip2 = d3.select('#chartTooltip');
+
 function getInTooltip(tooltip) {
     tooltip.style('display','block').style('opacity', 1);
 }
