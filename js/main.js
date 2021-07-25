@@ -1,9 +1,5 @@
-alert("CARGA JS");
-
 let tooltip = d3.select('#chartTooltip');
-
-alert("CARGA JS2");
-
+alert("Cambio");
 function getFirstChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-one');
