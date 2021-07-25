@@ -26,7 +26,12 @@ function getFirstChart() {
 
         //Estilos para eje X
         let xAxis = function(g){
-            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){
+                let each = 4;
+                if(window.innerWidth < 575) { 
+                    each = 8
+                } 
+                return !(i%each)})))
             g.call(function(g){
                 g.selectAll('.tick line')
                     .attr('y1', '0%')
@@ -157,7 +162,13 @@ function getFirstBisChart() {
 
         //Estilos para eje X
         let xAxis = function(g){
-            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){ return !(i%4)})))
+            g.call(d3.axisBottom(x).tickValues(x.domain().filter(function(d,i){
+                let each = 4;
+                if(window.innerWidth < 575) { 
+                    each = 8
+                } 
+                return !(i%each);
+            })))
             g.call(function(g){
                 g.selectAll('.tick line')
                     .attr('y1', '0%')
