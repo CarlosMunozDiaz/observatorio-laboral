@@ -115,14 +115,17 @@ function getFirstChart() {
                 .attr('height', d => Math.abs(y(d['América Latina y Caribe']) - y(0)));
         }
 
-        window.addEventListener('scroll', function() {
-            if (!chartBlock.node().classList.contains('visible')){
-                if(isElementInViewport(chartBlock.node())){
-                    chartBlock.node().classList.add('visible');
-                    initChart();
-                }                
-            }
-        });     
+        chartBlock.node().classList.add('visible');
+        initChart();
+
+        // window.addEventListener('scroll', function() {
+        //     if (!chartBlock.node().classList.contains('visible')){
+        //         if(isElementInViewport(chartBlock.node())){
+        //             chartBlock.node().classList.add('visible');
+        //             initChart();
+        //         }                
+        //     }
+        // });     
     });
 }
 
@@ -3592,7 +3595,7 @@ function getEighteenthChart() {
             
                             //Texto
                             let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                                <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css])}</p>`;
+                                <p class="chart__tooltip--text">${css.replace(/\_/g, ' ')}: ${numberWithCommas(d[css])}</p>`;
             
                             tooltip.html(html);
             
@@ -3660,7 +3663,7 @@ function getEighteenthChart() {
         
                         //Texto
                         let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                                    <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css])}</p>`;
+                                    <p class="chart__tooltip--text">${css.replace(/\_/g, ' ')}: ${numberWithCommas(d[css])}</p>`;
         
                         tooltip.html(html);
         
