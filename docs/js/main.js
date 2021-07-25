@@ -1739,7 +1739,7 @@ function getTenthChart() {
         //Eje X > Edades y columnas
         let x0 = d3.scaleBand()
             .rangeRound([0,width])
-            .paddingOuter(0.5)
+            .paddingOuter(0)
             .domain(edades);
         
         let x1 = d3.scaleBand()
@@ -3195,7 +3195,7 @@ function getSeventeenthChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 30};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -3489,7 +3489,7 @@ function getEighteenthChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 20};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
