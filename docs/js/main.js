@@ -828,6 +828,10 @@ function getFifthChart() {
                 
                     tooltip.html(html);
 
+                    //Tooltip
+                    positionTooltip(window.event, tooltip);
+                    getInTooltip(tooltip);
+
                     //Posibilidad visualización línea diferente
                     let rects = chartBlock.selectAll('.rect');
 
@@ -837,20 +841,16 @@ function getFifthChart() {
                             this.style.opacity = '1';
                         }
                     });
-
-                    //Tooltip
-                    positionTooltip(window.event, tooltip);
-                    getInTooltip(tooltip);
                 })
                 .on('mouseout', function(d, i, e) {
+                    //Quitamos el tooltip
+                    getOutTooltip(tooltip);
+                    
                     //Quitamos los estilos de la línea
                     let rects = chartBlock.selectAll('.rect');
                     rects.each(function() {
                         this.style.opacity = '1';
-                    });
-
-                    //Quitamos el tooltip
-                    getOutTooltip(tooltip); 
+                    }); 
                 })
                 .transition()
                 .duration(3000)            
@@ -3173,8 +3173,6 @@ function getSixteenthChart() {
         }
     });
 }
-
-alert("Fuera touch 2")
 
 function getSeventeenthChart() {
     //Bloque de la visualización
