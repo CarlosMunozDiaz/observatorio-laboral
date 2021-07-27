@@ -21,7 +21,7 @@ function getFirstChart() {
         if (error) throw alert(error);
                 
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let margin = {top: 5, right: 5, bottom: 25, left: 30};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -157,7 +157,7 @@ function getFirstBisChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let margin = {top: 5, right: 5, bottom: 25, left: 30};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -332,7 +332,7 @@ function getSecondBisChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 40};
+        let margin = {top: 5, right: 5, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -641,7 +641,7 @@ function getFourthBisChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 40};
+        let margin = {top: 5, right: 5, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -2909,7 +2909,7 @@ function getFifteenChart() {
         if (error) throw error;
 
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 115};
+        let margin = {top: 5, right: 5, bottom: 25, left: 110};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -3055,7 +3055,7 @@ function getSixteenthChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 115, left: 45};
+        let margin = {top: 5, right: 5, bottom: 115, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Eje X
@@ -3771,7 +3771,7 @@ function get4_6Chart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 100, left: 35};
+        let margin = {top: 5, right: 5, bottom: 100, left: 30};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Eje X

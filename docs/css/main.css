@@ -326,7 +326,7 @@ input:checked + .slider:before {
 .tick text {
     font-family: 'GothamNarrow';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 12px;
     line-height: 10px;
 
@@ -336,11 +336,12 @@ input:checked + .slider:before {
 /* VISUALIZACIÓN - Líneas (tanto X como Y) */
 .tick line {
     stroke: #F0F0F0;
-    stroke-width: 1px;
+    stroke-width: 0.5px;
 }
 
 .line-special {
     stroke: #000 !important;
+    stroke-width: 0.5px !important;
 }
 
 /* TOOLTIP */
