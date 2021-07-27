@@ -1,5 +1,11 @@
 let tooltip = d3.select('#chartTooltip');
 
+//Variables para colores
+let one_color = '#005578';
+let two_colors_first = '#FFB612', two_colors_second = '#005578';
+let three_colors_first = '#FFB612', three_colors_second = '#005578', three_colors_third = '#9B918B';
+let more_colors_first = '#FFB612', more_colors_second = '#7B96AA', more_colors_third = '#005578', more_colors_fourth = '#9B918B', more_colors_fifth = '#5F5C59';
+
 function getFirstChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-one');
@@ -76,7 +82,7 @@ function getFirstChart() {
                 .enter()
                 .append("rect")
                 .attr('class', function(d, i) { return `bar bar-${i}`; })
-                .style('fill', '#081C29')
+                .style('fill', one_color)
                 .attr('x', function(d) { return x(d.Fecha) + x.bandwidth() / 2; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
@@ -208,9 +214,9 @@ function getFirstBisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineEconomías Avanzadas', xAxis: 'Fecha', yAxis: 'Economías Avanzadas', cssLine: 'line-Economías Avanzadas', cssCircle: 'circle-Economías Avanzadas', cssColor: '#99E6FC', },
-            {lineName: 'lineAmérica Latina y Caribe', xAxis: 'Fecha', yAxis: 'América Latina y Caribe', cssLine: 'line-América Latina y Caribe', cssCircle: 'circle-América Latina y Caribe', cssColor: '#2347E3'},
-            {lineName: 'lineEconomías Emergentes', xAxis: 'Fecha', yAxis: 'Economías Emergentes', cssLine: 'line-Economías Emergentes', cssCircle: 'circle-Economías Emergentes', cssColor: '#081C29'}
+            {lineName: 'lineEconomías Avanzadas', xAxis: 'Fecha', yAxis: 'Economías Avanzadas', cssLine: 'line-Economías Avanzadas', cssCircle: 'circle-Economías Avanzadas', cssColor: three_colors_first, },
+            {lineName: 'lineAmérica Latina y Caribe', xAxis: 'Fecha', yAxis: 'América Latina y Caribe', cssLine: 'line-América Latina y Caribe', cssCircle: 'circle-América Latina y Caribe', cssColor: three_colors_second},
+            {lineName: 'lineEconomías Emergentes', xAxis: 'Fecha', yAxis: 'Economías Emergentes', cssLine: 'line-Economías Emergentes', cssCircle: 'circle-Economías Emergentes', cssColor: three_colors_third}
         ];
 
         window.addEventListener('scroll', function() {
@@ -293,9 +299,9 @@ function getSecondChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineEmpleo total', xAxis: 'Fecha_eje', yAxis: 'Empleo total', cssLine: 'line-Empleo total', cssCircle: 'circle-Empleo total', cssColor: '#99E6FC', },
-            {lineName: 'lineEmpleo formal', xAxis: 'Fecha_eje', yAxis: 'Empleo formal', cssLine: 'line-Empleo formal', cssCircle: 'circle-Empleo formal', cssColor: '#2347E3'},
-            {lineName: 'lineEmpleo informal', xAxis: 'Fecha_eje', yAxis: 'Empleo informal', cssLine: 'line-Empleo informal', cssCircle: 'circle-Empleo informal', cssColor: '#081C29'}
+            {lineName: 'lineEmpleo total', xAxis: 'Fecha_eje', yAxis: 'Empleo total', cssLine: 'line-Empleo total', cssCircle: 'circle-Empleo total', cssColor: three_colors_first, },
+            {lineName: 'lineEmpleo formal', xAxis: 'Fecha_eje', yAxis: 'Empleo formal', cssLine: 'line-Empleo formal', cssCircle: 'circle-Empleo formal', cssColor: three_colors_second},
+            {lineName: 'lineEmpleo informal', xAxis: 'Fecha_eje', yAxis: 'Empleo informal', cssLine: 'line-Empleo informal', cssCircle: 'circle-Empleo informal', cssColor: three_colors_third}
         ];
 
         window.addEventListener('scroll', function() {
@@ -377,8 +383,8 @@ function getSecondBisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineEmpleo formal', xAxis: 'Fecha_eje', yAxis: 'Empleo formal', cssLine: 'line-Empleo formal', cssCircle: 'circle-Empleo formal', cssColor: '#2347E3'},
-            {lineName: 'lineEmpleo informal', xAxis: 'Fecha_eje', yAxis: 'Empleo informal', cssLine: 'line-Empleo informal', cssCircle: 'circle-Empleo informal', cssColor: '#081C29'}
+            {lineName: 'lineEmpleo formal', xAxis: 'Fecha_eje', yAxis: 'Empleo formal', cssLine: 'line-Empleo formal', cssCircle: 'circle-Empleo formal', cssColor: two_colors_first},
+            {lineName: 'lineEmpleo informal', xAxis: 'Fecha_eje', yAxis: 'Empleo informal', cssLine: 'line-Empleo informal', cssCircle: 'circle-Empleo informal', cssColor: two_colors_second}
         ];
 
         window.addEventListener('scroll', function() {
@@ -479,7 +485,7 @@ function getThirdChart() {
                 .enter()
                 .append("rect")
                 .attr('class', function(d, i) { return `bar bar-${i}`; })
-                .style('fill', '#081C29')
+                .style('fill', one_color)
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
@@ -603,8 +609,8 @@ function getFourthChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
-            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: two_colors_first},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
         window.addEventListener('scroll', function() {
@@ -686,8 +692,8 @@ function getFourthBisChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
-            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: two_colors_first},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
         window.addEventListener('scroll', function() {
@@ -818,7 +824,7 @@ function getFifthChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-country', function(d,i) { return d.pais; })
-                .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+                .style('fill',function(d) {return d.descriptor == 'Hombres' ? two_colors_first : two_colors_second})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let pais = e[i].getAttribute('data-country').replace(/\*/g, '');
                     let css = e[i].getAttribute('class').split('-')[1];
@@ -949,7 +955,7 @@ function getFifthBisChart() {
                 .append('circle')
                 .attr('class', 'circle-scatterplot')
                 .style('opacity', '1')
-                .style('fill', function(d) { if (d.pais == 'Total') { return '#99E6FC'; } else { return '#081C29'; }} )
+                .style('fill', function(d) { if (d.pais == 'Total') { return two_colors_first; } else { return two_colors_second; }} )
                 .attr('r', 6)            
                 .attr('cx', (d) => {return x(d.dato_diferencia)})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
@@ -1104,7 +1110,7 @@ function getSixthChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-edad', function(d,i) { return d.edad; })
-                .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+                .style('fill',function(d) {return d.descriptor == 'Hombres' ? two_colors_first : two_colors_second})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -1284,7 +1290,7 @@ function getSeventhChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-edad', function(d,i) { return d.Edad.replace(/[\[\]]/g, '').replace(',', '-'); })
-                .style('fill',function(d) { return d.Edad == '[14,24]' ? '#99E6FC' : d.Edad == '[25,34]' ? '#2347E3' : d.Edad == '[35,55]' ? '#081C29' : '#474b4e'})
+                .style('fill',function(d) { return d.Edad == '[14,24]' ? more_colors_first : d.Edad == '[25,34]' ? more_colors_second : d.Edad == '[35,55]' ? more_colors_third : more_colors_fourth})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -1462,7 +1468,7 @@ function getEigthChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
-                .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+                .style('fill',function(d) {return d.descriptor == 'Hombres' ? two_colors_first : two_colors_second})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -1640,7 +1646,7 @@ function getNinethChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
-                .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
+                .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? three_colors_first : d.Escolaridad == '[9,13]' ? three_colors_second : three_colors_third})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -1814,7 +1820,7 @@ function getTenthChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
-                .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+                .style('fill',function(d) {return d.descriptor == 'Hombres' ? two_colors_first : two_colors_second})
                 .on('mouseenter mousedown', function(d, i, e) {
                     
                     positionTooltip(window.event, tooltip);
@@ -1979,7 +1985,7 @@ function getEleventhChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
-                .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
+                .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? three_colors_first : d.Escolaridad == '[9,13]' ? three_colors_second : three_colors_third})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -2153,7 +2159,7 @@ function getTwelvethChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.escolaridad; })
-                .style('fill',function(d) {return d.descriptor == 'Hombres' ? '#081C29' : '#99E6FC'})
+                .style('fill',function(d) {return d.descriptor == 'Hombres' ? two_colors_first : two_colors_second})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -2312,7 +2318,7 @@ function getThirteenthChart() {
                 })
                 .attr("width", x1.bandwidth())            
                 .attr('data-escolaridad', function(d,i) { return d.Escolaridad.replace(/[\[\]]/g, '').replace(',', '-'); })
-                .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? '#99E6FC' : d.Escolaridad == '[9,13]' ? '#2347E3' : '#081C29'})
+                .style('fill',function(d) { return d.Escolaridad == '[0,8]' ? three_colors_first : d.Escolaridad == '[9,13]' ? three_colors_second : three_colors_third})
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     let css = e[i].getAttribute('class').split('-')[1];
 
@@ -2446,9 +2452,9 @@ function getFourteen_1aChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'linePrimer nivel', xAxis: 'Fecha_eje', yAxis: 'Primer nivel', cssLine: 'line-Primer nivel', cssCircle: 'circle-Primer nivel', cssColor: '#99E6FC'},
-            {lineName: 'lineSegundo nivel', xAxis: 'Fecha_eje', yAxis: 'Segundo nivel', cssLine: 'line-Segundo nivel', cssCircle: 'circle-Segundo nivel', cssColor: '#2347E3'},
-            {lineName: 'lineTercer nivel', xAxis: 'Fecha_eje', yAxis: 'Tercer nivel', cssLine: 'line-Tercer nivel', cssCircle: 'circle-Tercer nivel', cssColor: '#081C29'}
+            {lineName: 'linePrimer nivel', xAxis: 'Fecha_eje', yAxis: 'Primer nivel', cssLine: 'line-Primer nivel', cssCircle: 'circle-Primer nivel', cssColor: three_colors_first},
+            {lineName: 'lineSegundo nivel', xAxis: 'Fecha_eje', yAxis: 'Segundo nivel', cssLine: 'line-Segundo nivel', cssCircle: 'circle-Segundo nivel', cssColor: three_colors_second},
+            {lineName: 'lineTercer nivel', xAxis: 'Fecha_eje', yAxis: 'Tercer nivel', cssLine: 'line-Tercer nivel', cssCircle: 'circle-Tercer nivel', cssColor: three_colors_third}
         ];
 
         window.addEventListener('scroll', function() {
@@ -2530,8 +2536,8 @@ function getFourteen_1bChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
-            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: two_colors_first},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
         window.addEventListener('scroll', function() {
@@ -2615,10 +2621,10 @@ function getFourteen_2aChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineCiclo básico', xAxis: 'Fecha_eje', yAxis: 'Ciclo básico', cssLine: 'line-Ciclo básico', cssCircle: 'circle-Ciclo básico', cssColor: '#99E6FC'},
-            {lineName: 'lineSegundo sin completar', xAxis: 'Fecha_eje', yAxis: 'Segundo sin completar', cssLine: 'line-Segundo sin completar', cssCircle: 'circle-Segundo sin completar', cssColor: '#2347E3'},
-            {lineName: 'lineTercero sin completar', xAxis: 'Fecha_eje', yAxis: 'Tercero sin completar', cssLine: 'line-Tercero sin completar', cssCircle: 'circle-Tercero sin completar', cssColor: '#081C29'},
-            {lineName: 'lineTercero completado', xAxis: 'Fecha_eje', yAxis: 'Tercero completado', cssLine: 'line-Tercero completado', cssCircle: 'circle-Tercero completado', cssColor: '#474b4e'}
+            {lineName: 'lineCiclo básico', xAxis: 'Fecha_eje', yAxis: 'Ciclo básico', cssLine: 'line-Ciclo básico', cssCircle: 'circle-Ciclo básico', cssColor: more_colors_first},
+            {lineName: 'lineSegundo sin completar', xAxis: 'Fecha_eje', yAxis: 'Segundo sin completar', cssLine: 'line-Segundo sin completar', cssCircle: 'circle-Segundo sin completar', cssColor: more_colors_second},
+            {lineName: 'lineTercero sin completar', xAxis: 'Fecha_eje', yAxis: 'Tercero sin completar', cssLine: 'line-Tercero sin completar', cssCircle: 'circle-Tercero sin completar', cssColor: more_colors_third},
+            {lineName: 'lineTercero completado', xAxis: 'Fecha_eje', yAxis: 'Tercero completado', cssLine: 'line-Tercero completado', cssCircle: 'circle-Tercero completado', cssColor: more_colors_fourth}
         ];
 
         window.addEventListener('scroll', function() {
@@ -2700,8 +2706,8 @@ function getFourteen_2bChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
-            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: two_colors_first},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
         window.addEventListener('scroll', function() {
@@ -2786,11 +2792,11 @@ function getFourteen_3aChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'linePrimaria', xAxis: 'Fecha_eje', yAxis: 'Primaria', cssLine: 'line-Primaria', cssCircle: 'circle-Primaria', cssColor: '#99E6FC'},
-            {lineName: 'lineSecundaria', xAxis: 'Fecha_eje', yAxis: 'Secundaria', cssLine: 'line-Secundaria', cssCircle: 'circle-Secundaria', cssColor: '#2347E3'},
-            {lineName: 'lineMedio superior', xAxis: 'Fecha_eje', yAxis: 'Medio superior', cssLine: 'line-Medio superior', cssCircle: 'circle-Medio superior', cssColor: '#081C29'},
-            {lineName: 'lineSuperior', xAxis: 'Fecha_eje', yAxis: 'Superior', cssLine: 'line-Superior', cssCircle: 'circle-Superior', cssColor: '#474b4e'},
-            {lineName: 'lineNo especificado', xAxis: 'Fecha_eje', yAxis: 'No especificado', cssLine: 'line-No especificado', cssCircle: 'circle-No especificado', cssColor: '#9b9b9b'}
+            {lineName: 'linePrimaria', xAxis: 'Fecha_eje', yAxis: 'Primaria', cssLine: 'line-Primaria', cssCircle: 'circle-Primaria', cssColor: more_colors_first},
+            {lineName: 'lineSecundaria', xAxis: 'Fecha_eje', yAxis: 'Secundaria', cssLine: 'line-Secundaria', cssCircle: 'circle-Secundaria', cssColor: more_colors_second},
+            {lineName: 'lineMedio superior', xAxis: 'Fecha_eje', yAxis: 'Medio superior', cssLine: 'line-Medio superior', cssCircle: 'circle-Medio superior', cssColor: more_colors_third},
+            {lineName: 'lineSuperior', xAxis: 'Fecha_eje', yAxis: 'Superior', cssLine: 'line-Superior', cssCircle: 'circle-Superior', cssColor: more_colors_fourth},
+            {lineName: 'lineNo especificado', xAxis: 'Fecha_eje', yAxis: 'No especificado', cssLine: 'line-No especificado', cssCircle: 'circle-No especificado', cssColor: more_colors_fifth}
         ]
 
         window.addEventListener('scroll', function() {
@@ -2872,8 +2878,8 @@ function getFourteen_3bChart() {
 
         //Inicialización de líneas
         let lines = [
-            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: '#081C29'},
-            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: '#99E6FC'}
+            {lineName: 'lineHombres', xAxis: 'Fecha_eje', yAxis: 'Hombres', cssLine: 'line-Hombres', cssCircle: 'circle-Hombres', cssColor: two_colors_first},
+            {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
         window.addEventListener('scroll', function() {
@@ -2979,7 +2985,7 @@ function getFifteenChart() {
                 .enter()
                 .append("rect")
                 .attr('class', function(d, i) { return `bar bar-${i}`; })
-                .style('fill', '#081C29')
+                .style('fill', one_color)
                 .attr("x", function (d) {
                     return x(0);
                 })
@@ -3119,7 +3125,7 @@ function getSixteenthChart() {
                 .enter()
                 .append("rect")
                 .attr('class', function(d, i) { return `bar bar-${i}`; })
-                .style('fill', function(d) {if (d.pais == 'ALC (Media Simple)') { return '#2783c6'; } else { return '#081C29'; }} )
+                .style('fill', function(d) {if (d.pais == 'ALC (Media Simple)') { return two_colors_first; } else { return two_colors_second; }} )
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
@@ -3246,13 +3252,13 @@ function getSeventeenthChart() {
 
         //Inicialización de líneas > Sólo se muestra la línea 'Promedio'
         let lines = [
-            {lineName: 'Promedio', xAxis: 'Fecha', cssName: 'Promedio', cssColor: '#99E6FC'},
-            {lineName: 'Argentina', xAxis: 'Fecha', cssName: 'Argentina', cssColor: '#081C29'},
-            {lineName: 'Brasil', xAxis: 'Fecha', cssName: 'Brasil', cssColor: '#081C29'},
-            {lineName: 'Chile', xAxis: 'Fecha', cssName: 'Chile', cssColor: '#081C29'},
-            {lineName: 'Colombia', xAxis: 'Fecha', cssName: 'Colombia', cssColor: '#081C29'},
-            {lineName: 'México', xAxis: 'Fecha', cssName: 'México', cssColor: '#081C29'},
-            {lineName: 'Perú', xAxis: 'Fecha', cssName: 'Perú', cssColor: '#081C29'},
+            {lineName: 'Promedio', xAxis: 'Fecha', cssName: 'Promedio', cssColor: two_colors_first},
+            {lineName: 'Argentina', xAxis: 'Fecha', cssName: 'Argentina', cssColor: two_colors_second},
+            {lineName: 'Brasil', xAxis: 'Fecha', cssName: 'Brasil', cssColor: two_colors_second},
+            {lineName: 'Chile', xAxis: 'Fecha', cssName: 'Chile', cssColor: two_colors_second},
+            {lineName: 'Colombia', xAxis: 'Fecha', cssName: 'Colombia', cssColor: two_colors_second},
+            {lineName: 'México', xAxis: 'Fecha', cssName: 'México', cssColor: two_colors_second},
+            {lineName: 'Perú', xAxis: 'Fecha', cssName: 'Perú', cssColor: two_colors_second},
         ];
 
         let currentCountry = 'null';
@@ -3566,7 +3572,7 @@ function getEighteenthChart() {
                         .data([data])
                         .attr("class", `line-${lines[i].cssName}`)
                         .attr("fill", "none")
-                        .attr("stroke", `#99E6FC`)
+                        .attr("stroke", two_colors_first)
                         .attr("stroke-width", "1.5px")
                         .attr("d", line)
                         .on('mouseenter mousedown mousemove mouseover', function(d,i,e) {
@@ -3836,7 +3842,7 @@ function get4_6Chart() {
                 .enter()
                 .append("rect")
                 .attr('class', function(d, i) { return `bar bar-${i}`; })
-                .style('fill', function(d) {if (d.pais == 'Promedio') { return '#8ca0ad'; } else { return '#081C29'; }} )
+                .style('fill', function(d) {if (d.pais == 'Promedio') { return two_colors_first; } else { return two_colors_second; }} )
                 .attr('x', function(d) { return x(d.pais) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
