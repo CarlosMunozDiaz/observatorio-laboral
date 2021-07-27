@@ -2,8 +2,45 @@
     margin: 0 auto;
 }
 
+@font-face {
+    font-family: Gotham;
+    font-weight: 300;
+    src: url("../fonts/Gotham/Gotham-Light.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Gotham;
+    font-weight: 400;
+    src: url("../fonts/Gotham/Gotham-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Gotham;
+    font-weight: 700;
+    src: url("../fonts/Gotham/Gotham-Bold.otf") format("opentype");
+}
+
+/* NARROW (para ejes) */
+@font-face {
+    font-family: GothamNarrow;
+    font-weight: 300;
+    src: url("../fonts/GothamNarrow/GothamNarrow-Light.otf") format("opentype");
+}
+
+@font-face {
+    font-family: GothamNarrow;
+    font-weight: 400;
+    src: url("../fonts/GothamNarrow/GothamNarrow-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: GothamNarrow;
+    font-weight: 700;
+    src: url("../fonts/GothamNarrow/GothamNarrow-Bold.otf") format("opentype");
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Gotham', Arial, Helvetica, sans-serif;
 }
 
 /* BLOQUE EXTERIOR DEL GRÁFICO */
@@ -24,7 +61,6 @@ body {
 
 /* TÍTULO */
 .chart__title {
-    font-family: 'Roboto';
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -35,7 +71,6 @@ body {
 
 /* SUBTÍTULO */
 .chart__subtitle {
-    font-family: 'Roboto';
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -168,13 +203,13 @@ body {
     width: 36px;
     left: 0px;
     bottom: 0px;
-    background-color: #081C29;
+    background-color: #FFB612;
     -webkit-transition: .4s;
     transition: .4s;
 }
 
 input:checked + .slider:before {
-    background-color: #99E6FC;
+    background-color: #005578;
 }
 
 input:checked + .slider:before {
@@ -209,7 +244,6 @@ input:checked + .slider:before {
     align-items: center;
     height: 15px;
 
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
@@ -235,32 +269,48 @@ input:checked + .slider:before {
     background-color: #ccc; /* Este es el atributo a modificar */
 }
 
-.chart__legend--item.color-one:before {
-    background-color: #99E6FC;
+.chart__legend--item.one-color:before {
+    background-color: #005578;
 }
 
-.chart__legend--item.color-two:before {
-    background-color: #2347E3;
+.chart__legend--item.two-colors-first:before { /* También sirve para hombres */
+    background-color: #FFB612;
 }
 
-.chart__legend--item.color-three:before {
-    background-color: #081C29;
+.chart__legend--item.two-colors-second:before { /* También sirve para mujeres */
+    background-color: #005578;
 }
 
-.chart__legend--item.color-four:before {
-    background-color: #474b4e;
+.chart__legend--item.three-colors-first:before {
+    background-color: #FFB612;
 }
 
-.chart__legend--item.color-five:before {
-    background-color: #9b9b9b;
+.chart__legend--item.three-colors-second:before {
+    background-color: #005578;
 }
 
-.chart__legend--item.color-men:before {
-    background-color: #081C29;
+.chart__legend--item.three-colors-third:before {
+    background-color: #9B918B;
 }
 
-.chart__legend--item.color-women:before {
-    background-color: #99E6FC;
+.chart__legend--item.more-colors-first:before {
+    background-color: #FFB612;
+}
+
+.chart__legend--item.more-colors-second:before {
+    background-color: #7B96AA;
+}
+
+.chart__legend--item.more-colors-third:before {
+    background-color: #005578;
+}
+
+.chart__legend--item.more-colors-fourth:before {
+    background-color: #9B918B;
+}
+
+.chart__legend--item.more-colors-fifth:before {
+    background-color: #5F5C59;
 }
 
 /* VISUALIZACIÓN */
@@ -273,9 +323,9 @@ input:checked + .slider:before {
 
 /* VISUALIZACIÓN - Texto ejes (tanto X como Y) */
 .tick text {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'GothamNarrow';
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 12px;
     line-height: 10px;
 
@@ -293,7 +343,7 @@ input:checked + .slider:before {
 }
 
 /* NOTA DESTACADA */
-.chart__note {
+/* .chart__note {
     font-family: Helvetica;
     font-style: italic;
     font-weight: normal;
@@ -301,7 +351,7 @@ input:checked + .slider:before {
     line-height: 10px;
 
     margin-top: 12px;
-}
+} */
 
 /* TOOLTIP */
 .chart__tooltip {
@@ -318,7 +368,7 @@ input:checked + .slider:before {
 
 .chart__tooltip--title {
     font-style: normal;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 12px;
     line-height: 1.1;
     color: #000;
@@ -326,7 +376,7 @@ input:checked + .slider:before {
 
 .chart__tooltip--text {
     font-style: normal;
-    font-weight: normal;
+    font-weight: 300;
     font-size: 12px;
     line-height: 1.1;
     color: #000;
