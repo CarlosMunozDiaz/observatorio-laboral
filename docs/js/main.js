@@ -82,7 +82,7 @@ function getFirstChart() {
                 .enter()
                 .append("rect")
                 .attr('class', function(d, i) { return `bar bar-${i}`; })
-                .style('fill', function(d, i) { if(d.Fecha == 2020) { return '#7B96AA'} else {return one_color;}})
+                .style('fill', function(d, i) { if(d.Fecha == 2020) { return '#005578'} else {return one_color;}})
                 .attr('x', function(d) { return x(d.Fecha) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
