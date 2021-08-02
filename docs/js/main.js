@@ -3734,7 +3734,6 @@ function getEighteenthChart() {
             //Tras ello, damos nuevos estilos al país seleccionado >> Si es null, sólo mostramos 'Promedio'
             if(industry != 'null') {
                 let line = chartBlock.select(`.line-${industry}`);
-                console.log(line);
                 let circles = chartBlock.selectAll(`.circle-${industry}`);
 
                 line.style('stroke-width','1.5px');
@@ -3747,7 +3746,7 @@ function getEighteenthChart() {
         document.getElementById('empleoEighteen').addEventListener('change', function(e) {
             let auxIndustry = currentIndustry;
             currentIndustry = e.target.value;
-            console.log(currentIndustry, auxIndustry);
+            
             updateChart(auxIndustry, currentIndustry);            
         });
 
