@@ -66,8 +66,8 @@ function getFirstChart() {
                             return 'line-special';
                         }
                     })
-                    .attr("x1", `${x.bandwidth() / 2}`)
-                    .attr("x2", `${width - x.bandwidth() / 2}`)
+                    .attr("x1", `0%`)
+                    .attr("x2", `${width - x.bandwidth() / 6}`)
             })
             svg.call(function(g){g.select('.domain').remove()})
         }        
@@ -82,8 +82,8 @@ function getFirstChart() {
                 .enter()
                 .append("rect")
                 .attr('class', function(d, i) { return `bar bar-${i}`; })
-                .style('fill', one_color)
-                .attr('x', function(d) { return x(d.Fecha) + x.bandwidth() / 2; })
+                .style('fill', function(d, i) { if(d.Fecha == 2020) { return '#7B96AA'} else {return one_color;}})
+                .attr('x', function(d) { return x(d.Fecha) + x.bandwidth() / 4; })
                 .attr('width', x.bandwidth() / 2)
                 .attr("y", function(d) { return y(0); })
                 .on('mouseover mouseenter mousedown mousemove', function(d, i, e) {
@@ -3201,7 +3201,7 @@ function getSeventeenthChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 10, bottom: 25, left: 30};
+        let margin = {top: 5, right: 10, bottom: 25, left: 37.5};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -3233,7 +3233,7 @@ function getSeventeenthChart() {
             .nice();
     
         let yAxis = function(svg){
-            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d.toString().replace(/\./g, ','); }))
+            svg.call(d3.axisLeft(y).tickFormat(function(d) { return d.toString().replace(/\./g, ',') + '%'; }))
             svg.call(function(g){
                 g.selectAll('.tick line')
                     .attr('class', function(d,i) {
@@ -3495,7 +3495,7 @@ function getEighteenthChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 10, bottom: 25, left: 20};
+        let margin = {top: 5, right: 10, bottom: 25, left: 25};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
@@ -3527,7 +3527,7 @@ function getEighteenthChart() {
             .nice();
     
         let yAxis = function(svg){
-            svg.call(d3.axisLeft(y).ticks(4).tickFormat(function(d) { return d.toString().replace(/\./g, ','); }))
+            svg.call(d3.axisLeft(y).ticks(4).tickFormat(function(d) { return d.toString().replace(/\./g, ',') + '%'; }))
             svg.call(function(g){
                 g.selectAll('.tick line')
                     .attr('class', function(d,i) {
