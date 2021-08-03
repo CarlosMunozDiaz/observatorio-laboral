@@ -875,8 +875,8 @@ function getFifthBisChart() {
     d3.csv(file, function(d) {
         return {
             pais: d.Pais,
-            dato_diferencia: +d.Diferencia.replace(/,/g, '.') * 100,
-            dato_perdidaEmpleo: +d.Empleo_total.replace(/,/g, '.') * 100
+            dato_diferencia: +d.Diferencia.replace(/,/g, '.').replace('%',''),
+            dato_perdidaEmpleo: +d.Empleo_total.replace(/,/g, '.').replace('%','')
         }
     }, function(error,data) {
         if (error) throw error;
@@ -887,7 +887,7 @@ function getFifthBisChart() {
 
         //Eje X
         let x = d3.scaleLinear()
-            .domain([-8, 4])
+            .domain([-10, 4])
             .range([0,width])
             .nice();
 
@@ -1178,6 +1178,8 @@ function getSeventhChart() {
     let chartBlock = d3.select('#chart-seven');
     let switchState = false;
 
+    setOpacitySwitch('chart-seven-switch', switchState);
+
     //Lectura de datos
     let file = './data/chart-seven.csv';
     d3.csv(file, function(d) {
@@ -1351,8 +1353,22 @@ function getSeventhChart() {
                 switchState = false;
                 updateChart('Hombres');
             }
+
+            setOpacitySwitch(e.target.parentElement.id, switchState);
         });        
     });
+}
+
+function setOpacitySwitch(id, state) {
+    let elem = document.getElementById(id);
+
+    if (state == true) {
+        elem.previousElementSibling.style.opacity = 0.25;
+        elem.nextElementSibling.style.opacity = 1;
+    } else {
+        elem.nextElementSibling.style.opacity = 0.25;
+        elem.previousElementSibling.style.opacity = 1;
+    }
 }
 
 function getEigthChart() {
@@ -1535,6 +1551,7 @@ function getNinethChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-nine');
     let switchState = false;
+    setOpacitySwitch('chart-nine-switch', switchState);
 
     //Lectura de datos
     let file = './data/chart-nine.csv';
@@ -1707,6 +1724,8 @@ function getNinethChart() {
                 switchState = false;
                 updateChart('Hombres');
             }
+
+            setOpacitySwitch(e.target.parentElement.id, switchState);
         });        
     });
 }
@@ -1874,6 +1893,7 @@ function getEleventhChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-eleven');
     let switchState = false;
+    setOpacitySwitch('chart-eleven-switch', switchState);
 
     //Lectura de datos
     let file = './data/chart-eleven.csv';
@@ -2046,6 +2066,8 @@ function getEleventhChart() {
                 switchState = false;
                 updateChart('Hombres');
             }
+
+            setOpacitySwitch(e.target.parentElement.id, switchState);
         });        
     });
 }
@@ -2207,6 +2229,7 @@ function getThirteenthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-thirteen');
     let switchState = false;
+    setOpacitySwitch('chart-thirteen-switch', switchState);
 
     //Lectura de datos
     let file = './data/chart-thirteen.csv';
@@ -2379,6 +2402,8 @@ function getThirteenthChart() {
                 switchState = false;
                 updateChart('Hombres');
             }
+
+            setOpacitySwitch(e.target.parentElement.id, switchState);
         });        
     });
 }

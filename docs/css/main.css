@@ -204,13 +204,13 @@ body {
     width: 36px;
     left: 0px;
     bottom: 0px;
-    background-color: #FFB612;
+    background-color: #000;
     -webkit-transition: .4s;
     transition: .4s;
 }
 
 input:checked + .slider:before {
-    background-color: #005578;
+    background-color: #000;
 }
 
 input:checked + .slider:before {
