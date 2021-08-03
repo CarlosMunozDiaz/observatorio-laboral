@@ -1359,18 +1359,6 @@ function getSeventhChart() {
     });
 }
 
-function setOpacitySwitch(id, state) {
-    let elem = document.getElementById(id);
-
-    if (state == true) {
-        elem.previousElementSibling.style.opacity = 0.25;
-        elem.nextElementSibling.style.opacity = 1;
-    } else {
-        elem.nextElementSibling.style.opacity = 0.25;
-        elem.previousElementSibling.style.opacity = 1;
-    }
-}
-
 function getEigthChart() {
     //Bloque de la visualización
     let chartBlock = d3.select('#chart-eight');
@@ -3344,7 +3332,7 @@ function getSeventeenthChart() {
             
                             //Texto
                             let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                                <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css])}</p>`;
+                                <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css])}%</p>`;
             
                             tooltip.html(html);
             
@@ -3412,7 +3400,7 @@ function getSeventeenthChart() {
         
                         //Texto
                         let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                                    <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css])}</p>`;
+                                    <p class="chart__tooltip--text">${css}: ${numberWithCommas(d[css])}%</p>`;
         
                         tooltip.html(html);
         
@@ -3637,7 +3625,7 @@ function getEighteenthChart() {
             
                             //Texto
                             let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                                <p class="chart__tooltip--text">${css.replace(/\_/g, ' ')}: ${numberWithCommas(d[css])}</p>`;
+                                <p class="chart__tooltip--text">${css.replace(/\_/g, ' ')}: ${numberWithCommas(d[css])}%</p>`;
             
                             tooltip.html(html);
             
@@ -3705,7 +3693,7 @@ function getEighteenthChart() {
         
                         //Texto
                         let html = `<p class="chart__tooltip--title">${d.Fecha}</p>
-                                    <p class="chart__tooltip--text">${css.replace(/\_/g, ' ')}: ${numberWithCommas(d[css])}</p>`;
+                                    <p class="chart__tooltip--text">${css.replace(/\_/g, ' ')}: ${numberWithCommas(d[css])}%</p>`;
         
                         tooltip.html(html);
         
@@ -4108,4 +4096,16 @@ function setMultipleLines(chartBlock, chart, data, dataType, lines, x, y, toolti
 function numberWithCommas(x) {
     //return x.toString().replace(/\./g, ',').replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
     return x.toString().replace(/\./g, ',');
+}
+
+function setOpacitySwitch(id, state) {
+    let elem = document.getElementById(id);
+    
+    if (state == true) {
+        elem.previousElementSibling.style.opacity = 0.25;
+        elem.nextElementSibling.style.opacity = 1;
+    } else {
+        elem.nextElementSibling.style.opacity = 0.25;
+        elem.previousElementSibling.style.opacity = 1;
+    }
 }
