@@ -11,8 +11,9 @@ function getFirstChart() {
     let chartBlock = d3.select('#chart-one');
     
     //Lectura de datos
-    let file = './data/chart-one.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=0&single=true&output=csv';
+    let localFile = './data/chart-one.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Year,
             'América Latina y Caribe': +d['LAC'].replace(/,/g, '.')
@@ -145,8 +146,9 @@ function getFirstBisChart() {
     let chartBlock = d3.select('#chart-one_bis');
 
     //Lectura de datos
-    let file = './data/chart-one.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=0&single=true&output=csv';
+    let localFile = './data/chart-one.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Year,
             'Economías Avanzadas': +d['Advanced Economies'].replace(/,/g, '.'),
@@ -235,8 +237,9 @@ function getSecondChart() {
     let chartBlock = d3.select('#chart-two');
 
     //Lectura de datos
-    let file = './data/chart-two.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=2040803656&single=true&output=csv';
+    let localFile = './data/chart-two.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha,
             Fecha_eje: d.Fecha_eje,
@@ -320,8 +323,9 @@ function getSecondBisChart() {
     let chartBlock = d3.select('#chart-two_bis');
 
     //Lectura de datos
-    let file = './data/chart-two_bis.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1096046951&single=true&output=csv';
+    let localFile = './data/chart-two_bis.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha,
             Fecha_eje: d.Fecha_eje,
@@ -403,8 +407,9 @@ function getThirdChart() {
     let chartBlock = d3.select('#chart-three');
 
     //Lectura de datos
-    let file = './data/chart-three.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=315606787&single=true&output=csv';
+    let localFile = './data/chart-three.csv';
+    d3.csv(driveFile, function(d) {
         return {
             pais: d.Pais,
             Empleo_total: +d.Empleo_Total.replace(/,/g, '.').replace('%',''),
@@ -546,8 +551,9 @@ function getFourthChart() {
     let chartBlock = d3.select('#chart-four');
 
     //Lectura de datos
-    let file = './data/chart-four.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=362208743&single=true&output=csv';
+    let localFile = './data/chart-four.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha,
             Fecha_eje: d.Fecha_eje,
@@ -629,8 +635,9 @@ function getFourthBisChart() {
     let chartBlock = d3.select('#chart-four_bis');
 
     //Lectura de datos
-    let file = './data/chart-four_bis.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=223597430&single=true&output=csv';
+    let localFile = './data/chart-four_bis.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha,
             Fecha_eje: d.Fecha_eje,
@@ -712,8 +719,9 @@ function getFifthChart() {
     let chartBlock = d3.select('#chart-five');
 
     //Lectura de datos
-    let file = './data/chart-five.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=281483609&single=true&output=csv';
+    let localFile = './data/chart-five.csv';
+    d3.csv(driveFile, function(d) {
         return {
             pais: d.Pais,
             porc_hombres: +d['Perdida_Hombres'].replace(/,/g, '.') * 100,
@@ -871,8 +879,9 @@ function getFifthBisChart() {
     let chartBlock = d3.select('#chart-five_bis');
 
     //Lectura de datos
-    let file = './data/chart-five_bis.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=249388345&single=true&output=csv';
+    let localFile = './data/chart-five_bis.csv';
+    d3.csv(driveFile, function(d) {
         return {
             pais: d.Pais,
             dato_diferencia: +d.Diferencia.replace(/,/g, '.').replace('%',''),
@@ -1002,8 +1011,9 @@ function getSixthChart() {
     let chartBlock = d3.select('#chart-six');
 
     //Lectura de datos
-    let file = './data/chart-six.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1952395396&single=true&output=csv';
+    let localFile = './data/chart-six.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Edad: d['Edad'],
             Edad_eje: d['Edad_eje'],
@@ -1181,8 +1191,9 @@ function getSeventhChart() {
     setOpacitySwitch('chart-seven-switch', switchState);
 
     //Lectura de datos
-    let file = './data/chart-seven.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=217189789&single=true&output=csv';
+    let localFile = './data/chart-seven.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Pais: d.Pais_eje,
             Edad: d.Edad,
@@ -1364,8 +1375,9 @@ function getEigthChart() {
     let chartBlock = d3.select('#chart-eight');
 
     //Lectura de datos
-    let file = './data/chart-eight.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1977311255&single=true&output=csv';
+    let localFile = './data/chart-eight.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Escolaridad: d['Escolaridad'],
             Escolaridad_eje: d['Escolaridad_eje'],
@@ -1542,8 +1554,9 @@ function getNinethChart() {
     setOpacitySwitch('chart-nine-switch', switchState);
 
     //Lectura de datos
-    let file = './data/chart-nine.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=2108948829&single=true&output=csv';
+    let localFile = './data/chart-nine.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Pais: d.Pais_eje,
             Escolaridad: d.Escolaridad,
@@ -1723,8 +1736,9 @@ function getTenthChart() {
     let chartBlock = d3.select('#chart-ten');
 
     //Lectura de datos
-    let file = './data/chart-ten.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1760382618&single=true&output=csv';
+    let localFile = './data/chart-ten.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Escolaridad: d['Escolaridad'],
             Escolaridad_eje: d['Escolaridad_eje'],
@@ -1884,8 +1898,9 @@ function getEleventhChart() {
     setOpacitySwitch('chart-eleven-switch', switchState);
 
     //Lectura de datos
-    let file = './data/chart-eleven.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=28986039&single=true&output=csv';
+    let localFile = './data/chart-eleven.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Pais: d.Pais_eje,
             Escolaridad: d.Escolaridad,
@@ -2065,8 +2080,9 @@ function getTwelvethChart() {
     let chartBlock = d3.select('#chart-twelve');
 
     //Lectura de datos
-    let file = './data/chart-twelve.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=778438931&single=true&output=csv';
+    let localFile = './data/chart-twelve.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Escolaridad: d['Escolaridad'],
             Escolaridad_eje: d['Escolaridad_eje'],
@@ -2220,8 +2236,9 @@ function getThirteenthChart() {
     setOpacitySwitch('chart-thirteen-switch', switchState);
 
     //Lectura de datos
-    let file = './data/chart-thirteen.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=358068232&single=true&output=csv';
+    let localFile = './data/chart-thirteen.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Pais: d.Pais_eje,
             Escolaridad: d.Escolaridad,
@@ -2401,8 +2418,9 @@ function getFourteen_1aChart() {
     let chartBlock = d3.select('#chart-fourteen_1a');
 
     //Lectura de datos
-    let file = './data/chart-fourteen_1a.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=385461408&single=true&output=csv';
+    let localFile = './data/chart-fourteen_1a.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
@@ -2486,8 +2504,9 @@ function getFourteen_1bChart() {
     let chartBlock = d3.select('#chart-fourteen_1b');
 
     //Lectura de datos
-    let file = './data/chart-fourteen_1b.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=227790346&single=true&output=csv';
+    let localFile = './data/chart-fourteen_1b.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
@@ -2569,8 +2588,9 @@ function getFourteen_2aChart() {
     let chartBlock = d3.select('#chart-fourteen_2a');
 
     //Lectura de datos
-    let file = './data/chart-fourteen_2a.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1620342191&single=true&output=csv';
+    let localFile = './data/chart-fourteen_2a.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
@@ -2656,8 +2676,9 @@ function getFourteen_2bChart() {
     let chartBlock = d3.select('#chart-fourteen_2b');
 
     //Lectura de datos
-    let file = './data/chart-fourteen_2b.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1012754388&single=true&output=csv';
+    let localFile = './data/chart-fourteen_2b.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
@@ -2739,8 +2760,9 @@ function getFourteen_3aChart() {
     let chartBlock = d3.select('#chart-fourteen_3a');
 
     //Lectura de datos
-    let file = './data/chart-fourteen_3a.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1629857581&single=true&output=csv';
+    let localFile = './data/chart-fourteen_3a.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
@@ -2828,8 +2850,9 @@ function getFourteen_3bChart() {
     let chartBlock = d3.select('#chart-fourteen_3b');
 
     //Lectura de datos
-    let file = './data/chart-fourteen_3b.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1570393047&single=true&output=csv';
+    let localFile = './data/chart-fourteen_3b.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha_eje,
             Fecha_eje: d.Fecha_eje,
@@ -2911,8 +2934,9 @@ function getFifteenChart() {
     let chartBlock = d3.select('#chart-fifteen');
 
     //Lectura de datos
-    let file = './data/chart-fifteen.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=878098539&single=true&output=csv';
+    let localFile = './data/chart-fifteen.csv';
+    d3.csv(driveFile, function(d) {
         return {
             tipo: d.tipo,
             tipo_eje: d.tipo_eje,
@@ -3055,8 +3079,9 @@ function getSixteenthChart() {
     let chartBlock = d3.select('#chart-sixteen');
 
     //Lectura de datos
-    let file = './data/chart-sixteen.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=209421241&single=true&output=csv';
+    let localFile = './data/chart-sixteen.csv';
+    d3.csv(driveFile, function(d) {
         return {
             pais: d.Pais,
             Vacantes: +d['Cambio en Vacantes'].replace(/,/g, '.').replace('%',''),
@@ -3198,8 +3223,9 @@ function getSeventeenthChart() {
     let chartBlock = d3.select('#chart-seventeen');
 
     //Lectura de datos
-    let file = './data/chart-seventeen.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=1149410722&single=true&output=csv';
+    let localFile = './data/chart-seventeen.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha,
             Promedio: +d['Promedio'].replace(/,/g, '.'),            
@@ -3476,8 +3502,9 @@ function getEighteenthChart() {
     let chartBlock = d3.select('#chart-eighteen');
 
     //Lectura de datos
-    let file = './data/chart-eighteen.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=845969318&single=true&output=csv';
+    let localFile = './data/chart-eighteen.csv';
+    d3.csv(driveFile, function(d) {
         return {
             Fecha: d.Fecha,
             Promedio: +d['Promedio'].replace(/,/g, '.'),            
@@ -3772,8 +3799,9 @@ function get4_6Chart() {
     let chartBlock = d3.select('#chart-4_6');
 
     //Lectura de datos
-    let file = './data/chart-4_6.csv';
-    d3.csv(file, function(d) {
+    let driveFile = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwwEw1toOPxVQ_DRPCMC5Xd_eW_kmhGQrtm9pJ5P2Ja8auGT-ITZ1772aiNHAZKI-0P0Nq8GopCyOV/pub?gid=542509294&single=true&output=csv';
+    let localFile = './data/chart-4_6.csv';
+    d3.csv(driveFile, function(d) {
         return {
             pais: d.Pais,
             Horas_trabajadas: +d['Cambio en horas trabajadas'].replace(/,/g, '.').replace('%',''),
