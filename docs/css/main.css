@@ -319,7 +319,7 @@ input:checked + .slider:before {
     width: 100%;
     max-width: 648px;
     height: 390px;
-    margin: 12px auto 0px auto;
+    margin: 12px auto 8px auto;
 }
 
 /* VISUALIZACIÓN - Texto ejes (tanto X como Y) */
@@ -377,8 +377,7 @@ input:checked + .slider:before {
 
 .data-source {
     font-size: 12px;
-    font-weight: 400;
-    line-height: 10px;
+    font-weight: 300;
 }
 
 .data-source .strong {
