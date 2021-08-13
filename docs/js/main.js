@@ -970,7 +970,7 @@ function getFifthBisChart() {
                 .on('mouseenter mousedown mousemove mouseover', function(d, i, e) {
                     //Texto
                     let html = `<p class="chart__tooltip--title">${d.pais}</p>
-                                <p class="chart__tooltip--text">Pérdida de empleo: ${numberWithCommas(d.dato_perdidaEmpleo.toFixed(2))}%</p>
+                                <p class="chart__tooltip--text">Cambio en el empleo: ${numberWithCommas(d.dato_perdidaEmpleo.toFixed(2))}%</p>
                                 <p class="chart__tooltip--text">Diferencia entre hombres y mujeres: ${numberWithCommas(d.dato_diferencia.toFixed(2))}%</p>`; //Solucionar recogida de información
 
                     tooltip.html(html);
