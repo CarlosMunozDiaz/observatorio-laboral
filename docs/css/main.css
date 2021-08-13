@@ -68,6 +68,8 @@ body {
     line-height: 20px;
     letter-spacing: 0em;
     color: #000;
+
+    width: 40%;
 }
 
 /* SUBTÍTULO */
@@ -81,8 +83,6 @@ body {
     
     margin-top: 4px;
 }
-
-.chart__sb-title { width: 40%; }
 
 /* BLOQUE - SELECTOR */
 .chart__b-select {text-align: end; margin-top: 8px;}
@@ -226,10 +226,6 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-
-/**** BLOQUE TÍTULO + ELEMENTO SUPERIOR */
-.chart__b-title--together { display: flex; justify-content: space-between; align-items: flex-end;}
-.chart__b-title--together .chart__b-select, .chart__b-title--together .chart__b-switch {margin-top: 0px;}
 
 /* LEYENDA */
 .chart__legend {
