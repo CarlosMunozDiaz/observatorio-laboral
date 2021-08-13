@@ -47,7 +47,7 @@ body {
 /* BLOQUE EXTERIOR DEL GRÁFICO */
 .outer-chart {
     width: 100%;
-    max-width: 768px;
+    max-width: 648px;
     height: auto;
     margin: 24px auto;
 }
@@ -55,7 +55,6 @@ body {
 /* BLOQUE INTERIOR DEL GRÁFICO */
 .chart {
     width: 100%;
-    max-width: 648px;
     height: auto;
     margin: 0 auto;
 }

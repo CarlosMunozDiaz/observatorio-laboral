@@ -10,19 +10,18 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <div class="outer-chart">
+    <div class="outer-chart">        
+        <h1 class="chart__title">Caída del PIB comparado con otras recesiones (1980-2021)</h1>
+        <h2 class="chart__subtitle">Datos en porcentajes</h2>
         <div class="chart">
-            <h1 class="chart__title">Caída del PIB comparado con otras recesiones (1980-2021)</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>
-            <div class="chart__viz" id="chart-one">
-            </div>            
-            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia con datos del informe <a href="https://www.imf.org/external/datamapper/NGDP_RPCH@WEO/OEMDC/ADVEC/WEOWORLD" target="_blank">Perspectivas de la Economía Mundial</a> (Fondo Monetario Internacional, 2021)</p>
-        </div>
+            <div class="chart__viz" id="chart-one"></div>
+        </div>           
+        <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia con datos del informe <a href="https://www.imf.org/external/datamapper/NGDP_RPCH@WEO/OEMDC/ADVEC/WEOWORLD" target="_blank">Perspectivas de la Economía Mundial</a> (Fondo Monetario Internacional, 2021)</p>
     </div>
-    <div class="outer-chart">
+    <div class="outer-chart">        
+        <h1 class="chart__title">Caída del PIB comparado con otras recesiones (1980-2021)</h1>
+        <h2 class="chart__subtitle">Datos en porcentajes</h2>
         <div class="chart">
-            <h1 class="chart__title">Caída del PIB comparado con otras recesiones (1980-2021)</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>
             <div class="chart__legend">
                 <span class="chart__legend--item three-colors-first">Economías avanzadas</span>
                 <span class="chart__legend--item three-colors-second">América Latina y Caribe</span>
@@ -30,289 +29,295 @@
             </div>
             <div class="chart__viz" id="chart-one_bis">
             </div>
-            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia con datos del informe <a href="https://www.imf.org/external/datamapper/NGDP_RPCH@WEO/OEMDC/ADVEC/WEOWORLD" target="_blank">Perspectivas de la Economía Mundial</a> (Fondo Monetario Internacional, 2021)</p>        
-        </div>
+        </div>            
+        <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia con datos del informe <a href="https://www.imf.org/external/datamapper/NGDP_RPCH@WEO/OEMDC/ADVEC/WEOWORLD" target="_blank">Perspectivas de la Economía Mundial</a> (Fondo Monetario Internacional, 2021)</p>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">Pérdida de empleo total, formal e informal</h1>
             <h2 class="chart__subtitle">Datos en porcentajes</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item three-colors-first">Total</span>
-                <span class="chart__legend--item three-colors-second">Formal</span>
-                <span class="chart__legend--item three-colors-third">Informal</span>
-            </div>
-            <div class="chart__viz" id="chart-two">
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item three-colors-first">Total</span>
+                    <span class="chart__legend--item three-colors-second">Formal</span>
+                    <span class="chart__legend--item three-colors-third">Informal</span>
+                </div>
+                <div class="chart__viz" id="chart-two">
+                </div>            
             </div>
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares y registros administrativos publicada en el Observatorio Laboral COVID-19</p>
-        </div>
     </div>
     <div class="outer-chart">
-        <div class="chart">
             <h1 class="chart__title">Pérdida de empleo total, formal e informal</h1>
             <h2 class="chart__subtitle">Datos absolutos</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Formal</span>
-                <span class="chart__legend--item two-colors-second">Informal</span>
-            </div>
-            <div class="chart__viz" id="chart-two_bis">
-            </div>
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Formal</span>
+                    <span class="chart__legend--item two-colors-second">Informal</span>
+                </div>
+                <div class="chart__viz" id="chart-two_bis">
+                </div>
+            </div>            
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares y registros administrativos publicada en el Observatorio Laboral COVID-19</p>
-        </div>
     </div>
     <div class="outer-chart">
-        <div class="chart">
+        
             <h1 class="chart__title">Pérdida de empleo por países</h1>
             <h2 class="chart__subtitle">Cambio porcentual entre febrero de 2020 y marzo de 2021</h2>
-            <div class="chart__b-select">
-                <select class="chart__select" id="empleoThree">
-                    <option class="chart__select--item" value="Empleo_total">Empleo total</option>
-                    <option class="chart__select--item" value="Empleo_formal">Empleo formal</option>
-                    <option class="chart__select--item" value="Empleo_informal">Empleo informal</option>
-                </select>
-            </div>
-            <div class="chart__viz" id="chart-three">
+            <div class="chart">
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleoThree">
+                        <option class="chart__select--item" value="Empleo_total">Empleo total</option>
+                        <option class="chart__select--item" value="Empleo_formal">Empleo formal</option>
+                        <option class="chart__select--item" value="Empleo_informal">Empleo informal</option>
+                    </select>
+                </div>
+                <div class="chart__viz" id="chart-three"></div>
             </div>
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares y registros administrativos publicada en el Observatorio Laboral COVID-19</p>
-        </div>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">Ajustes en horas y salarios por país (Comparativa entre 2019 y 2020)</h1>
-            <h2 class="chart__subtitle">Datos porcentuales</h2>                
-            <div class="chart__b-select">
-                <select class="chart__select" id="empleo4_6">
-                    <option class="chart__select--item" value="Horas_trabajadas">En horas trabajadas</option>
-                    <option class="chart__select--item" value="Salarios">En salarios</option>
-                </select>
-            </div>            
-            <div class="chart__viz" id="chart-4_6">
+            <h2 class="chart__subtitle">Datos porcentuales</h2>
+            <div class="chart">
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleo4_6">
+                        <option class="chart__select--item" value="Horas_trabajadas">En horas trabajadas</option>
+                        <option class="chart__select--item" value="Salarios">En salarios</option>
+                    </select>
+                </div>            
+                <div class="chart__viz" id="chart-4_6">
+                </div>
             </div>
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
-        </div>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">Pérdidas de empleo por género (desde febrero de 2020 a marzo de 2021)</h1>
             <h2 class="chart__subtitle">Datos en porcentajes</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-four">
-            </div>
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
+                </div>
+                <div class="chart__viz" id="chart-four">
+                </div>
+            </div>            
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares y registros administrativos publicada en el Observatorio Laboral COVID-19</p>
-        </div>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">Pérdidas de empleo por género (desde febrero de 2020 a marzo de 2021)</h1>
             <h2 class="chart__subtitle">Datos absolutos</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-four_bis">
-            </div>
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
+                </div>
+                <div class="chart__viz" id="chart-four_bis">
+                </div>
+            </div>            
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares y registros administrativos publicada en el Observatorio Laboral COVID-19</p>
-        </div>
     </div>
     <div class="outer-chart">
-        <div class="chart">
+        
             <h1 class="chart__title">Pérdidas de empleo por género para cada país (desde febrero de 2020 a marzo de 2021</h1>
             <h2 class="chart__subtitle">Datos en porcentajes</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-five">
-            </div>
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
+                </div>
+                <div class="chart__viz" id="chart-five">
+                </div>
+            </div>            
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares y registros administrativos publicada en el Observatorio Laboral COVID-19</p>
-        </div>
+        
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">Cambio en el empleo por diferencia entre hombres y mujeres (desde febrero de 2020 a marzo de 2021)</h1>
             <h2 class="chart__subtitle">Datos en porcentajes</h2>
-            <div class="chart__viz" id="chart-five_bis">
-            </div>
+            <div class="chart">
+                <div class="chart__viz" id="chart-five_bis">
+                </div>
+            </div>            
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares y registros administrativos publicada en el Observatorio Laboral COVID-19</p>
         </div>
     </div>
     <div class="outer-chart">
-        <div class="chart">
+        
             <h1 class="chart__title">Pérdidas de empleo por formalidad, grupo de edad y género (entre 2019 y 2020)</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>               
-            <div class="chart__b-select">
-                <select class="chart__select" id="empleoSix">
-                    <option class="chart__select--item" value="0">Empleo total</option>
-                    <option class="chart__select--item" value="1">Empleo formal</option>
-                    <option class="chart__select--item" value="2">Empleo informal</option>
-                </select>
-            </div>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-six">
-            </div>
+            <h2 class="chart__subtitle">Datos en porcentajes</h2>  
+            <div class="chart">
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleoSix">
+                        <option class="chart__select--item" value="0">Empleo total</option>
+                        <option class="chart__select--item" value="1">Empleo formal</option>
+                        <option class="chart__select--item" value="2">Empleo informal</option>
+                    </select>
+                </div>
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
+                </div>
+                <div class="chart__viz" id="chart-six">
+                </div>
+            </div>             
+            
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de Argentina, Brasil, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
-        </div>
+        
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">(X) Pérdida de empleo por grupo de edad, género y país</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>                
-            <div class="chart__b-switch">
-                <div class="chart__switch">
-                    <img src="./img/hombre_36.svg" width="17" height="36" alt="Icono hombre">
-                    <label class="switch" id="chart-seven-switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                    <img src="./img/mujer_36_b.svg" width="18" height="36" alt="Icono mujer">
+            <h2 class="chart__subtitle">Datos en porcentajes</h2>
+            <div class="chart">
+                <div class="chart__b-switch">
+                    <div class="chart__switch">
+                        <img src="./img/hombre_36.svg" width="17" height="36" alt="Icono hombre">
+                        <label class="switch" id="chart-seven-switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <img src="./img/mujer_36_b.svg" width="18" height="36" alt="Icono mujer">
+                    </div>
+                </div>            
+                <div class="chart__legend">
+                    <span class="chart__legend--item more-colors-first">Entre 14 y 24 años</span>
+                    <span class="chart__legend--item more-colors-second">Entre 25 y 34</span>
+                    <span class="chart__legend--item more-colors-third">Entre 35 y 55</span>
+                    <span class="chart__legend--item more-colors-fourth">Entre 56 y 70</span>
                 </div>
-            </div>            
-            <div class="chart__legend">
-                <span class="chart__legend--item more-colors-first">Entre 14 y 24 años</span>
-                <span class="chart__legend--item more-colors-second">Entre 25 y 34</span>
-                <span class="chart__legend--item more-colors-third">Entre 35 y 55</span>
-                <span class="chart__legend--item more-colors-fourth">Entre 56 y 70</span>
+                <div class="chart__viz" id="chart-seven">
+                </div>
             </div>
-            <div class="chart__viz" id="chart-seven">
-            </div>
-        </div>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">(X) Pérdida de empleo por grupo de edad y años de escolaridad</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>                
-            <div class="chart__b-select">
-                <select class="chart__select" id="empleoEight">
-                    <option class="chart__select--item" value="0">Empleo total</option>
-                    <option class="chart__select--item" value="1">Empleo formal</option>
-                    <option class="chart__select--item" value="2">Empleo informal</option>
-                </select>
-            </div>            
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-eight">
-            </div>
-        </div>
-    </div>
-    <div class="outer-chart">
-        <div class="chart">
-            <h1 class="chart__title">Pérdidas de empleo por años de escolaridad, género y país (entre 2019 y 2020)</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>                
-            <div class="chart__b-switch">
-                <div class="chart__switch">
-                    <img src="./img/hombre_36.svg" width="17" height="36" alt="Icono hombre">
-                    <label class="switch" id="chart-nine-switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                    <img src="./img/mujer_36_b.svg" width="18" height="36" alt="Icono mujer">
+            <h2 class="chart__subtitle">Datos en porcentajes</h2>
+            <div class="chart">
+                <div class="chart__b-select">
+                    <select class="chart__select" id="empleoEight">
+                        <option class="chart__select--item" value="0">Empleo total</option>
+                        <option class="chart__select--item" value="1">Empleo formal</option>
+                        <option class="chart__select--item" value="2">Empleo informal</option>
+                    </select>
+                </div>            
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
                 </div>
-            </div>            
-            <div class="chart__legend">
-                <span class="chart__legend--item three-colors-first">Entre 0 y 8 años</span>
-                <span class="chart__legend--item three-colors-second">Entre 9 y 13</span>
-                <span class="chart__legend--item three-colors-third">14 años o más</span>
+                <div class="chart__viz" id="chart-eight">
+                </div>
             </div>
-            <div class="chart__viz" id="chart-nine">
-            </div>
-            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
-        </div>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
+            <h1 class="chart__title">Pérdidas de empleo por años de escolaridad, género y país (entre 2019 y 2020)</h1>
+            <h2 class="chart__subtitle">Datos en porcentajes</h2>
+            <div class="chart">
+                <div class="chart__b-switch">
+                    <div class="chart__switch">
+                        <img src="./img/hombre_36.svg" width="17" height="36" alt="Icono hombre">
+                        <label class="switch" id="chart-nine-switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <img src="./img/mujer_36_b.svg" width="18" height="36" alt="Icono mujer">
+                    </div>
+                </div>            
+                <div class="chart__legend">
+                    <span class="chart__legend--item three-colors-first">Entre 0 y 8 años</span>
+                    <span class="chart__legend--item three-colors-second">Entre 9 y 13</span>
+                    <span class="chart__legend--item three-colors-third">14 años o más</span>
+                </div>
+                <div class="chart__viz" id="chart-nine">
+                </div>
+            </div>         
+            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
+    </div>
+    <div class="outer-chart">        
             <h1 class="chart__title">Caídas en salarios por género y años de escolaridad (entre 2019 y 2020)</h1>
             <h2 class="chart__subtitle">Datos en porcentajes</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-ten">
-            </div>
-            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
-        </div>
-    </div>
-    <div class="outer-chart">
-        <div class="chart">
-            <h1 class="chart__title">Caídas en salarios por nivel educativo, género y país (entre 2019 y 2020)</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>                
-            <div class="chart__b-switch">
-                <div class="chart__switch">
-                    <img src="./img/hombre_36.svg" width="17" height="36" alt="Icono hombre">
-                    <label class="switch" id="chart-eleven-switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                    <img src="./img/mujer_36_b.svg" width="18" height="36" alt="Icono mujer">
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
                 </div>
-            </div>
-            <div class="chart__legend">
-                <span class="chart__legend--item three-colors-first">Entre 0 y 8 años</span>
-                <span class="chart__legend--item three-colors-second">Entre 9 y 13</span>
-                <span class="chart__legend--item three-colors-third">14 años o más</span>
-            </div>
-            <div class="chart__viz" id="chart-eleven">
-            </div>
-            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
-        </div>
-    </div>
-    <div class="outer-chart">
-        <div class="chart">
-            <h1 class="chart__title">Caídas en horas trabajadas por género y años de escolaridad (entre 2019 y 2020)</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-twelve">
-            </div>
-            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
-        </div>
-    </div>
-    <div class="outer-chart">
-        <div class="chart">
-            <h1 class="chart__title">Caídas en horas trabajadas por años de escolaridad, género y país (entre 2019 y 2020)</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>                
-            <div class="chart__b-switch">
-                <div class="chart__switch">
-                    <img src="./img/hombre_36.svg" width="17" height="36" alt="Icono hombre">
-                    <label class="switch" id="chart-thirteen-switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                    <img src="./img/mujer_36_b.svg" width="18" height="36" alt="Icono mujer">
+                <div class="chart__viz" id="chart-ten">
                 </div>
             </div>            
-            <div class="chart__legend">
-                <span class="chart__legend--item three-colors-first">Entre 0 y 8 años</span>
-                <span class="chart__legend--item three-colors-second">Entre 9 y 13</span>
-                <span class="chart__legend--item three-colors-third">14 años o más</span>
-            </div>
-            <div class="chart__viz" id="chart-thirteen">
+            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
+    </div>
+    <div class="outer-chart">        
+            <h1 class="chart__title">Caídas en salarios por nivel educativo, género y país (entre 2019 y 2020)</h1>
+            <h2 class="chart__subtitle">Datos en porcentajes</h2>
+            <div class="chart">
+                <div class="chart__b-switch">
+                    <div class="chart__switch">
+                        <img src="./img/hombre_36.svg" width="17" height="36" alt="Icono hombre">
+                        <label class="switch" id="chart-eleven-switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <img src="./img/mujer_36_b.svg" width="18" height="36" alt="Icono mujer">
+                    </div>
+                </div>
+                <div class="chart__legend">
+                    <span class="chart__legend--item three-colors-first">Entre 0 y 8 años</span>
+                    <span class="chart__legend--item three-colors-second">Entre 9 y 13</span>
+                    <span class="chart__legend--item three-colors-third">14 años o más</span>
+                </div>
+                <div class="chart__viz" id="chart-eleven">
+                </div>
             </div>
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
-        </div>
     </div>
-    <div class="outer-chart">
+    <div class="outer-chart">        
+            <h1 class="chart__title">Caídas en horas trabajadas por género y años de escolaridad (entre 2019 y 2020)</h1>
+            <h2 class="chart__subtitle">Datos en porcentajes</h2>
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
+                </div>
+                <div class="chart__viz" id="chart-twelve">
+                </div>
+            </div>            
+            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
+    </div>
+    <div class="outer-chart">        
+            <h1 class="chart__title">Caídas en horas trabajadas por años de escolaridad, género y país (entre 2019 y 2020)</h1>
+            <h2 class="chart__subtitle">Datos en porcentajes</h2>    
+            <div class="chart">
+                <div class="chart__b-switch">
+                    <div class="chart__switch">
+                        <img src="./img/hombre_36.svg" width="17" height="36" alt="Icono hombre">
+                        <label class="switch" id="chart-thirteen-switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <img src="./img/mujer_36_b.svg" width="18" height="36" alt="Icono mujer">
+                    </div>
+                </div>            
+                <div class="chart__legend">
+                    <span class="chart__legend--item three-colors-first">Entre 0 y 8 años</span>
+                    <span class="chart__legend--item three-colors-second">Entre 9 y 13</span>
+                    <span class="chart__legend--item three-colors-third">14 años o más</span>
+                </div>
+                <div class="chart__viz" id="chart-thirteen">
+                </div>
+            </div>
+            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares de Argentina, Brasil, Chile, Colombia, Costa Rica, Ecuador, México y Paraguay</p>
+    </div>
+    <div class="outer-chart">        
+        <h1 class="chart__title">Pérdidas de empleo por sector (junio de 2021 en comparación con febrero de 2020)</h1>
+        <h2 class="chart__subtitle">Datos porcentuales</h2>
         <div class="chart">
-            <h1 class="chart__title">Pérdidas de empleo por sector (junio de 2021 en comparación con febrero de 2020)</h1>
-            <h2 class="chart__subtitle">Datos porcentuales</h2>
             <div class="chart__viz" id="chart-fifteen">
             </div>
         </div>
         <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando información de encuestas de hogares publicadas en el Observatorio Laboral COVID-19</p>
     </div>
-    <div class="outer-chart">
+    <div class="outer-chart">        
+        <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
+        <h2 class="chart__subtitle">Chile, por nivel de educación. Datos en porcentajes</h2>
         <div class="chart">
-            <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
-            <h2 class="chart__subtitle">Chile, por nivel de educación. Datos en porcentajes</h2>
             <div class="chart__legend">
                 <span class="chart__legend--item three-colors-first">Menos de 8 años</span>
                 <span class="chart__legend--item three-colors-second">Entre 9 y 12 años</span>
@@ -320,26 +325,26 @@
             </div>
             <div class="chart__viz" id="chart-fourteen_1a">
             </div>
-            <p class="data-source"><span class="strong">Fuente: </span>INE, ENE (Encuesta Nacional de Empleo)</p>
         </div>
+        <p class="data-source"><span class="strong">Fuente: </span>INE, ENE (Encuesta Nacional de Empleo)</p>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
             <h2 class="chart__subtitle">Chile, por género. Datos en porcentajes</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-fourteen_1b">
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
+                </div>
+                <div class="chart__viz" id="chart-fourteen_1b">
+                </div>
             </div>
             <p class="data-source"><span class="strong">Fuente: </span>INE, ENE (Encuesta Nacional de Empleo)</p>
-        </div>
     </div>
-    <div class="outer-chart">
+    <div class="outer-chart">        
+        <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
+        <h2 class="chart__subtitle">Uruguay, por nivel de educación. Datos en porcentajes</h2>
         <div class="chart">
-            <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
-            <h2 class="chart__subtitle">Uruguay, por nivel de educación. Datos en porcentajes</h2>
             <div class="chart__legend">
                 <span class="chart__legend--item more-colors-first">Ciclo básico</span>
                 <span class="chart__legend--item more-colors-second">Segundo ciclo sin terminar</span>
@@ -348,55 +353,55 @@
             </div>
             <div class="chart__viz" id="chart-fourteen_2a">
             </div>
-            <p class="data-source"><span class="strong">Fuente: </span>INE, ECH (Encuesta Continua de Hogares 2020)</p>
-        </div>
+        </div>            
+        <p class="data-source"><span class="strong">Fuente: </span>INE, ECH (Encuesta Continua de Hogares 2020)</p>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
             <h2 class="chart__subtitle">Uruguay, por género. Datos en porcentajes</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Hombres</span>
-                <span class="chart__legend--item two-colors-second">Mujeres</span>
-            </div>
-            <div class="chart__viz" id="chart-fourteen_2b">
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Hombres</span>
+                    <span class="chart__legend--item two-colors-second">Mujeres</span>
+                </div>
+                <div class="chart__viz" id="chart-fourteen_2b">
+                </div>
             </div>
             <p class="data-source"><span class="strong">Fuente: </span>INE, ECH (Encuesta Continua de Hogares 2020)</p>
-        </div>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
+    <div class="outer-chart">        
             <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
             <h2 class="chart__subtitle">México, por nivel de educación. Datos en porcentajes</h2>
-            <div class="chart__legend">
-                <span class="chart__legend--item more-colors-first">Primaria</span>
-                <span class="chart__legend--item more-colors-second">Secundaria</span>
-                <span class="chart__legend--item more-colors-third">Medio superior</span>
-                <span class="chart__legend--item more-colors-fourth">Superior</span>
-                <span class="chart__legend--item more-colors-fifth">No especificado</span>
-            </div>
-            <div class="chart__viz" id="chart-fourteen_3a">
-            </div>
+            <div class="chart">
+                <div class="chart__legend">
+                    <span class="chart__legend--item more-colors-first">Primaria</span>
+                    <span class="chart__legend--item more-colors-second">Secundaria</span>
+                    <span class="chart__legend--item more-colors-third">Medio superior</span>
+                    <span class="chart__legend--item more-colors-fourth">Superior</span>
+                    <span class="chart__legend--item more-colors-fifth">No especificado</span>
+                </div>
+                <div class="chart__viz" id="chart-fourteen_3a">
+                </div>
+            </div>            
             <p class="data-source"><span class="strong">Fuente: </span>INEGI, ECOVID-ML (Encuesta Telefónica sobre COVID-19 y Mercado Laboral)</p>
-        </div>
     </div>
-    <div class="outer-chart">
+    <div class="outer-chart">        
+        <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
+        <h2 class="chart__subtitle">México, por género. Datos en porcentajes</h2>
         <div class="chart">
-            <h1 class="chart__title">Teletrabajo en Chile, México y Uruguay</h1>
-            <h2 class="chart__subtitle">México, por género. Datos en porcentajes</h2>
             <div class="chart__legend">
                 <span class="chart__legend--item two-colors-first">Hombres</span>
                 <span class="chart__legend--item two-colors-second">Mujeres</span>
             </div>
             <div class="chart__viz" id="chart-fourteen_3b">
             </div>
-            <p class="data-source"><span class="strong">Fuente: </span>INEGI, ECOVID-ML (Encuesta Telefónica sobre COVID-19 y Mercado Laboral)</p>
         </div>
+        <p class="data-source"><span class="strong">Fuente: </span>INEGI, ECOVID-ML (Encuesta Telefónica sobre COVID-19 y Mercado Laboral)</p>
     </div>    
-    <div class="outer-chart">
+    <div class="outer-chart">        
+        <h1 class="chart__title">Cambio en el porcentaje de vacantes que demandan educación media y superior (abril de 2021 comparado con febrero de 2020)</h1>
+        <h2 class="chart__subtitle">Datos en porcentajes</h2>
         <div class="chart">
-            <h1 class="chart__title">Cambio en el porcentaje de vacantes que demandan educación media y superior (abril de 2021 comparado con febrero de 2020)</h1>
-            <h2 class="chart__subtitle">Datos en porcentajes</h2>                
             <div class="chart__b-select">
                 <select class="chart__select" id="empleoSixteen">
                     <option class="chart__select--item" value="Vacantes">Número de vacantes</option>
@@ -407,37 +412,36 @@
             </div>
             <div class="chart__viz" id="chart-sixteen">
             </div>
-            <p class="data-source"><span class="strong">Fuente: </span>Observatorio Laboral COVID-19, BID</p>
         </div>
+        <p class="data-source"><span class="strong">Fuente: </span>Observatorio Laboral COVID-19, BID</p>
     </div>
-    <div class="outer-chart">
+    <div class="outer-chart">        
+        <h1 class="chart__title">Evolución de la tasa de contratación en LinkedIn (2020-2021)</h1>
+        <h2 class="chart__subtitle">Datos en porcentajes</h2>
         <div class="chart">
-                <h1 class="chart__title">Evolución de la tasa de contratación en LinkedIn (2020-2021)</h1>
-                <h2 class="chart__subtitle">Datos en porcentajes</h2>
-                <div class="chart__b-select">
-                    <select class="chart__select" id="empleoSeventeen">
-                        <option class="chart__select--item" value="null">Seleccione un país</option>
-                        <option class="chart__select--item" value="Argentina">Argentina</option>
-                        <option class="chart__select--item" value="Brasil">Brasil</option>
-                        <option class="chart__select--item" value="Chile">Chile</option>
-                        <option class="chart__select--item" value="Colombia">Colombia</option>
-                        <option class="chart__select--item" value="México">México</option>
-                        <option class="chart__select--item" value="Perú">Perú</option>
-                    </select>
-                </div>
+            <div class="chart__b-select">
+                <select class="chart__select" id="empleoSeventeen">
+                    <option class="chart__select--item" value="null">Seleccione un país</option>
+                    <option class="chart__select--item" value="Argentina">Argentina</option>
+                    <option class="chart__select--item" value="Brasil">Brasil</option>
+                    <option class="chart__select--item" value="Chile">Chile</option>
+                    <option class="chart__select--item" value="Colombia">Colombia</option>
+                    <option class="chart__select--item" value="México">México</option>
+                    <option class="chart__select--item" value="Perú">Perú</option>
+                </select>
+            </div>
             <div class="chart__legend">
                 <span class="chart__legend--item two-colors-first">Promedio general</span>
                 <span class="chart__legend--item two-colors-second">País seleccionado</span>
             </div>
             <div class="chart__viz" id="chart-seventeen">
             </div>
-            <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando los datos de LinkedIn a través del Data Partnership</p>
-        </div>
+        </div><p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando los datos de LinkedIn a través del Data Partnership</p>
     </div>
-    <div class="outer-chart">
-        <div class="chart">
-                <h1 class="chart__title">Evolución de la tasa de contratación en LinkedIn por industria (2020-2021)</h1>
-                <h2 class="chart__subtitle">Datos en porcentajes</h2>                
+    <div class="outer-chart">        
+            <h1 class="chart__title">Evolución de la tasa de contratación en LinkedIn por industria (2020-2021)</h1>
+            <h2 class="chart__subtitle">Datos en porcentajes</h2>
+            <div class="chart">
                 <div class="chart__b-select">
                     <select class="chart__select" id="empleoEighteen">
                         <option class="chart__select--item" value="null">Seleccione una industria</option>
@@ -465,14 +469,14 @@
                         <option class="chart__select--item" value="Recreación_y_viajes">Recreación y viajes</option>
                     </select>
                 </div>
-            <div class="chart__legend">
-                <span class="chart__legend--item two-colors-first">Promedio general</span>
-                <span class="chart__legend--item two-colors-second">Industria seleccionada</span>
-            </div>
-            <div class="chart__viz" id="chart-eighteen">
+                <div class="chart__legend">
+                    <span class="chart__legend--item two-colors-first">Promedio general</span>
+                    <span class="chart__legend--item two-colors-second">Industria seleccionada</span>
+                </div>
+                <div class="chart__viz" id="chart-eighteen">
+                </div>
             </div>
             <p class="data-source"><span class="strong">Fuente: </span>Elaboración propia usando los datos de LinkedIn a través del Data Partnership</p>
-        </div>
     </div>
     <div class="chart__tooltip" id="chartTooltip">
         <p class="chart__tooltip--title"></p>
