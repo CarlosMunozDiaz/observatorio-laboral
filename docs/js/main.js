@@ -251,14 +251,14 @@ function getSecondChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let margin = {top: 5, right: 20, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha_eje }))
             .range([0, width])
-            .paddingInner(0.9);
+            .paddingInner(0.5);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -336,14 +336,14 @@ function getSecondBisChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha_eje }))
             .range([0, width])
-            .paddingInner(1);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -564,14 +564,14 @@ function getFourthChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha_eje }))
             .range([0, width])
-            .paddingInner(0.9);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -648,14 +648,14 @@ function getFourthBisChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 5, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha_eje }))
             .range([0, width])
-            .paddingInner(1);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -2432,14 +2432,14 @@ function getFourteen_1aChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let margin = {top: 5, right: 15, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(1);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -2517,14 +2517,14 @@ function getFourteen_1bChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(1);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -2603,14 +2603,14 @@ function getFourteen_2aChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(1);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -2689,14 +2689,14 @@ function getFourteen_2bChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(1);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -2776,14 +2776,14 @@ function getFourteen_3aChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(1);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -2863,14 +2863,14 @@ function getFourteen_3bChart() {
         if (error) throw error;
         
         //Creación del elemento SVG en el contenedor
-        let margin = {top: 5, right: 20, bottom: 25, left: 35};
+        let margin = {top: 5, right: 10, bottom: 25, left: 35};
         let {width, height, chart} = setChart(chartBlock, margin);
 
         //Disposición del eje X
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(1);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -3247,7 +3247,7 @@ function getSeventeenthChart() {
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(0.25);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
@@ -3542,7 +3542,7 @@ function getEighteenthChart() {
         let x = d3.scaleBand()
             .domain(data.map(function(d) { return d.Fecha }))
             .range([0, width])
-            .paddingInner(0.25);
+            .paddingInner(0.75);
 
         //Estilos para eje X
         let xAxis = function(g){
