@@ -269,11 +269,11 @@ input:checked + .slider:before {
     background-color: #005578;
 }
 
-.chart__legend--item.two-colors-first:before { /* También sirve para hombres */
+.chart__legend--item.two-colors-first:before {
     background-color: #FFB612;
 }
 
-.chart__legend--item.two-colors-second:before { /* También sirve para mujeres */
+.chart__legend--item.two-colors-second:before {
     background-color: #005578;
 }
 
