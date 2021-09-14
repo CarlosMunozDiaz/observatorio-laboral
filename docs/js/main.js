@@ -1492,14 +1492,14 @@ function getEigthChart() {
         chartBlock.node().classList.add('visible');
         initChart();
 
-        window.addEventListener('scroll', function() {
-            if (!chartBlock.node().classList.contains('visible')){
-                if(isElementInViewport(chartBlock.node())){
-                    chartBlock.node().classList.add('visible');
-                    initChart();
-                }                
-            }
-        });
+        // window.addEventListener('scroll', function() {
+        //     if (!chartBlock.node().classList.contains('visible')){
+        //         if(isElementInViewport(chartBlock.node())){
+        //             chartBlock.node().classList.add('visible');
+        //             initChart();
+        //         }                
+        //     }
+        // });
         
         function initChart() {
             slice.selectAll("rect")
@@ -4020,18 +4020,18 @@ function get4_6Chart() {
     });
 }
 
-getFirstChart();
-getFirstBisChart();
-getSecondChart();
-getSecondBisChart();
-getThirdChart();
-get4_6Chart();
-getFourthChart();
-getFourthBisChart();
-getFifthChart();
-getFifthBisChart();
-getSixthChart();
-getSeventhChart();
+// getFirstChart();
+// getFirstBisChart();
+// getSecondChart();
+// getSecondBisChart();
+// getThirdChart();
+// get4_6Chart();
+// getFourthChart();
+// getFourthBisChart();
+// getFifthChart();
+// getFifthBisChart();
+// getSixthChart();
+// getSeventhChart();
 getEigthChart();
 getNinethChart();
 getTenthChart();
