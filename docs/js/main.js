@@ -127,17 +127,7 @@ function getFirstChart() {
                 .attr('height', d => Math.abs(y(d['América Latina y Caribe']) - y(0)));
         }
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });     
     });
 }
 
@@ -221,17 +211,7 @@ function getFirstBisChart() {
             {lineName: 'lineEconomías Emergentes', xAxis: 'Fecha', yAxis: 'Economías Emergentes', cssLine: 'line-Economías Emergentes', cssCircle: 'circle-Economías Emergentes', cssColor: three_colors_third}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });   
     });
 }
 
@@ -310,17 +290,7 @@ function getSecondChart() {
             {lineName: 'lineEmpleo informal', xAxis: 'Fecha_eje', yAxis: 'Empleo informal', cssLine: 'line-Empleo informal', cssCircle: 'circle-Empleo informal', cssColor: three_colors_third}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });  
     });
 }
 
@@ -397,17 +367,7 @@ function getSecondBisChart() {
             {lineName: 'lineEmpleo informal', xAxis: 'Fecha_eje', yAxis: 'Empleo informal', cssLine: 'line-Empleo informal', cssCircle: 'circle-Empleo informal', cssColor: two_colors_second}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'absolute', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'absolute', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // }); 
     });
 }
 
@@ -477,17 +437,7 @@ function getThirdChart() {
         //Primera visualización de datos
         let tipoGenerico = 'Empleo_total';
 
-        chartBlock.node().classList.add('visible');
-        initChart(tipoGenerico);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart(tipoGenerico);
-        //         }                
-        //     }
-        // });        
+        initChart(tipoGenerico);  
 
         //Actualización
         document.getElementById('empleoThree').addEventListener('change', function(e) {
@@ -631,17 +581,7 @@ function getFourthChart() {
             {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
-        chartBlock.node().classList.add('visible');
-        setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });        
+        setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);      
     });
 }
 
@@ -718,17 +658,7 @@ function getFourthBisChart() {
             {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'absolute', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'absolute', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });
     });
 }
 
@@ -825,17 +755,7 @@ function getFifthChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
 
         function initChart() {
             slice.selectAll("rect")
@@ -967,17 +887,7 @@ function getFifthBisChart() {
             .attr("x", -((height / 2) - 34))
             .text("Empleo total");
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
 
         //Dibujo del gráfico
         function initChart() {
@@ -1119,17 +1029,7 @@ function getSixthChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
         
         function initChart() {
             slice.selectAll("rect")
@@ -1301,17 +1201,7 @@ function getSeventhChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.key) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-        
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
 
         function initChart() {
             slice.selectAll("rect")
@@ -1489,17 +1379,7 @@ function getEigthChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
         
         function initChart() {
             slice.selectAll("rect")
@@ -1670,17 +1550,7 @@ function getNinethChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.key) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
 
         function initChart() {
             slice.selectAll("rect")
@@ -1852,17 +1722,7 @@ function getTenthChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        window.addEventListener('scroll', function() {
-            if (!chartBlock.node().classList.contains('visible')){
-                if(isElementInViewport(chartBlock.node())){
-                    chartBlock.node().classList.add('visible');
-                    initChart();
-                }                
-            }
-        });
 
         function initChart() {
             slice.selectAll("rect")
@@ -2020,17 +1880,7 @@ function getEleventhChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.key) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
 
         function initChart() {
             slice.selectAll("rect")
@@ -2202,17 +2052,7 @@ function getTwelvethChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.categoria) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
 
         function initChart() {
             slice.selectAll("rect")
@@ -2364,17 +2204,7 @@ function getThirteenthChart() {
             .attr("class", "g")
             .attr("transform",function(d) { return "translate(" + x0(d.key) + ",0)"; });
 
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
 
         function initChart() {
             slice.selectAll("rect")
@@ -2536,17 +2366,7 @@ function getFourteen_1aChart() {
             {lineName: 'lineTercer nivel', xAxis: 'Fecha_eje', yAxis: 'Tercer nivel', cssLine: 'line-Tercer nivel', cssCircle: 'circle-Tercer nivel', cssColor: three_colors_third}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });
     });
 }
 
@@ -2623,17 +2443,7 @@ function getFourteen_1bChart() {
             {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });
     });
 }
 
@@ -2714,17 +2524,7 @@ function getFourteen_2aChart() {
             {lineName: 'lineTercero completado', xAxis: 'Fecha_eje', yAxis: 'Tercero completado', cssLine: 'line-Tercero completado', cssCircle: 'circle-Tercero completado', cssColor: more_colors_fourth}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });
     });
 }
 
@@ -2801,17 +2601,7 @@ function getFourteen_2bChart() {
             {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });
     });
 }
 
@@ -2894,17 +2684,7 @@ function getFourteen_3aChart() {
             {lineName: 'lineNo especificado', xAxis: 'Fecha_eje', yAxis: 'No especificado', cssLine: 'line-No especificado', cssCircle: 'circle-No especificado', cssColor: more_colors_fifth}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });
     });
 }
 
@@ -2981,17 +2761,7 @@ function getFourteen_3bChart() {
             {lineName: 'lineMujeres', xAxis: 'Fecha_eje', yAxis: 'Mujeres', cssLine: 'line-Mujeres', cssCircle: 'circle-Mujeres', cssColor: two_colors_second}
         ];
 
-        chartBlock.node().classList.add('visible');
         setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             setMultipleLines(chartBlock, chart, data, 'percentage', lines, x, y, tooltip);
-        //         }                
-        //     }
-        // });
     });
 }
 
@@ -3073,17 +2843,7 @@ function getFifteenChart() {
             .call(wrap, 130);
 
         //Visualización de datos
-        chartBlock.node().classList.add('visible');
         initChart();
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // });
 
         function initChart() {
             chart.selectAll(".bar")
@@ -3211,17 +2971,7 @@ function getSixteenthChart() {
         //Primera visualización de datos
         let tipoGenerico = 'Vacantes';
 
-        chartBlock.node().classList.add('visible');
         initChart(tipoGenerico);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart(tipoGenerico);
-        //         }                
-        //     }
-        // }); 
 
         //Actualización
         document.getElementById('empleoSixteen').addEventListener('change', function(e) {
@@ -3375,7 +3125,6 @@ function getSeventeenthChart() {
 
         let currentCountry = 'null';
 
-        chartBlock.node().classList.add('visible');
         initChart();
 
         function initChart() {
@@ -3530,15 +3279,6 @@ function getSeventeenthChart() {
             }
         }
 
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart();
-        //         }                
-        //     }
-        // }); 
-
         //Se actualiza con el país seleccionado        
         function updateChart(currentCountry, country) {
             //Primero quitamos la línea del país anterior >> Lógica para opacidad de línea y uso de círculos
@@ -3675,7 +3415,6 @@ function getEighteenthChart() {
 
         let currentIndustry = 'null';
 
-        chartBlock.node().classList.add('visible');
         initChart(newLines);
 
         function initChart(lines) {
@@ -3827,15 +3566,6 @@ function getEighteenthChart() {
             }
         }
 
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart(newLines);
-        //         }                
-        //     }
-        // });
-
         //Se actualiza con el país seleccionado
         function updateChart(currentIndustry, industry) {
             //Primero quitamos la línea del país anterior >> Lógica para opacidad de línea y uso de círculos
@@ -3939,17 +3669,7 @@ function get4_6Chart() {
         //Primera visualización de datos
         let tipoGenerico = 'Horas_trabajadas';
 
-        chartBlock.node().classList.add('visible');
-        initChart(tipoGenerico);
-
-        // window.addEventListener('scroll', function() {
-        //     if (!chartBlock.node().classList.contains('visible')){
-        //         if(isElementInViewport(chartBlock.node())){
-        //             chartBlock.node().classList.add('visible');
-        //             initChart(tipoGenerico);
-        //         }                
-        //     }
-        // });        
+        initChart(tipoGenerico);      
 
         //Actualización
         document.getElementById('empleo4_6').addEventListener('change', function(e) {
