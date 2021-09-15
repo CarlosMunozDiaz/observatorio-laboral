@@ -343,8 +343,10 @@ input:checked + .slider:before {
 .chart__tooltip {
     position: absolute;
     /* Este elemento se modifica de forma dinámica desde JS */
-    opacity: 0;   
-
+    opacity: 0;
+      
+    top: 0;
+    left: 0;
     width: auto;
     max-width: 135px;
     height: auto;
