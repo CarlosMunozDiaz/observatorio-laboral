@@ -19,7 +19,7 @@ function getFirstChart() {
             'América Latina y Caribe': +d['LAC'].replace(/,/g, '.')
         }
     }, function(error, data) {
-        if (error) throw alert(error);
+        if (error) throw console.log(error);
                 
         //Creación del elemento SVG en el contenedor
         let margin = {top: 5, right: 5, bottom: 25, left: 30};
@@ -3740,6 +3740,7 @@ function get4_6Chart() {
     });
 }
 
+
 getFirstChart();
 getFirstBisChart();
 getSecondChart();
@@ -3929,13 +3930,17 @@ function numberWithCommas(x) {
 }
 
 function setOpacitySwitch(id, state) {
-    let elem = document.getElementById(id);
+    try {
+        let elem = document.getElementById(id);
     
-    if (state == true) {
-        elem.previousElementSibling.style.opacity = 0.25;
-        elem.nextElementSibling.style.opacity = 1;
-    } else {
-        elem.nextElementSibling.style.opacity = 0.25;
-        elem.previousElementSibling.style.opacity = 1;
-    }
+        if (state == true) {
+            elem.previousElementSibling.style.opacity = 0.25;
+            elem.nextElementSibling.style.opacity = 1;
+        } else {
+            elem.nextElementSibling.style.opacity = 0.25;
+            elem.previousElementSibling.style.opacity = 1;
+        }
+    } catch (error) {
+        console.log(error);
+    }    
 }
